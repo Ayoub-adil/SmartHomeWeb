@@ -80,7 +80,7 @@ class App extends React.Component {
               <td>Air Conditioner</td>
               <td>{this.state.climatiseur}</td>
               <td>
-              <button onBlur={this.changeAirConditionerState}></button>
+              <button onClick={this.changeAirConditionerState}></button>
               </td>
             </tr>
             <tr>
@@ -122,12 +122,13 @@ class App extends React.Component {
     this.getLampState();
   }
   handleTemperature(e) {
-    this.setState({ temp: e.target.value });    
+    this.setState({ temp: e.target.value });   
+    this.changeTemperature(); 
   }
-  // changeTemperature() {
-  //   fetch('/setTemperature?tmp='+this.state.temp);
-  //   this.getLampState();
-  // }
+  changeTemperature() {
+    fetch('/setTemperature?tmp='+this.state.temp);
+    this.getLampState();
+  }
   changeAirConditionerState() {
     fetch('/setAirConditioner');
     this.getTemperature();

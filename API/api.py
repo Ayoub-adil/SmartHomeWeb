@@ -48,13 +48,10 @@ def set_lamp_state():
     else:
         H.rooms[r].lamp="on"
     return 'room '+str(r)    
-# @app.route('/setTemperature?tmp=<tmp>',methods=["POST","GET"])
-# def set_temperature():
-#     if(H.rooms[r].lamp=="on"):
-#         H.rooms[r].lamp="off"
-#     else:
-#         H.rooms[r].lamp="on"
-#     return 'room '+str(r)
+@app.route('/setTemperature?tmp=<tmp>',methods=["POST","GET"])
+def set_temperature():
+    H.rooms[r].temperature=request.tmp
+    return 'room '+str(r)
 @app.route('/setAirConditioner',methods=["POST","GET"])
 def set_air_conditioner_state():
     if(H.rooms[r].airConditioner=="on"):
