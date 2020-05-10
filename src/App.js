@@ -21,6 +21,7 @@ class App extends React.Component {
     this.getTemperature=this.getTemperature.bind(this);
     this.getWindowState=this.getWindowState.bind(this);
 
+    this.changeRoom=this.changeRoom.bind(this) 
     this.changeLampState=this.changeLampState.bind(this) 
     this.handleTemperature=this.handleTemperature.bind(this) 
     //this.changeTemperature=this.changeTemperature.bind(this) 
@@ -60,7 +61,12 @@ class App extends React.Component {
             <tr>
               <td>Room number</td>
               <td><strong>{this.state.rooom+1}</strong></td>
-              <td><button onClick={this.changeRoom}></button></td>
+              <td>
+                <select onClick={this.changeRoom}>
+                  <option>1</option>
+                  <option>2</option>
+                </select>
+              </td>
             </tr>
           </thead>
           
@@ -74,7 +80,7 @@ class App extends React.Component {
               <td>Air Conditioner</td>
               <td>{this.state.climatiseur}</td>
               <td>
-              <button onClick={this.changeAirConditionerState}></button>
+              <button onBlur={this.changeAirConditionerState}></button>
               </td>
             </tr>
             <tr>
@@ -105,6 +111,12 @@ class App extends React.Component {
   }
 
 
+  changeRoom(e) {
+    this.setState({ rooom: e.target.value-1 });
+    this.getLampState();
+    this.getTemperature();
+    this.getWindowState()
+  }
   changeLampState() {
     fetch('/setLamp');
     this.getLampState();
