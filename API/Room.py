@@ -4,6 +4,7 @@ class Room:
     # lamp
     # window
     # temperature
+    # airConditioner
 
 # Services
     def lampState(self):
@@ -15,6 +16,10 @@ class Room:
         states=['closed','opened']
         self.window=random.choice(states)
         return self.window
+    def airConditionerState(self):
+        states=['on','off']
+        self.airConditioner=random.choice(states)
+        return self.airConditioner
 
     def Temperature(self):
         Temperatures=range(15,51)
@@ -26,4 +31,5 @@ class Room:
         self.lamp=self.lampState()
         self.window=self.windowState()
         self.temperature=self.Temperature()
+        self.airConditioner=self.airConditionerState()
 
