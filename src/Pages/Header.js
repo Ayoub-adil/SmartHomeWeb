@@ -2,9 +2,9 @@ import React , {Component} from 'react';
 import Toolbar from '../components/Toolbar/Toolbar';
 import SideDrawer from '../components/SideDrawer/SideDrawer';
 import Backdrop from '../components/Backdrop/Backdrop'
-import Landing from './Landing.js'
-import { Switch } from 'antd';
-import backdrop from '../components/Backdrop/Backdrop';
+// import Landing from './Landing.js'
+// import { Switch } from 'antd';
+// import backdrop from '../components/Backdrop/Backdrop';
 
 class Header extends Component {
   state = {

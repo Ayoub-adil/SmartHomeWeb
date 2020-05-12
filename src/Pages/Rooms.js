@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 import { Col, Row,Divider} from 'antd';
-import './App.css';
-import bedroom from './images/bedroom.png';
-import bedroom2 from './images/bedroom2.png';
-import kitchen from './images/kitchen.png';
-import livingroom from './images/livingroom.png';
+import '../App.css';
+import bedroom from '../images/bedroom.png';
+import bedroom2 from '../images/bedroom2.png';
+import kitchen from '../images/kitchen.png';
+import livingroom from '../images/livingroom.png';
 import Header from './Header.js';
-
-const style = { background: '#007bff', padding: '8px 0' };
 
 class Rooms extends Component{
     render(){

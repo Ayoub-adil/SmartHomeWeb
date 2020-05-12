@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { Card, Avatar, Switch, Button } from 'antd';
 import { KeyOutlined, WindowsOutlined, AlertOutlined } from '@ant-design/icons';
-import './App.css';
-import lampe from './images/lampe.jpg';
-import temperature from './images/temperature.jpg';
+import '../App.css';
+import lampe from '../images/lampe.jpg';
+import temperature from '../images/temperature.jpg';
 import Header from './Header.js';
 function onChange(checked) {
     console.log(`switch to ${checked}`);

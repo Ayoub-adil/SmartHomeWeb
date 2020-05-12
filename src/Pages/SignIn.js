@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link , NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Form, Input, Button} from 'antd';
-import key from './images/key4.png';
-import './App.css';
+import key from '../images/key4.png';
+import '../App.css';
 
 const layout = {
     labelCol: { span: 8 },

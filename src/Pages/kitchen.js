@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import { Tabs, Switch, Slider  } from 'antd';
 import Header from './Header.js';
-import './App.css';
-import kitchenRoom from './images/kitchenRoom.png';
+import '../App.css';
+import kitchenRoom from '../images/kitchenRoom.png';
 
 const { TabPane } = Tabs;
 const marks = {

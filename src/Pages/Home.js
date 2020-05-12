@@ -2,19 +2,14 @@ import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 import { Avatar } from 'antd';
 import { HomeOutlined,SettingOutlined } from '@ant-design/icons';
-import './App.css';
-import param from './images/param.png';
+import '../App.css';
 import Header from './Header.js';
-import chooseRoom from './images/chooseRoom.jpg';
 
 class Home extends Component{
     render(){
       return(
         <div className="App">
           <Header />
-          {/* <div className="theRight">
-                    <img className="bedroomImg" src={chooseRoom}/>
-              </div> */}
           <div >
               <NavLink to="/Rooms">
                 <button className='btn'><h2 className="titleroom">Rooms</h2> <Avatar size={90} style={{ color: '#ffffff' , background:'none' }}icon={<HomeOutlined />}/></button>
@@ -37,5 +32,4 @@ class Home extends Component{
     }
   }
   
-
 export default Home;

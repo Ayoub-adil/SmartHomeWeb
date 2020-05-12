@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import {BrowserRouter , Route} from 'react-router-dom';
 import './App.css';
 import './index.css';
-import Landing from './Pages/Landing.jsing.js.js';
+import Landing from './Pages/Landing.js';
 import SignIn from './Pages/SignIn.js';
-import Home from './Pages/Home.jsome.js.js';
+import Home from './Pages/Home.js';
 import Rooms from './Pages/Rooms.js';
 import Setting from './Pages/Setting.js';
 import Bedroom from './Pages/Bedroom.js';
 import Bedroom2 from './Pages/Bedroom2.js';
-import LivingRoom from './Pages/LivingRoom.jsoom.js.js';
+import LivingRoom from './Pages/LivingRoom.js';
 import Kitchen from './Pages/kitchen.js';
 
 class App extends Component{

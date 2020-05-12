@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import { Link , NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button } from 'antd';
-import './App.css';
-import Smarthome from './images/home.png';
+import '../App.css';
+import Smarthome from '../images/home.png';
 
 class Landing extends Component{
   render(){
