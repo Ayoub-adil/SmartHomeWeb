@@ -1,5 +1,5 @@
 import flask
-from flask import request
+from flask import request,redirect
 import Home
 
 app = flask.Flask(__name__)
@@ -41,17 +41,22 @@ def get_window_state():
 
 
 
-@app.route('/setLamp',methods=["POST","GET"])
+@app.route('/setLamp')
 def set_lamp_state():
     if(H.rooms[r].lamp=="on"):
         H.rooms[r].lamp="off"
     else:
         H.rooms[r].lamp="on"
-    return 'room '+str(r)    
-@app.route('/setTemperature?tmp=<tmp>',methods=["POST","GET"])
+    return 'room '+str(r)   
+
+@app.route('/setTemperature',methods=["POST","GET"])
 def set_temperature():
-    H.rooms[r].temperature=request.tmp
-    return 'room '+str(r)
+    if request.method=='POST':
+        tmp=request.form.get("tmp")
+        H.rooms[r].temperature=int(tmp)
+        return redirect('/frontend')
+    return 'room '+str(r+1)
+
 @app.route('/setAirConditioner',methods=["POST","GET"])
 def set_air_conditioner_state():
     if(H.rooms[r].airConditioner=="on"):
@@ -78,6 +83,27 @@ def get_plan():
             'garage':H.n_garage
         }
     }
+    
+@app.route('/getpost',methods=["POST","GET"])
+def getpost():
+    if request.method=="GET":
+        return '''
+        <form method='post'>
+        <input type='text' name='first'/>
+        <input type='text' name='last'/>
+        <input type='submit'/>
+        </form>
+        '''
+    if request.method=="POST":
+        first=request.form.get('first')
+        last=request.form.get('last')
+        return f'''
+        Hello <strong>{first} {last}</strong>
+        '''
+
+@app.route('/frontend')
+def frontend():
+    return redirect("http://localhost:3000")
 
 if __name__ == "__main__":
     app.run(debug=True)

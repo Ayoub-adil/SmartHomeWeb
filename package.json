@@ -3,14 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^4.2.2",
+    "babel-plugin-import": "^1.13.0",
     "cra-template": "1.0.3",
+    "customize-cra": "^0.9.1",
+    "rc-animate": "^3.0.0",
     "react": "^16.13.1",
+    "react-app-rewired": "^2.1.6",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
+    "react-sticky": "^6.0.3"
   },
   "scripts": {
     "start-api": "cd API && C:/Users/Ayoub/Desktop/application/API/venv/Scripts/flask run",
     "test-api": "cd API && C:/Users/Ayoub/Desktop/application/API/venv/Scripts/flask test",
+    "start-app": "react-app-rewired start",
+    "build-app": "react-app-rewired build",
+    "test-app": "react-app-rewired test",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -31,5 +41,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy":"http://localhost:5000"
+  "proxy": "http://localhost:5000"
 }

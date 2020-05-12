@@ -1,38 +1,247 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #F9F9F9;
+  font-family: 'Quicksand', sans-serif;
+}
+
 .App {
+  text-align: justify;
+  font-weight: 800;
+}
+
+.smarthome{
+  color: #007bff;
+  font-weight: 800;
+}
+
+p{
+  font-weight: 700;
+  font-size: medium;
+}
+
+.welcome{
+  float: left;
+  padding: 20% 0% 20% 10%;
+}
+
+
+.smartH_img{
+  float: right;
+}
+
+.img
+{
+    width: 40%;
+    height: auto;
+    margin-left: 45%;
+    margin-top: -50%;
+}
+.btnStart{
+  float: left;
+  margin-top: -20%;
+  margin-left: 10%;
+}
+
+.imgkey{
+  width: 47%;
+  height: auto;
+  margin-top: 20%; 
+  margin-left: 40%;
+}
+
+.right{
+  float: right;
+}
+
+.left{
+  float: left;
+  margin-top: 18%; 
+  margin-left: 10%;
+}
+
+.crd{
+  margin: 20% 7% 0 15%;
+}
+
+.crd1{
+  float: left;
+}
+
+.crd2{
+  float: right;
+}
+
+.imgRoom{
+  width: 32%;
+  margin-bottom: 2%;
+  margin-left: 20%;
+  margin-top: 2%;
+}
+
+.Rooms{
+  margin-top: 5%;
+}
+
+.onOff{
+  float: right;
+  margin-top: 3%;
+  font-size: 14px;
+  margin-left: 5%;
+}
+
+.onOffRoomX{
+  margin-top: -70%;
+  font-size: 16px;
+}
+
+.ant-tabs-nav .ant-tabs-tab{
+  margin: 0px 50px 0px 21px;
+}
+
+.circle{
+  position: relative;
+  display: inline-block;
+  margin: 26% 15% 55% 13%;
+  padding: 33% 15%;
+  height: 250px;
+  width: 250px;
+  border-radius: 100%;
   text-align: center;
+  font-size: 20px;
+  box-shadow: 0px 10px 50px -10px rgba(0, 0, 0, 0.2);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.theLeft{
+  float: left;
+  margin-left: 10%;
+  margin-top: -3%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.theRight{
+  float: right;
+}
+
+.bedroomImg{
+  width: 47%;
+  height: auto;
+  margin-top: 5%; 
+  margin-left: 45%;
+}
+
+.btn{
+  padding: 10% 16%;
+  margin-top: 10%;
+  margin-left: 10%;
+  background-color: #007bff;
+  color: #F9F9F9;
+  font-size: 20px;
+  border: 2px solid #007bff;
+  border-radius: 20px;
+  box-shadow: 0px 10px 50px -10px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 700px){
+
+  .img
+  {
+      width: 55%;
+      height: auto;
+      margin-left: 25%;
+      margin-top: 0%;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .imgkey{
+    width: 55%;
+    height: auto;
+    margin-top: 18%; 
+    margin-left: 25%;
   }
-  to {
-    transform: rotate(360deg);
+
+  .welcome{
+    padding: 20% 0% 5% 5%;
   }
-}
+  
+  .smartH_img{
+      margin-left: -30%;
+      margin-top: 20%;
+      margin-bottom: 14%;
+      margin-right: -24%;
+  }
+
+  .btnStart{
+    float: none;
+    text-align: center;
+    margin-top: 0%;
+    margin-left: 0%;
+  }
+
+  .left{
+    float: left;
+    margin-top: 12%; 
+    margin-left: 10%;
+  }
+
+  .crd{
+    margin: 20% 0% 0% 8%;
+  }
+  
+  .crd1{
+    float: none;
+  }
+  
+  .crd{
+    float: none;
+  }
+  .imgRoom{
+    width: 70%;
+    margin-top: 10%;
+    margin-bottom: 40%;
+    margin-left: 15%;
+  }
+
+  .Rooms{
+    margin-top: 20%;
+  }
+
+  .onOff{
+    float: right;
+    margin-top: 3%;
+    font-size: 13px;
+    margin-left: 10px;
+  }
+  .onOffRoomX {
+    margin-top: -60%;
+    font-size: 16px;
+  }
+
+  .theLeft{
+    float: left;
+    margin-left: 20%;
+    margin-top: 90%;
+  }
+  
+  .theRight{
+    float: none;
+  }
+  
+  .bedroomImg {
+    width: 59%;
+    height: auto;
+    margin-top: 20%;
+    margin-left: 20%;
+  }
+
+  .btn{
+    padding: 20% 33%;
+    margin-top: 15%;
+    margin-left: 8%;
+    background-color: #007bff;
+    color: #F9F9F9;
+    font-size: 20px;
+    border: 2px solid #007bff;
+    border-radius: 20px;
+    box-shadow: 0px 10px 50px -10px rgba(0, 0, 0, 0.2);
+  }
+  
+  }

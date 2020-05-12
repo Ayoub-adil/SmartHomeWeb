@@ -1,141 +1,36 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {BrowserRouter , Route} from 'react-router-dom';
 import './App.css';
+import './index.css';
+import Landing from './Pages/Landing.jsing.js.js';
+import SignIn from './Pages/SignIn.js';
+import Home from './Pages/Home.jsome.js.js';
+import Rooms from './Pages/Rooms.js';
+import Setting from './Pages/Setting.js';
+import Bedroom from './Pages/Bedroom.js';
+import Bedroom2 from './Pages/Bedroom2.js';
+import LivingRoom from './Pages/LivingRoom.jsoom.js.js';
+import Kitchen from './Pages/kitchen.js';
 
-class App extends React.Component {
-
-  constructor(props){
-    super(props);
-    this.state={
-      rooom:0,
-      lamp: "broken",
-      window:'half opened',
-      climatiseur:"broken",
-      temperature:0,
-      temp: 0,
-    }
-    this.getLampState();
-    this.getTemperature();
-    this.getWindowState();
-
-    this.getLampState=this.getLampState.bind(this)
-    this.getTemperature=this.getTemperature.bind(this);
-    this.getWindowState=this.getWindowState.bind(this);
-
-    this.changeRoom=this.changeRoom.bind(this) 
-    this.changeLampState=this.changeLampState.bind(this) 
-    this.handleTemperature=this.handleTemperature.bind(this) 
-    //this.changeTemperature=this.changeTemperature.bind(this) 
-    this.changeAirConditionerState=this.changeAirConditionerState.bind(this) 
-    this.changeWindowState=this.changeWindowState.bind(this) 
-  }
-  
- 
-
-  getLampState(){
-    fetch('/lamp').then(res=>res.json()).then(data=>{
-      this.setState({ lamp: data.lamp[this.state.rooom] })
-    })
-  }
-  getTemperature(){
-    fetch('/temperature').then(res=>res.json()).then(data=>{
-      this.setState({
-        temperature: data.temperature[this.state.rooom],
-        temp: data.temperature[this.state.rooom],
-        climatiseur: data.airConditioner[this.state.rooom], 
-      })
-    })
-  }
-  getWindowState(){
-    fetch('/window').then(res=>res.json()).then(data=>{
-      this.setState({ window: data.window[this.state.rooom] })
-    })
-  }
-
-
-
-  render (){
-    return (
-      <div className="App App-header">
-        <table>
-          <thead>
-            <tr>
-              <td>Room number</td>
-              <td><strong>{this.state.rooom+1}</strong></td>
-              <td>
-                <select onClick={this.changeRoom}>
-                  <option>1</option>
-                  <option>2</option>
-                </select>
-              </td>
-            </tr>
-          </thead>
-          
-          <tbody>
-            <tr>
-              <td>Lamp</td>
-              <td>{this.state.lamp}</td>
-              <td><button onClick={this.changeLampState}></button></td>
-            </tr>
-            <tr>
-              <td>Air Conditioner</td>
-              <td>{this.state.climatiseur}</td>
-              <td>
-              <button onClick={this.changeAirConditionerState}></button>
-              </td>
-            </tr>
-            <tr>
-              <td>Temperaturature</td>
-              <td>
-                {this.state.climatiseur==="on"
-                ?this.state.temp 
-                :null}
-                /{this.state.temperature}°c
-              </td>
-              <td>
-                {this.state.climatiseur==="on"
-                ?<input onBlur  ={this.handleTemperature} onKeyUp  ={this.handleTemperature} type="number" id="quantity" name="quantity" min="15" max="50" placeholder={+this.state.temperature}></input>
-                :null
-                }
-              </td>
-            </tr>
-            
-            <tr>
-              <td>Window</td>
-              <td>{this.state.window}</td>
-              <td><button onClick={this.changeWindowState}></button></td>
-            </tr>
-          </tbody>
-        </table>        
+class App extends Component{
+  render(){
+    return(
+      <BrowserRouter>
+      <div className="App">
+        <Route exact path="/" component={Landing} />
+        <Route path="/SignIn" component={SignIn} />
+        {/* <Header /> */}
+        {/* Le header ne doit pas etre fo9 SignIn et Landing page !!! */}
+        <Route path="/Home" component={Home} />
+        <Route path="/Rooms" component={Rooms} />        
+        <Route path="/Setting" component={Setting} />
+        <Route path="/Bedroom" component={Bedroom} />
+        <Route path="/Bedroom2" component={Bedroom2} />
+        <Route path="/kitchen" component={Kitchen} />
+        <Route path="/LivingRoom" component={LivingRoom} />
       </div>
+      </BrowserRouter>
     );
-  }
-
-
-  changeRoom(e) {
-    this.setState({ rooom: e.target.value-1 });
-    this.getLampState();
-    this.getTemperature();
-    this.getWindowState()
-  }
-  changeLampState() {
-    fetch('/setLamp');
-    this.getLampState();
-  }
-  handleTemperature(e) {
-    this.setState({ temp: e.target.value });   
-    this.changeTemperature(); 
-  }
-  changeTemperature() {
-    fetch('/setTemperature?tmp='+this.state.temp);
-    this.getLampState();
-  }
-  changeAirConditionerState() {
-    fetch('/setAirConditioner');
-    this.getTemperature();
-  }
-  changeWindowState() {
-    fetch('/setWindow');
-    this.getWindowState();
   }
 }
 
