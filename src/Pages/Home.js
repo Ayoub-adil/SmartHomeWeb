@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
-import { Card } from 'antd';
+import { Avatar } from 'antd';
+import { HomeOutlined,SettingOutlined } from '@ant-design/icons';
 import './App.css';
 import param from './images/param.png';
 import Header from './Header.js';
@@ -13,20 +14,17 @@ class Home extends Component{
           <Header />
           {/* <div className="theRight">
                     <img className="bedroomImg" src={chooseRoom}/>
-                </div> */}
+              </div> */}
           <div >
-          
               <NavLink to="/Rooms">
-                <button className='btn'>Rooms</button>
+                <button className='btn'><h2 className="titleroom">Rooms</h2> <Avatar size={90} style={{ color: '#ffffff' , background:'none' }}icon={<HomeOutlined />}/></button>
                 {/* <Card title="Rooms" bordered={true} style={{ width: 300 }}>
                     <img className="img" src={chooseRoom}></img>
                 </Card> */}
               </NavLink>
             
-    
-            
               <NavLink to="/Setting">
-              <button className='btn'>Setting</button>
+              <button className='btn'><h2 className="titleroom">Setting</h2> <Avatar size={90} style={{ color: '#ffffff' , background:'none' }}icon={<SettingOutlined />}/></button>
                 {/* <Card title="Setting" bordered={true} style={{ width: 300 }}>
                     <img className="img" src={param}></img>
                 </Card> */}

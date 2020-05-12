@@ -20,6 +20,9 @@ p{
   font-size: medium;
 }
 
+.titleroom{
+  color: #F9F9F9;
+}
 .welcome{
   float: left;
   padding: 20% 0% 20% 10%;
@@ -130,14 +133,14 @@ p{
 }
 
 .btn{
-  padding: 10% 16%;
-  margin-top: 10%;
-  margin-left: 10%;
+  padding: 3% 8%;
+  margin-top: 14%;
+  margin-left: 19%;
   background-color: #007bff;
   color: #F9F9F9;
   font-size: 20px;
   border: 2px solid #007bff;
-  border-radius: 20px;
+  border-radius: 35px;
   box-shadow: 0px 10px 50px -10px rgba(0, 0, 0, 0.2);
 }
 
@@ -233,14 +236,13 @@ p{
   }
 
   .btn{
-    padding: 20% 33%;
+    padding: 5% 28%;
     margin-top: 15%;
     margin-left: 8%;
     background-color: #007bff;
     color: #F9F9F9;
-    font-size: 20px;
     border: 2px solid #007bff;
-    border-radius: 20px;
+    border-radius: 35px;
     box-shadow: 0px 10px 50px -10px rgba(0, 0, 0, 0.2);
   }
   
