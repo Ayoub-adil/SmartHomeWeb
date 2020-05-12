@@ -27,7 +27,6 @@ class Setting extends Component{
                 <Avatar size={40} style={{ color: '#007bff' , background:'none' }}icon={<AlertOutlined />}/>
                 Alert
                 <div className="onOff">ON/OFF <Switch size="small" defaultChecked onChange={onChange} /></div>
-                <div className="onOff">All lights OFF at : <Button type="primary" shape="round" size="small">01:00</Button></div>
                 </Card>
 
                 <Card
@@ -43,6 +42,7 @@ class Setting extends Component{
                 type="inner">
                 <Avatar size={40} src={lampe} />
                 <div className="onOff">ON/OFF <Switch size="small" defaultChecked onChange={onChange} /></div>
+                <div className="onOff">All lights OFF at : <Button type="primary" shape="round" size="small">01:00</Button></div>
                 Light
                 </Card>
 
