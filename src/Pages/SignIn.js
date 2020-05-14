@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input, Button} from 'antd';
 import key from '../images/key4.png';
@@ -13,7 +13,9 @@ const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
 };
 
-const SignIn = () => (
+class SignIn extends Component{
+    render(){
+      return(
   <div className="App">
     <div className="right">
         <img className='imgkey' src={key}></img>
@@ -49,5 +51,7 @@ const SignIn = () => (
     </div>
   </div>
 );
+}
+}
 
 export default SignIn;
