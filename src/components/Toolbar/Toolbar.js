@@ -15,8 +15,6 @@ const toolbar = props =>(
             <div className="toolbar-navigation-items">
                 <ul>
                     <li><NavLink to="/Home">Home</NavLink></li>
-                    <li><NavLink to="/Rooms">Rooms</NavLink></li>
-                    <li><NavLink to="/Setting">Setting</NavLink></li>
                     <li><NavLink exact to="/">Disconnect</NavLink></li>                   
                 </ul>
             </div>

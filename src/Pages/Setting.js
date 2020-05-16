@@ -5,6 +5,11 @@ import '../App.css';
 import lampe from '../images/lampe.jpg';
 import temperature from '../images/temperature.jpg';
 import Header from './Header.js';
+import { TimePicker } from 'antd';
+import moment from 'moment';
+
+const format = 'HH:mm';
+
 function onChange(checked) {
     console.log(`switch to ${checked}`);
 }
@@ -42,7 +47,7 @@ class Setting extends Component{
                 type="inner">
                 <Avatar size={40} src={lampe} />
                 <div className="onOff">ON/OFF <Switch size="small" defaultChecked onChange={onChange} /></div>
-                <div className="onOff">All lights OFF at : <Button type="primary" shape="round" size="small">01:00</Button></div>
+                <div className="onOff">All lights OFF at : <TimePicker defaultValue={moment('12:08', format)} format={format} /></div>
                 Light
                 </Card>
 
@@ -68,7 +73,7 @@ class Setting extends Component{
                 <Avatar size={40} style={{ color: '#007bff' , background:'none' }}icon={<WindowsOutlined />}/>
                 Window
                 <div className="onOff">Auto <Switch size="small" defaultChecked onChange={onChange} /></div>
-                <div className="onOff">All lights OFF at : <Button type="primary" shape="round" size="small">01:00</Button></div>
+                <div className="onOff">All Windows close at : <TimePicker defaultValue={moment('12:08', format)} format={format} /></div>
                 </Card>
 
             </div>
