@@ -1,6 +1,7 @@
 import flask
 from flask import request,redirect
 import Home
+from flask_mysqldb import MySQL
 
 app = flask.Flask(__name__)
 
@@ -8,6 +9,24 @@ app = flask.Flask(__name__)
 nl,nb,nk,ns,ng=1,2,1,1,1
 H=Home.Home(nl,nb,nk,ns,ng)
 r=-1
+
+# DATABASE CONFIG 
+
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'smarthome'
+
+mysql = MySQL(app)
+
+# @app.route('/login')
+# def login():
+#     cur = mysql.connection.cursor()
+#     cur.execute("SELECT * FROM admin")
+#     fetchdata = cur.fetchall()
+#     cur.close()
+
+# FIN DATABASE CONFIG
 
 @app.route('/lamp')
 def get_lamp_state():
