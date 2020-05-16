@@ -5,9 +5,10 @@ from flask_mysqldb import MySQL
 
 app = flask.Flask(__name__)
 
-nr,nk,ns,ng=2,1,1,1
-H=Home.Home(nr,nk,ns,ng)
-r=0
+nl,nb,nk,ns,ng=1,2,1,1,1
+H=Home.Home(nl,nb,nk,ns,ng)
+r=-1
+
 
 # DATABASE CONFIG 
 
