@@ -5,34 +5,9 @@ from flask_mysqldb import MySQL
 
 app = flask.Flask(__name__)
 
-<<<<<<< HEAD
 nr,nk,ns,ng=2,1,1,1
 H=Home.Home(nr,nk,ns,ng)
 r=0
-=======
-
-nl,nb,nk,ns,ng=1,2,1,1,1
-H=Home.Home(nl,nb,nk,ns,ng)
-r=-1
-
-# DATABASE CONFIG 
-
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'smarthome'
-
-mysql = MySQL(app)
-
-# @app.route('/login')
-# def login():
-#     cur = mysql.connection.cursor()
-#     cur.execute("SELECT * FROM admin")
-#     fetchdata = cur.fetchall()
-#     cur.close()
-
-# FIN DATABASE CONFIG
->>>>>>> 72bf49b0b655ef454072db3e252d71dd79ad4744
 
 # DATABASE CONFIG 
 
