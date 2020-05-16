@@ -6,8 +6,6 @@ import '../App.css';
 import Header from './Header.js';
 
 class Home extends Component{
-
-          
   render(){
     return(
       <div className="App">
