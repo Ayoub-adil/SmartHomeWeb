@@ -9,12 +9,17 @@ class Home:
     # rain
     # lock
 
-    # n_room
+    # r   
+    # type_r
+
+    # n_livingroom
+    # n_bedroom
     # n_kitchen
     # n_stairs
     # n_garage
 
-# Global services
+# Global services   
+
     def outsideTemperature(self):
         Temperatures=range(15,51)
         self.outsideT=random.choice(Temperatures)
@@ -37,8 +42,10 @@ class Home:
         self.lock=self.doorLocked()
         
 # Home Plan
-    def __init__(self,n_room,n_kitchen,n_stairs,n_garage):
-        self.n_room=n_room
+    def __init__(self,n_livingroom,n_bedroom,n_kitchen,n_stairs,n_garage):
+        self.r=-1
+        self.n_livingroom=n_livingroom
+        self.n_bedroom=n_bedroom
         self.n_kitchen=n_kitchen
         self.n_stairs=n_stairs
         self.n_garage=n_garage
@@ -46,13 +53,27 @@ class Home:
         self.setStates()
 
     def simulate(self):
-        # self.rooms=[Room.Room()]*self.n_room
-        self.rooms=[]
-        for i in range(self.n_room):
-            self.rooms.append(Room.Room())
-        self.kitchens=[Kitchen.Kitchen()]*self.n_kitchen
-        self.stairs=[Stair.Stair()]*self.n_stairs
-        self.garages=[Garage.Garage()]*self.n_garage
+        self.livingrooms=[]
+        for i in range(self.n_livingroom):
+            self.livingrooms.append(Room.Room())
+        self.bedrooms=[]
+        for i in range(self.n_bedroom):
+            self.bedrooms.append(Room.Room())
+        self.kitchens=[]
+        for i in range(self.n_kitchen):
+            self.kitchens.append(Kitchen.Kitchen())
+        self.stairs=[]
+        for i in range(self.n_stairs):
+            self.stairs.append(Stair.Stair())
+        self.garages=[]
+        for i in range(self.n_garage):
+            self.garages.append(Garage.Garage())
     
+    def setRoom(self,type_r,rooom):
+        self.type_r=type_r
+        self.r=rooom
+        return self.r
+
+
     def __str__(self):
-        return 'this Home has '+str(self.n_room)+' rooms, '+str(self.n_kitchen)+' kitchen '+str(self.n_stairs)+' stairs or hall and '+str(self.n_garage)+' garage.'
+        return 'this Home has '+str(self.n_livingroom)+' livingrooms, '+str(self.n_bedroom)+' bedrooms, '+str(self.n_kitchen)+' kitchen '+str(self.n_stairs)+' stairs or hall and '+str(self.n_garage)+' garage.'

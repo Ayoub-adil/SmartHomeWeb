@@ -5,14 +5,14 @@ import Home
 app = flask.Flask(__name__)
 
 
-nr,nk,ns,ng=2,1,1,1
-H=Home.Home(nr,nk,ns,ng)
-r=0
+nl,nb,nk,ns,ng=1,2,1,1,1
+H=Home.Home(nl,nb,nk,ns,ng)
+r=-1
 
 @app.route('/lamp')
 def get_lamp_state():
     state=[]
-    for i in range(H.n_room):
+    for i in range(H.n_livingroom):
         state.append(H.rooms[i].lamp)
     return {
         'lamp':state
@@ -26,7 +26,7 @@ def get_temperature():
         clim.append(H.rooms[i].airConditioner)
     return {
         "temperature":temp,
-        "airConditioner":clim  
+        "airConditioner":clim 
     }
 @app.route('/window')
 def get_window_state():
@@ -40,6 +40,22 @@ def get_window_state():
   
 
 
+@app.route('/setRoom',methods=["POST","GET"])
+def set_room():
+    if request.method=='POST':
+        rooom=request.form.get("rooom")
+        typeOfRoom=request.form.get("typeofroom")
+        H.setRoom(typeOfRoom, rooom)
+        if typeOfRoom=="bedroom":
+            return redirect('http://localhost:3000/Bedroom')
+        if typeOfRoom=="livingroom":
+            return redirect('http://localhost:3000/Livingroom')
+        elif typeOfRoom=="kitchen":
+            return redirect('http://localhost:3000/kitchen')
+
+@app.route('/activeRoom')
+def active_room():
+    return ' ' + str(H.r)
 
 @app.route('/setLamp')
 def set_lamp_state():
@@ -77,7 +93,8 @@ def set_window_state():
 def get_plan():
     return {
         'plan':{
-            'room':H.n_room,
+            'livingroom':H.n_livingroom,
+            'bedroom':H.n_bedroom,
             'kitchen':H.n_kitchen,
             'stairs':H.n_stairs,
             'garage':H.n_garage
