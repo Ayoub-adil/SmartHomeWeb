@@ -36,7 +36,8 @@ class Rooms extends Component{
             window:'broken',      
             climatiseur:"broken",
             temperature:0,
-            temp: 0,    
+            temp: 0,  
+            valid:true  
         } 
         this.getRoom();  
         // this.getLampState();
@@ -97,9 +98,9 @@ class Rooms extends Component{
                         Temperature : <Slider marks={marks} defaultValue={37} />    
                     </div> */}
                     
-                        <div className="onOffRoomX">Light : Off <Switch  defaultChecked onChange={this.changeLampState} /> On</div>
+                        <div className="onOffRoomX">Light : Off <Switch onChange={this.changeLampState} /> On</div>
                         
-                        <div className="onOffRoomX">Window : <Switch  defaultChecked onChange={this.changeWindowState} /> {this.state.window}</div>
+                        <div className="onOffRoomX">Window : <Switch defaultChecked onChange={this.changeWindowState} /> {this.state.window}</div>
                     
                 </div>
                 

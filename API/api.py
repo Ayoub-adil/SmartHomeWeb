@@ -115,10 +115,17 @@ def set_room():
 def set_lamp_state():
     if(H.type_r=='bedroom'):
         if(H.bedrooms[H.r].lamp=="on"):
-            H.bedH.ooms[H.r].lamp="off"
+            H.bedrooms[H.r].lamp="off"
         else:
             H.bedrooms[H.r].lamp="on"
-    return H.type_r +"+"+ str(H.r)   
+        return "<h1>"+H.type_r+" "+str(H.r+1)+": Lamp is "+H.bedrooms[H.r].lamp+"</h1>"
+    elif(H.type_r=='livingroom'):
+        if(H.livingrooms[H.r].lamp=="off"):
+            H.livingrooms[H.r].lamp="on"
+        else:
+            H.livingrooms[H.r].lamp="off"
+        return "<h1>"+H.type_r+" "+str(H.r+1)+": Lamp is "+H.livingrooms[H.r].lamp+"</h1>"
+    return "<h1>You shouldn't be here.. </h1>" 
 
 @app.route('/change/temperature',methods=["POST","GET"])
 def set_temperature():
