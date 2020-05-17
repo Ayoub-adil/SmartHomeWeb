@@ -9,7 +9,6 @@ f_end="http://localhost:3000/"
 nl,nb,nk,ns,ng=1,2,1,1,1
 H=Home.Home(nl,nb,nk,ns,ng)
 
-
 # DATABASE CONFIG 
 
 # app.config['MYSQL_HOST'] = 'localhost'

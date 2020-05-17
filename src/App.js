@@ -13,7 +13,8 @@ import LivingRoom from './Pages/LivingRoom.js';
 import Kitchen from './Pages/kitchen.js';
 // import Login from './SuperAdmin/login.js';
 import Console from './SuperAdmin/console.js';
-import Dashboard  from './SuperAdmin/Dashboard.js';
+
+
 class App extends Component{
   render(){
 
@@ -31,7 +32,6 @@ class App extends Component{
         <Route path="/LivingRoom" component={LivingRoom} />
         {/* <Route path="/login" component={Login} /> */}
         <Route path="/console" component={Console} />
-        <Route path="/Dashboard" component={Dashboard} />
       </div>
       </BrowserRouter>
     );
