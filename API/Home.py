@@ -44,6 +44,7 @@ class Home:
 # Home Plan
     def __init__(self,n_livingroom,n_bedroom,n_kitchen,n_stairs,n_garage):
         self.r=-1
+        self.type_r='outdoor'
         self.n_livingroom=n_livingroom
         self.n_bedroom=n_bedroom
         self.n_kitchen=n_kitchen
