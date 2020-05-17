@@ -18,13 +18,16 @@ H=Home.Home(nl,nb,nk,ns,ng)
 
 # mysql = MySQL(app)
 
-# @app.route('/login')
-# def login():
-#     cur = mysql.connection.cursor()
-#     cur.execute("SELECT * FROM admin")
+# insertion des info du formulaire d'admin dans la table admin dans la BD
+
+# @app.route('/traitementForm')
+# def traitementForm():
+#     cur = mysql.connection.cursor() == to connect with the DATABASE
+#     cur.execute("INSERT INTO admin (login, mdp, n_livingroom, n_Beedroom, n_Kitchen, n_Stairs, n_Garage) VALUES (....)") == 
 #     fetchdata = cur.fetchall()
 #     cur.close()
-#     return 'Database page for test'
+#     return "...."
+#     redirect ...
 # FIN DATABASE CONFIG
 
 

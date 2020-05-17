@@ -6,18 +6,19 @@ import bedroomRoom from '../images/bedroomRoom.png';
 
 const { TabPane } = Tabs;
 const marks = {
-    0: '0°C',
-    37: '37°C',
-    100: {
+    15: '15°C',
+    30: '30°C',
+    40: '40°C',
+    50: {
         style: {
         color: '#f50',
         },
-        label: <strong>100°C</strong>,
+        label: <strong>50°C</strong>,
     },
 };
 
-function onChange(checked) {
-    console.log(checked);
+function onChange(value) {
+  console.log('onChange: ', value);
 }
 
 function formatter(value) {
@@ -94,9 +95,9 @@ class Rooms extends Component{
                     <img className="bedroomImg" src={bedroomRoom}/>
                 </div>
                 <div className="theLeft">
-                    {/* <div className="onOffRoomX">
-                        Temperature : <Slider marks={marks} defaultValue={37} />    
-                    </div> */}
+                    <div className="onOffRoomX">
+                        Temperature : <Slider max="50" min="15" tipFormatter={formatter} onChange={onChange} marks={marks} defaultValue={30} />    
+                    </div>
                     
                         <div className="onOffRoomX">Light : <Switch onChange={this.changeLampState} /> {this.state.lamp}</div>
                         
