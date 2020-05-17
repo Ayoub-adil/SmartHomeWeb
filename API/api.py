@@ -5,9 +5,9 @@ import Home
 
 app = flask.Flask(__name__)
 
+f_end="http://localhost:3000/"
 nl,nb,nk,ns,ng=1,2,1,1,1
 H=Home.Home(nl,nb,nk,ns,ng)
-r=-1
 
 # DATABASE CONFIG 
 
@@ -24,90 +24,18 @@ r=-1
 #     cur.execute("SELECT * FROM admin")
 #     fetchdata = cur.fetchall()
 #     cur.close()
-
+#     return 'Database page for test'
 # FIN DATABASE CONFIG
 
-@app.route('/lamp')
-def get_lamp_state():
-    state=[]
-    for i in range(H.n_livingroom):
-        state.append(H.rooms[i].lamp)
-    return {
-        'lamp':state
-    }
-@app.route('/temperature')
-def get_temperature():
-    temp=[]
-    clim=[]
-    for i in range(H.n_room):
-        temp.append(H.rooms[i].temperature)
-        clim.append(H.rooms[i].airConditioner)
-    return {
-        "temperature":temp,
-        "airConditioner":clim 
-    }
-@app.route('/window')
-def get_window_state():
-    win=[]
-    for i in range(H.n_room):
-        win.append(H.rooms[i].window)
-    return {
-        'window':win
-    }
 
-  
-
-
-@app.route('/setRoom',methods=["POST","GET"])
-def set_room():
-    if request.method=='POST':
-        rooom=request.form.get("rooom")
-        typeOfRoom=request.form.get("typeofroom")
-        H.setRoom(typeOfRoom, rooom)
-        if typeOfRoom=="bedroom":
-            return redirect('http://localhost:3000/Bedroom')
-        if typeOfRoom=="livingroom":
-            return redirect('http://localhost:3000/Livingroom')
-        elif typeOfRoom=="kitchen":
-            return redirect('http://localhost:3000/kitchen')
-
-@app.route('/activeRoom')
+@app.route('/home/room')
 def active_room():
-    return ' ' + str(H.r)
+    return {
+        'room':H.r,
+        'type':H.type_r
+    }
 
-@app.route('/setLamp')
-def set_lamp_state():
-    if(H.rooms[r].lamp=="on"):
-        H.rooms[r].lamp="off"
-    else:
-        H.rooms[r].lamp="on"
-    return 'room '+str(r)   
-
-@app.route('/setTemperature',methods=["POST","GET"])
-def set_temperature():
-    if request.method=='POST':
-        tmp=request.form.get("tmp")
-        H.rooms[r].temperature=int(tmp)
-        return redirect('/frontend')
-    return 'room '+str(r+1)
-
-@app.route('/setAirConditioner',methods=["POST","GET"])
-def set_air_conditioner_state():
-    if(H.rooms[r].airConditioner=="on"):
-        H.rooms[r].airConditioner="off"
-    else:
-        H.rooms[r].airConditioner="on"
-    return 'room '+str(r)
-@app.route('/setWindow',methods=["POST","GET"])
-def set_window_state():
-    if(H.rooms[r].window=="opened"):
-        H.rooms[r].window="closed"
-    else:
-        H.rooms[r].window="opened"
-    return 'room '+str(r)
-
-
-@app.route('/plan')
+@app.route('/home/plan')
 def get_plan():
     return {
         'plan':{
@@ -118,27 +46,124 @@ def get_plan():
             'garage':H.n_garage
         }
     }
-    
-@app.route('/getpost',methods=["POST","GET"])
-def getpost():
-    if request.method=="GET":
-        return '''
-        <form method='post'>
-        <input type='text' name='first'/>
-        <input type='text' name='last'/>
-        <input type='submit'/>
-        </form>
-        '''
-    if request.method=="POST":
-        first=request.form.get('first')
-        last=request.form.get('last')
-        return f'''
-        Hello <strong>{first} {last}</strong>
-        '''
+@app.route('/home/lamp')
+def get_lamp_state():
+    lrlamps=[]
+    for i in range(H.n_livingroom):
+        lrlamps.append(H.livingrooms[i].lamp)
+    brlamps=[]
+    for i in range(H.n_bedroom):
+        brlamps.append(H.bedrooms[i].lamp)
+    return {
+        'livingroom':lrlamps,
+        'bedroom':brlamps
+    }
+@app.route('/home/temperature')
+def get_temperature():
+    templr=[]
+    climlr=[]
+    for i in range(H.n_livingroom):
+        templr.append(H.livingrooms[i].temperature)
+        climlr.append(H.livingrooms[i].airConditioner)
+    tempbr=[]
+    climbr=[]
+    for i in range(H.n_bedroom):
+        tempbr.append(H.bedrooms[i].temperature)
+        climbr.append(H.bedrooms[i].airConditioner)
+    return {
+        "temperature":{
+            'livingroom':templr,
+            'bedroom':tempbr
+        },
+        "airConditioner":{
+            'livingroom':climlr,
+            'bedroom':climbr
+        }
+    }
+@app.route('/home/window')
+def get_window_state():
+    windowlr=[]
+    for i in range(H.n_livingroom):
+        windowlr.append(H.livingrooms[i].window)
+    windowbr=[]
+    for i in range(H.n_bedroom):
+        windowbr.append(H.bedrooms[i].window)
+    return {
+        'livingroom':windowlr,
+        'bedroom':windowbr
+    }
+
+  
+
+
+@app.route('/change/room',methods=["POST","GET"])
+def set_room():
+    if request.method=='POST':
+        rooom=request.form.get("rooom")
+        typeOfRoom=request.form.get("typeofroom")
+        H.setRoom(typeOfRoom, int(rooom))
+        if typeOfRoom=="bedroom":
+            return redirect(f_end+'Bedroom')
+        if typeOfRoom=="livingroom":
+            return redirect(f_end+'Livingroom')
+        elif typeOfRoom=="kitchen":
+            return redirect(f_end+'kitchen')
+    else:
+        return "<h1>You shouldn't be here.. </h1>" 
+
+
+
+@app.route('/change/lamp')
+def set_lamp_state():
+    if(H.type_r=='bedroom'):
+        if(H.bedrooms[H.r].lamp=="on"):
+            H.bedrooms[H.r].lamp="off"
+        else:
+            H.bedrooms[H.r].lamp="on"
+        return "<h1>"+H.type_r+" "+str(H.r+1)+": Lamp is "+H.bedrooms[H.r].lamp+"</h1>"
+    elif(H.type_r=='livingroom'):
+        if(H.livingrooms[H.r].lamp=="off"):
+            H.livingrooms[H.r].lamp="on"
+        else:
+            H.livingrooms[H.r].lamp="off"
+        return "<h1>"+H.type_r+" "+str(H.r+1)+": Lamp is "+H.livingrooms[H.r].lamp+"</h1>"
+    return "<h1>You shouldn't be here.. </h1>"   
+
+@app.route('/change/temperature',methods=["POST","GET"])
+def set_temperature():
+    if request.method=='POST':
+        tmp=request.form.get("tmp")
+        H.rooms[H.r].temperature=int(tmp)
+        return redirect('/frontend')
+    return 'room '+str(H.r+1)
+
+@app.route('/change/airConditioner',methods=["POST","GET"])
+def set_air_conditioner_state():
+    if(H.rooms[H.r].airConditioner=="on"):
+        H.rooms[H.r].airConditioner="off"
+    else:
+        H.rooms[H.r].airConditioner="on"
+    return 'room '+str(H.r)
+
+@app.route('/change/window',methods=["POST","GET"])
+def set_window_state():
+    if(H.type_r=='bedroom'):
+        if(H.bedrooms[H.r].window=="opened"):
+            H.bedrooms[H.r].window="closed"
+        else:
+            H.bedrooms[H.r].window="opened"
+        return "<h1>"+H.type_r+" "+str(H.r+1)+": window is "+H.bedrooms[H.r].window+"</h1>"
+    elif(H.type_r=='livingroom'):
+        if(H.livingrooms[H.r].window=="opened"):
+            H.livingrooms[H.r].window="closed"
+        else:
+            H.livingrooms[H.r].window="opened"
+        return "<h1>"+H.type_r+" "+str(H.r+1)+": window is "+H.livingrooms[H.r].window+"</h1>"
+    return "<h1>You shouldn't be here.. </h1>"
 
 @app.route('/frontend')
-def frontend():
-    return redirect("http://localhost:3000")
+def frontend(link=''):
+    return redirect(frontend+link)
 
 if __name__ == "__main__":
     app.run(debug=True)

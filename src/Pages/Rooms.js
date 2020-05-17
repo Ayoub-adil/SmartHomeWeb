@@ -13,16 +13,18 @@ class Rooms extends Component{
         super(props);
         this.state={
         }
-        this.getplan();
-        this.getplan=this.getplan.bind(this);
+        // this.getplan();
+        // this.getplan=this.getplan.bind(this);
       }
       
-    getplan(){
-    fetch('/plan').then(res=>res.json()).then(data=>{
-        this.setState({ plan: data.plan })
-        console.log(this.state.plan);
-    })
-    }
+    // getplan(){
+    // fetch('/home/plan').then(res=>res.json()).then(data=>{
+    //     this.setState({ plan: data.plan })
+    //     console.log(this.state.plan);
+    // })
+    // }
+
+    
     
     render(){
         return(
@@ -40,7 +42,7 @@ class Rooms extends Component{
                     {/* <NavLink to="/kitchen"> 
                     <img className="imgRoom" src={kitchen}></img>
                     </NavLink> */}
-                    <form method='post' action='/setRoom'>
+                    <form method='post' action='/change/room'>
                         <input name='typeofroom' type='text' value='kitchen' hidden></input>
                         <button name='rooom' type='submit' value={0}>
                             <img className="imgRoom" src={kitchen}></img>
@@ -51,7 +53,7 @@ class Rooms extends Component{
                     {/* <NavLink to="/Bedroom"> 
                         <button name='rooom' type='submit' value={8}>
                     </NavLink> */}
-                    <form method='post' action='/setRoom'>
+                    <form method='post' action='/change/room'>
                         <input name='typeofroom' type='text' value='bedroom' hidden></input>
                         <button name='rooom' type='submit' value={0}>
                             <img className="imgRoom" src={bedroom}></img>
@@ -64,7 +66,7 @@ class Rooms extends Component{
                    {/* <NavLink to="/LivingRoom">
                    <img className="imgRoom" src={livingroom}></img>   
                    </NavLink> */}
-                    <form method='post' action='/setRoom'>
+                    <form method='post' action='/change/room'>
                         <input name='typeofroom' type='text' value='livingroom' hidden></input>
                         <button name='rooom' type='submit' value={0}>
                             <img className="imgRoom" src={livingroom}></img>
@@ -72,7 +74,7 @@ class Rooms extends Component{
                     </form> 
                    </Col>
                    <Col className="gutter-row" span={12}>  
-                   <form method='post' action='/setRoom'>
+                   <form method='post' action='/change/room'>
                         <input name='typeofroom' type='text' value='bedroom' hidden></input>
                         <button name='rooom' type='submit' value={1}>
                             <img className="imgRoom" src={bedroom2}></img>

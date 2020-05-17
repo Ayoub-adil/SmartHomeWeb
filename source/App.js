@@ -6,9 +6,9 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      rooom:0,
+      rooom:-1,
       lamp: "broken",
-      window:'half opened',
+      window:'broken',
       climatiseur:"broken",
       temperature:0,
       temp: 0,
