@@ -5,6 +5,7 @@ import './console.css';
 import '../App.css';
 import Title from 'antd/lib/typography/Title';
 import Password from 'antd/lib/input/Password';
+import Dashboard  from './Dashboard.js';
 
 const { TabPane } = Tabs;
 
@@ -53,7 +54,7 @@ class Console extends Component{
                             </Breadcrumb.Item>
                         </Breadcrumb>
                         <div className="site-layout-content" style={{background:'#fff' , padding:24, minHeight:580}}>
-                        <Tabs defaultActiveKey="2">
+                        <Tabs defaultActiveKey="1">
                             <TabPane
                             tab={
                             <span>
@@ -63,7 +64,8 @@ class Console extends Component{
                                 }
                                 key="1"
                                 >
-                                table here ...
+                                <Dashboard />
+
                             </TabPane>
                                     <TabPane
                                     tab={
