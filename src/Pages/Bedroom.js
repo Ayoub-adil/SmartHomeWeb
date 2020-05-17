@@ -63,11 +63,11 @@ class Rooms extends Component{
         console.log(this.state.rooom)
       }
 
-    //   getLampState(){
-    //     fetch('/home/lamp').then(res=>res.json()).then(data=>{
-    //       this.setState({ lamp: data.bedroom[this.state.rooom] })
-    //     })
-    //   }
+      getLampState(){
+        fetch('/home/lamp').then(res=>res.json()).then(data=>{
+          this.setState({ lamp: data.bedroom[this.state.rooom] })
+        })
+      }
 
     //   getTemperature(){
     //     fetch('/home/temperature').then(res=>res.json()).then(data=>{
@@ -98,7 +98,7 @@ class Rooms extends Component{
                         Temperature : <Slider marks={marks} defaultValue={37} />    
                     </div> */}
                     
-                        <div className="onOffRoomX">Light : Off <Switch onChange={this.changeLampState} /> On</div>
+                        <div className="onOffRoomX">Light : <Switch onChange={this.changeLampState} /> {this.state.lamp}</div>
                         
                         <div className="onOffRoomX">Window : <Switch defaultChecked onChange={this.changeWindowState} /> {this.state.window}</div>
                     
@@ -111,9 +111,8 @@ class Rooms extends Component{
     
 
     changeLampState() {
-        console.log(this.state.rooom)
-      // fetch('/change/lamp');
-      // this.getLampState();
+      fetch('/change/lamp');
+      this.getLampState();
     }
 
   //   handleTemperature(e) {

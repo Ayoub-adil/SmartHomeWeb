@@ -108,6 +108,8 @@ def set_room():
             return redirect(f_end+'Livingroom')
         elif typeOfRoom=="kitchen":
             return redirect(f_end+'kitchen')
+    else:
+        return "<h1>You shouldn't be here.. </h1>" 
 
 
 
@@ -125,7 +127,7 @@ def set_lamp_state():
         else:
             H.livingrooms[H.r].lamp="off"
         return "<h1>"+H.type_r+" "+str(H.r+1)+": Lamp is "+H.livingrooms[H.r].lamp+"</h1>"
-    return "<h1>You shouldn't be here.. </h1>" 
+    return "<h1>You shouldn't be here.. </h1>"   
 
 @app.route('/change/temperature',methods=["POST","GET"])
 def set_temperature():
