@@ -11,7 +11,7 @@ class Dashboard extends Component{
               <th>Login</th>
               <th>Password</th>
               <th>Living room number</th>
-              <th>Bedroom number</th>
+              <th>Bpackageedroom number</th>
               <th>Kitchen number</th>
               <th>Stairs number</th>
               <th>Garage number</th>
