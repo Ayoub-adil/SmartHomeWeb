@@ -20,7 +20,7 @@ H=Home.Home(nl,nb,nk,ns,ng)
 
 # insertion des info du formulaire d'admin dans la table admin dans la BD
 
-# @app.route('/traitementForm')
+# @app.route('/traitementForm', methods=['GET', 'POST'])
 # def traitementForm():
 #     cur = mysql.connection.cursor() == to connect with the DATABASE
 #     cur.execute("INSERT INTO admin (login, mdp, n_livingroom, n_Beedroom, n_Kitchen, n_Stairs, n_Garage) VALUES (....)") == 
@@ -28,6 +28,22 @@ H=Home.Home(nl,nb,nk,ns,ng)
 #     cur.close()
 #     return "...."
 #     redirect ...
+
+#@app.route('login/', methods=['GET', 'POST'])
+# def login():
+#     cur = mysql.connection.cursor() 
+#     cursor.execute('SELECT * FROM admin WHERE login = %s AND mdp = %s', (login, mdp,))
+#     donnee = cur.fetchall()
+# If account exists in accounts table in out database
+        # if donnee:
+        #     # Create session data, we can access this data in other routes
+        #     session['login'] = True
+        #     session['mdp'] = True
+        #     # Redirect to home page
+        #     return 'Logged in successfully!'
+        # else:
+        #     # Account doesnt exist or username/password incorrect
+        #     msg = 'Incorrect username/password!'
 # FIN DATABASE CONFIG
 
 
