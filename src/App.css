@@ -121,19 +121,27 @@ p{
 
 .theLeft{
   float: left;
-  margin-left: 10%;
-  margin-top: -3%;
+  width: 30%;
+  padding-left:15%;
+  padding-top:10%;
 }
+
 
 .theRight{
   float: right;
+  width: 49%;
+  margin-right:5%;  
+  margin-top:5%;  
 }
 
 .bedroomImg{
-  width: 47%;
+  width: 100%;
   height: auto;
-  margin-top: 5%; 
-  margin-left: 45%;
+}
+
+.livingroomImg{
+  width: auto;
+  height: 500px;
 }
 
 .btn{

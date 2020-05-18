@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import { Tabs, Switch, Slider  } from 'antd';
+import { Switch,Row,Col,Input, Slider } from 'antd';
 import Header from './Header.js';
 import '../App.css';
 import bedroomRoom from '../images/bedroomRoom.png';
+import LivingroomRoom from '../images/LivingroomRoom.png';
 
-const { TabPane } = Tabs;
 const marks = {
     15: '15°C',
-    30: '30°C',
-    40: '40°C',
+    // 30: '30°C',
+    // 40: '40°C',
     50: {
         style: {
         color: '#f50',
@@ -16,16 +16,6 @@ const marks = {
         label: <strong>50°C</strong>,
     },
 };
-
-function onChange(value) {
-  console.log('onChange: ', value);
-}
-
-function formatter(value) {
-    return `${value}%`;
-}
-
-
 
 class Rooms extends Component{
 
@@ -38,22 +28,22 @@ class Rooms extends Component{
             climatiseur:"broken",
             temperature:0,
             temp: 0,  
-            valid:true  
         } 
         this.getRoom();  
         this.getLampState();
-        // this.getTemperature();
+        this.getTemperature();
         this.getWindowState();
 
         this.getRoom=this.getRoom.bind(this)
-        // this.getLampState=this.getLampState.bind(this)
-        // this.getTemperature=this.getTemperature.bind(this);
+        this.getLampState=this.getLampState.bind(this)
+        this.getTemperature=this.getTemperature.bind(this);
         this.getWindowState=this.getWindowState.bind(this);
 
         this.changeLampState=this.changeLampState.bind(this) 
-        // this.handleTemperature=this.handleTemperature.bind(this) 
-        //this.changeTemperature=this.changeTemperature.bind(this) 
-        // this.changeAirConditionerState=this.changeAirConditionerState.bind(this) 
+        this.handleTemperature=this.handleTemperature.bind(this) 
+        this.handleTemperatureinput=this.handleTemperatureinput.bind(this) 
+        // this.changeTemperature=this.changeTemperature.bind(this) 
+        this.changeAirConditionerState=this.changeAirConditionerState.bind(this) 
         this.changeWindowState=this.changeWindowState.bind(this) 
       }
       
@@ -70,15 +60,15 @@ class Rooms extends Component{
         })
       }
 
-    //   getTemperature(){
-    //     fetch('/home/temperature').then(res=>res.json()).then(data=>{
-    //       this.setState({
-    //         temperature: data.temperature.bedroom[this.state.rooom],
-    //         temp: data.temperature.bedroom[this.state.rooom],
-    //         climatiseur: data.airConditioner.bedroom[this.state.rooom], 
-    //       })
-    //     })
-    //   }
+      getTemperature(){
+        fetch('/home/temperature').then(res=>res.json()).then(data=>{
+          this.setState({
+            temperature: data.temperature.bedroom[this.state.rooom],
+            temp: data.temperature.bedroom[this.state.rooom],
+            climatiseur: data.airConditioner.bedroom[this.state.rooom], 
+          })
+        })
+      }
 
       getWindowState(){
         fetch('/home/window').then(res=>res.json()).then(data=>{
@@ -89,23 +79,107 @@ class Rooms extends Component{
 
     render(){
         return(
-            <div className="App">
-                <Header/>
-                <div className="theRight">
-                    <img className="bedroomImg" src={bedroomRoom}/>
-                </div>
-                <div className="theLeft">
-                    <div className="onOffRoomX">
-                        Temperature : <Slider max="50" min="15" tipFormatter={formatter} onChange={onChange} marks={marks} defaultValue={30} />    
-                    </div>
-                    
-                        <div className="onOffRoomX">Light : <Switch onChange={this.changeLampState} /> {this.state.lamp}</div>
-                        
-                        <div className="onOffRoomX">Window : <Switch defaultChecked onChange={this.changeWindowState} /> {this.state.window}</div>
-                    
-                </div>
+          <div className="App">
+            <Header/>
+
+
+            <div className="theRight">
+                <img className="bedroomImg" src={bedroomRoom} alt="manage your bedroom"/>
+            </div>
+
+
+            <div className="theLeft">
+
+              <Row gutter={[8, 48]}>
+                <Col>
+                  Climatiseur:
+                </Col>
+                <Col>
+                  <Switch 
+                    disabled={this.state.climatiseur==='broken'?true:false}
+                    checked={this.state.climatiseur==='on'?true:false}  
+                    onChange={this.changeAirConditionerState} 
+                  /> 
+                </Col>
+              </Row>
+
+              <Row gutter={[8, 48]}>
+                <Col>
+                  Temperature :
+                </Col>
+                <Col>
+                  <form  method='post' action='/change/temperature'>
+                    <Input 
+                      type='submit' 
+                      value={this.state.temp}
+                      hidden={this.state.temperature===0?true:false}
+                    />
+                    <input  
+                      type="number" 
+                      name="tmp" 
+                      hidden
+                      onChange={this.handleTemperatureinput}  
+                      value={+this.state.temp}
+                    />
+                  </form>
+                </Col>
+              </Row>
+              {/* <Row gutter={[8, 48]}> */}
+                {/* <Col> */}
+                    {this.state.climatiseur==="on"
+                    ?  
+                    <Slider
+                      disabled={this.state.temperature===0 || this.state.climatiseur==='off'?true:false}
+                      max={50} 
+                      min={15} 
+                      marks={marks} 
+                      defaultValue={this.state.temperature} 
+                      value={this.state.temp}
+                      onChange={this.handleTemperature} 
+                    /> 
+                    :null 
+                    }
+                {/* </Col> */}
+              {/* </Row>      */}
+                  
+      
+              <Row gutter={[8, 48]}>
+                <Col>
+                  Light : 
+                </Col>
+                <Col>
+                  <Switch 
+                    disabled={this.state.lamp==='broken'?true:false}
+                    checked={this.state.lamp==='on'?true:false}
+                    // checkedChildren="on" 
+                    // unCheckedChildren="off"  
+                    onChange={this.changeLampState} 
+                  />
+                </Col>
+                <Col>
+                  {this.state.lamp} 
+                </Col>
+              </Row>
+
+              <Row gutter={[8, 48]}>
+                <Col>
+                  Window : 
+                </Col>
+                <Col>
+                  <Switch 
+                    disabled={this.state.window==='broken'?true:false}
+                    checked={this.state.window==='opened'?true:false}
+                    onChange={this.changeWindowState} 
+                  />
+                </Col> 
+                <Col>
+                  {this.state.window}
+                </Col>  
+              </Row>
+
+            </div>
                 
-            </div>     
+          </div>     
         );
     }
 
@@ -114,33 +188,40 @@ class Rooms extends Component{
     changeLampState() {
       fetch('/change/lamp');
       this.getLampState();
+      //console.log(this.state.temperature)
     }
 
-  //   handleTemperature(e) {
-  //     this.setState({ temp: e.target.value });   
-  //     this.changeTemperature(); 
-  //   }
+    handleTemperature(value) {
+      this.setState({ temp: +value }); 
+      console.log('slider '+value)  
+      // this.changeTemperature(); 
+    }
+    handleTemperatureinput(e) {
+      this.setState({ temp: e.target.value }); 
+      console.log('input '+e.target.value)  
+      // this.changeTemperature(); 
+    }
 
-  //   async changeTemperature() {
-  //     let result=await fetch('/change/temperature',{
-  //       'method':'POST',
-  //       'mode': 'no-cors',
-  //       'headers':{
-  //         'accept':'application/json',
-  //         'content-type':'application/json'
-  //       },
-  //       'body':JSON.stringify({
-  //         tmp:this.state.temp
-  //       })
-  //     });
-  //     this.getLampState();
-  //     console.log(result);
-  //   }
+    // async changeTemperature() {
+    //   let result=await fetch('/change/temperature',{
+    //     'method':'POST',
+    //     'mode': 'no-cors',
+    //     'headers':{
+    //       'accept':'application/json',
+    //       'content-type':'application/json'
+    //     },
+    //     'body':JSON.stringify({
+    //       tmp:this.state.temp
+    //     })
+    //   });
+    //   this.getTemperature();
+    //   //console.log(result);
+    // }
 
-  //   changeAirConditionerState() {
-  //     fetch('/change/airConditioner');
-  //     this.getTemperature();
-  //   }
+    changeAirConditionerState() {
+      fetch('/change/airConditioner');
+      this.getTemperature();
+    }
 
     changeWindowState() {
       fetch('/change/window');

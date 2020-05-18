@@ -134,14 +134,14 @@ def set_room():
         rooom=request.form.get("rooom")
         typeOfRoom=request.form.get("typeofroom")
         H.setRoom(typeOfRoom, int(rooom))
-        if typeOfRoom=="bedroom":
-            return redirect(f_end+'Bedroom')
-        if typeOfRoom=="livingroom":
-            return redirect(f_end+'Livingroom')
-        elif typeOfRoom=="kitchen":
-            return redirect(f_end+'kitchen')
-    else:
-        return "<h1>You shouldn't be here.. </h1>" 
+        return redirect(f_end+H.type_r)
+        # if typeOfRoom=="bedroom":
+        #     return redirect(f_end+'Bedroom')
+        # if typeOfRoom=="livingroom":
+        #     return redirect(f_end+'Livingroom')
+        # elif typeOfRoom=="kitchen":
+        #     return redirect(f_end+'kitchen')
+    return "<h1>You shouldn't be here.. </h1>" 
 
 
 
@@ -164,18 +164,29 @@ def set_lamp_state():
 @app.route('/change/temperature',methods=["POST","GET"])
 def set_temperature():
     if request.method=='POST':
-        tmp=request.form.get("tmp")
-        H.rooms[H.r].temperature=int(tmp)
-        return redirect('/frontend')
-    return 'room '+str(H.r+1)
+        tmp=request.form.get('tmp')
+        if H.type_r=='bedroom':
+            H.bedrooms[H.r].temperature=int(tmp)
+        elif H.type_r=='livingroom':
+            H.livingrooms[H.r].temperature=int(tmp)
+        return redirect(f_end+H.type_r)
+    return "<h1>You shouldn't be here.. </h1>"
 
 @app.route('/change/airConditioner',methods=["POST","GET"])
 def set_air_conditioner_state():
-    if(H.rooms[H.r].airConditioner=="on"):
-        H.rooms[H.r].airConditioner="off"
-    else:
-        H.rooms[H.r].airConditioner="on"
-    return 'room '+str(H.r)
+    if(H.type_r=='bedroom'):
+        if(H.bedrooms[H.r].airConditioner=="on"):
+            H.bedrooms[H.r].airConditioner="off"
+        else:
+            H.bedrooms[H.r].airConditioner="on"
+        return "<h1>"+H.type_r+" "+str(H.r+1)+": Air Conditioner is "+H.bedrooms[H.r].airConditioner+"</h1>"
+    elif(H.type_r=='livingroom'):
+        if(H.livingrooms[H.r].airConditioner=="on"):
+            H.livingrooms[H.r].airConditioner="off"
+        else:
+            H.livingrooms[H.r].airConditioner="on"
+        return "<h1>"+H.type_r+" "+str(H.r+1)+": Air Conditioner is "+H.bedrooms[H.r].airConditioner+"</h1>"
+    return "<h1>You shouldn't be here.. </h1>"
 
 @app.route('/change/window',methods=["POST","GET"])
 def set_window_state():
