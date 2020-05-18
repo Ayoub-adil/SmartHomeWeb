@@ -79,7 +79,7 @@ class Console extends Component{
                                             {/*Write this in form ? 7itach gltila matkhdmich b url_for : action="{{ url_for('traitementForm') }}" method="post" */}
                                         <Form {...layout} onFinish={onFinish} validateMessages={validateMessages}>
                                             <Form.Item
-                                            name={['login']}
+                                            name={['log']}
                                             label="Login: "
                                             rules={[
                                                 {
@@ -90,7 +90,7 @@ class Console extends Component{
                                             <Input />
                                             </Form.Item>
                                             <Form.Item
-                                                name={['password']}
+                                                name={['psw']}
                                                 label="Password :"
                                                 rules={[
                                                     {
@@ -101,7 +101,7 @@ class Console extends Component{
                                             <Input.Password />
                                             </Form.Item>
                                             <Form.Item
-                                                name={['n_livingroom']}
+                                                name={['nlr']}
                                                 label="Living room number :"
                                                 rules={[
                                                     {
@@ -112,7 +112,7 @@ class Console extends Component{
                                             <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
                                             </Form.Item>
                                             <Form.Item
-                                                name={['n_bedroom']}
+                                                name={['nbr']}
                                                 label="Bedroom number :"
                                                 rules={[
                                                     {
@@ -123,7 +123,7 @@ class Console extends Component{
                                             <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
                                             </Form.Item>
                                             <Form.Item
-                                                name={['n_kitchen']}
+                                                name={['nk']}
                                                 label="Kitchen number :"
                                                 rules={[
                                                     {
@@ -134,7 +134,7 @@ class Console extends Component{
                                             <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
                                             </Form.Item>
                                             <Form.Item
-                                                name={['n_stairs']}
+                                                name={['ns']}
                                                 label="Stairs number :"
                                                 rules={[
                                                     {
@@ -145,7 +145,7 @@ class Console extends Component{
                                             <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
                                             </Form.Item>
                                             <Form.Item
-                                                name={['n_garage']}
+                                                name={['ng']}
                                                 label="Garage number :"
                                                 rules={[
                                                     {

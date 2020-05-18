@@ -30,7 +30,7 @@ H=Home.Home(nl,nb,nk,ns,ng)
 #         nk=request.form.get("nk")
 #         ns=request.form.get("ns")
 #         ng=request.form.get("ng")
-#         cur = mysql.connection.cursor() #== to connect with the DATABASE
+#         cur = mysql.connection.cursor() # to connect with the DATABASE
 #         cur.execute("INSERT INTO admin (login, password, n_livingroom, n_Beedroom, n_Kitchen, n_Stairs, n_Garage) VALUES ("+log+','  +psw+','+nlr+','+nbr+','+nk+','+ns+','+ng+")")
 #         fetchdata = cur.fetchall()
 #         cur.close()
