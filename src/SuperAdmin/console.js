@@ -76,6 +76,7 @@ class Console extends Component{
                                         }
                                         key="2"
                                         >
+                                            {/*Write this in form ? 7itach gltila matkhdmich b url_for : action="{{ url_for('traitementForm') }}" method="post" */}
                                         <Form {...layout} onFinish={onFinish} validateMessages={validateMessages}>
                                             <Form.Item
                                             name={['login']}
