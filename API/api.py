@@ -23,7 +23,7 @@ H=Home.Home(nl,nb,nk,ns,ng)
 # @app.route('/traitementForm', methods=['GET', 'POST'])
 # def traitementForm():
 #     cur = mysql.connection.cursor() == to connect with the DATABASE
-#     cur.execute("INSERT INTO admin (login, mdp, n_livingroom, n_Beedroom, n_Kitchen, n_Stairs, n_Garage) VALUES (....)") == 
+#     cur.execute("INSERT INTO admin (login, password, n_livingroom, n_Beedroom, n_Kitchen, n_Stairs, n_Garage) VALUES (....)") == 
 #     fetchdata = cur.fetchall()
 #     cur.close()
 #     return "...."
@@ -34,6 +34,9 @@ H=Home.Home(nl,nb,nk,ns,ng)
 #     cur = mysql.connection.cursor() 
 #     cursor.execute('SELECT * FROM admin WHERE login = %s AND mdp = %s', (login, mdp,))
 #     donnee = cur.fetchall()
+
+# khas nchouf wach les variables existe ou pas
+# khas nzid la condition lta7t
 # If account exists in accounts table in out database
         # if donnee:
         #     # Create session data, we can access this data in other routes
@@ -44,6 +47,8 @@ H=Home.Home(nl,nb,nk,ns,ng)
         # else:
         #     # Account doesnt exist or username/password incorrect
         #     msg = 'Incorrect username/password!'
+
+        
 # FIN DATABASE CONFIG
 
 
