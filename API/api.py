@@ -120,9 +120,13 @@ def get_window_state():
     windowbr=[]
     for i in range(H.n_bedroom):
         windowbr.append(H.bedrooms[i].window)
+    windowk=[]
+    for i in range(H.n_kitchen):
+        windowk.append(H.kitchens[i].window)
     return {
         'livingroom':windowlr,
-        'bedroom':windowbr
+        'bedroom':windowbr,
+        'kitchen':windowk
     }
 
   
@@ -202,6 +206,12 @@ def set_window_state():
         else:
             H.livingrooms[H.r].window="opened"
         return "<h1>"+H.type_r+" "+str(H.r+1)+": window is "+H.livingrooms[H.r].window+"</h1>"
+    elif(H.type_r=='kitchen'):
+        if(H.kitchens[H.r].window=="opened"):
+            H.kitchens[H.r].window="closed"
+        else:
+            H.kitchens[H.r].window="opened"
+        return "<h1>"+H.type_r+" "+str(H.r+1)+": window is "+H.kitchens[H.r].window+"</h1>"
     return "<h1>You shouldn't be here.. </h1>"
 
 @app.route('/frontend')
