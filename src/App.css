@@ -140,8 +140,12 @@ p{
 }
 
 .livingroomImg{
-  width: auto;
-  height: 500px;
+  width: 80%;
+  height: auto;
+}
+.kitchenImg{
+  width: 80%;
+  height: auto;
 }
 
 .btn{
@@ -263,7 +267,7 @@ p{
   .theLeft{
     float: left;
     margin-left: 20%;
-    margin-top: 90%;
+    margin-top: 15%;
   }
   
   .theRight{
@@ -271,11 +275,25 @@ p{
   }
   
   .bedroomImg {
-    width: 59%;
+    width: 163%;
     height: auto;
-    margin-top: 20%;
+    margin-top: 30%;
     margin-left: 20%;
   }
+
+  .livingroomImg{
+    width: 163%;
+    height: auto;
+    margin-top: 30%;
+    margin-left: 20%;
+  }
+
+  .kitchenImg{
+    width: 160%;
+    height: auto;
+    margin-top: 30%;
+    margin-left: 20%;
+  }  
 
   .btn{
     padding: 14% 32%;

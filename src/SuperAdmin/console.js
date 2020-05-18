@@ -34,7 +34,15 @@ const layout = {
   const onFinish = values => {
     console.log(values);
   };
+
+  
+
 class Console extends Component{
+
+    Traitement() {
+        fetch('/traitementForm')
+      }
+
     render(){
       return(
         <div className="App">
@@ -77,7 +85,7 @@ class Console extends Component{
                                         key="2"
                                         >
                                             {/*Write this in form ? 7itach gltila matkhdmich b url_for : action="{{ url_for('traitementForm') }}" method="post" */}
-                                        <Form {...layout} onFinish={onFinish} validateMessages={validateMessages}>
+                                        <Form method="post" {...layout} onFinish={onFinish} validateMessages={validateMessages}>
                                             <Form.Item
                                             name={['log']}
                                             label="Login: "
@@ -156,7 +164,7 @@ class Console extends Component{
                                             <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
                                             </Form.Item>
                                             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                                                <Button type="primary" htmlType="submit">Add an admin</Button>
+                                                <Button onclick="Traitement()" type="primary" htmlType="submit">Add an admin</Button>
                                             </Form.Item>
                                         </Form>
                             </TabPane>

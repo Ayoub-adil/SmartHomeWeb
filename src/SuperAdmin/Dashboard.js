@@ -8,6 +8,7 @@ class Dashboard extends Component{
 
           <table>
             <tr>
+              <th>Id</th>
               <th>Login</th>
               <th>Password</th>
               <th>Living room number</th>
@@ -18,6 +19,7 @@ class Dashboard extends Component{
               <th>Action</th>
             </tr>
             <tr>
+              <td>1</td>
               <td>user 1</td>
               <td>vhzvsddjbdhcsdh</td>
               <td>3</td>
@@ -28,6 +30,7 @@ class Dashboard extends Component{
               <td><a href='#'>Delete</a></td>
             </tr>
             <tr>
+              <td>2</td>
               <td>user 2</td>
               <td>xzevgf5347923e</td>
               <td>2</td>

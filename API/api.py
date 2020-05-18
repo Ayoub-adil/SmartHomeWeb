@@ -1,7 +1,8 @@
 import flask
-from flask import request,redirect
+from flask import request,redirect,session
 import Home
-# from flask_mysqldb import MySQL
+from flask_mysqldb import MySQL
+import MySQLdb.cursors
 
 app = flask.Flask(__name__)
 
@@ -11,52 +12,94 @@ H=Home.Home(nl,nb,nk,ns,ng)
 
 # DATABASE CONFIG 
 
-# app.config['MYSQL_HOST'] = 'localhost'
-# app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = ''
-# app.config['MYSQL_DB'] = 'smarthome'
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'smarthome'
 
-# mysql = MySQL(app)
+mysql = MySQL(app)
 
 # insertion des info du formulaire d'admin dans la table admin dans la BD
 
 # @app.route('/traitementForm', methods=['GET', 'POST'])
 # def traitementForm():
 #     if request.method=='POST':
-#         log=request.form.get("log")
-#         psw=request.form.get("psw")
-#         nbr=request.form.get("nbr")
-#         nlr=request.form.get("nlr")
-#         nk=request.form.get("nk")
-#         ns=request.form.get("ns")
-#         ng=request.form.get("ng")
+#         log=request.Form.get("log")
+#         psw=request.Form.get("psw")
+#         nbr=request.Form.get("nbr")
+#         nlr=request.Form.get("nlr")
+#         nk=request.Form.get("nk")
+#         ns=request.Form.get("ns")
+#         ng=request.Form.get("ng")
 #         cur = mysql.connection.cursor() # to connect with the DATABASE
-#         cur.execute("INSERT INTO admin (login, password, n_livingroom, n_Beedroom, n_Kitchen, n_Stairs, n_Garage) VALUES ("+log+','  +psw+','+nlr+','+nbr+','+nk+','+ns+','+ng+")")
+#         cur.execute("INSERT INTO admin (login, mdp, n_livingroom, n_Beedroom, n_Kitchen, n_Stairs, n_Garage) VALUES ("+log+','  +psw+','+nlr+','+nbr+','+nk+','+ns+','+ng+")")
 #         fetchdata = cur.fetchall()
 #         cur.close()
 #         return redirect(f_end+'console') # redirect(URL_page_admin) soit "http://localhost:3000/console"
 
-# @app.route('login/', methods=['GET', 'POST'])
-# def login():
-#     log=request.form.get("log")
-#     psw=request.form.get("psw")
-#     cur = mysql.connection.cursor() 
-#     cursor.execute('SELECT * FROM admin WHERE login = %s AND mdp = %s', (log, psw))
-#     donnee = cur.fetchall()
-# khas nchouf wach les variables existe ou pas
-# khas nzid la condition lta7t
-# If account exists in accounts table in out database
-    # if donnee:
-# Create session data, we can access this data in other routes
-    #     session['login'] = True
-    #     session['mdp'] = True
-    #     # Redirect to home page
-    #     return 'Logged in successfully!'
-    # else:
-# Account doesnt exist or username/password incorrect
-    #     msg = 'Incorrect username/password!'
 
-        
+
+
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+
+# # check if username and password exist in the form
+#     if request.method == 'POST' and 'log' in request.form and 'psw' in request.form:
+#         log=request.form.get("log")
+#         psw=request.form.get("psw")
+    
+#     cur = mysql.connection.cursor() 
+#     cur.execute('SELECT * FROM admin WHERE login = %s AND mdp = %s', (log, psw))
+#     donnee = cur.fetchall()
+
+# #condition
+#     if donnee:
+# #Create session data
+#         session['login'] = donnee['log']
+#         return redirect(f_end+'Home')
+#         return 'Logged in successfully!'
+#     else:
+# #Account doesnt exist or username/password incorrect
+#         msg = 'Incorrect username/password!'
+
+
+
+
+
+
+# @app.route('/SuperAdmin/dashboard', methods=['GET', 'POST'])
+# def dashboard():
+
+#     cur = mysql.connection.cursor() 
+#     cursor.execute('SELECT * FROM admin')
+#     donnee = cur.fetchall()
+# # je dois afficher selon des <td> f le tableau dashboard: HOW !!
+
+
+
+
+
+
+@app.route('/SuperAdmin/loginDirecteur', methods=['GET', 'POST'])
+def loginDirecteur():
+
+# creer des variables internes pour le login et mdp du directeur
+    secretlogin="SuperAdmin"
+    secretpsw="1234"
+
+# check if username and password exist in the form
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        log = request.form.get("username")
+        psw = request.form.get("password")
+    
+#condition
+    if 'log' == 'secretlogin' and 'psw' == 'secretpsw':
+        return redirect(f_end+'console')
+        return 'Logged in successfully!'
+    else:
+#message d'erreur
+        return 'Incorrect username/password!'
+
 # FIN DATABASE CONFIG
 
 
@@ -120,9 +163,13 @@ def get_window_state():
     windowbr=[]
     for i in range(H.n_bedroom):
         windowbr.append(H.bedrooms[i].window)
+    windowk=[]
+    for i in range(H.n_kitchen):
+        windowk.append(H.kitchens[i].window)
     return {
         'livingroom':windowlr,
-        'bedroom':windowbr
+        'bedroom':windowbr,
+        'kitchen':windowk
     }
 
   
@@ -202,6 +249,12 @@ def set_window_state():
         else:
             H.livingrooms[H.r].window="opened"
         return "<h1>"+H.type_r+" "+str(H.r+1)+": window is "+H.livingrooms[H.r].window+"</h1>"
+    elif(H.type_r=='kitchen'):
+        if(H.kitchens[H.r].window=="opened"):
+            H.kitchens[H.r].window="closed"
+        else:
+            H.kitchens[H.r].window="opened"
+        return "<h1>"+H.type_r+" "+str(H.r+1)+": window is "+H.kitchens[H.r].window+"</h1>"
     return "<h1>You shouldn't be here.. </h1>"
 
 @app.route('/frontend')
