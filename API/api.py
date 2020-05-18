@@ -57,9 +57,10 @@ mysql = MySQL(app)
 # #Create session data
 #         session['login'] = donnee['log']
 #         return redirect(f_end+'Home')
-#         return 'Logged in successfully!'
+#         # return 'Logged in successfully!'
 #     else:
 # #Account doesnt exist or username/password incorrect
+#         return redirect(f_end+'SignIn')
 #         msg = 'Incorrect username/password!'
 
 
@@ -95,10 +96,12 @@ def loginDirecteur():
 #condition
     if 'log' == 'secretlogin' and 'psw' == 'secretpsw':
         return redirect(f_end+'console')
-        return 'Logged in successfully!'
+        # return 'Logged in successfully!'
     else:
 #message d'erreur
-        return 'Incorrect username/password!'
+        return redirect(f_end+'login')
+        msg = 'Incorrect username/password!'
+        # return 'Incorrect username/password!'
 
 # FIN DATABASE CONFIG
 
