@@ -22,31 +22,39 @@ H=Home.Home(nl,nb,nk,ns,ng)
 
 # @app.route('/traitementForm', methods=['GET', 'POST'])
 # def traitementForm():
-#     cur = mysql.connection.cursor() == to connect with the DATABASE
-#     cur.execute("INSERT INTO admin (login, password, n_livingroom, n_Beedroom, n_Kitchen, n_Stairs, n_Garage) VALUES (....)") == 
-#     fetchdata = cur.fetchall()
-#     cur.close()
-#     return "...."
-#     redirect ...
+#     if request.method=='POST':
+#         log=request.form.get("log")
+#         psw=request.form.get("psw")
+#         nbr=request.form.get("nbr")
+#         nlr=request.form.get("nlr")
+#         nk=request.form.get("nk")
+#         ns=request.form.get("ns")
+#         ng=request.form.get("ng")
+#         cur = mysql.connection.cursor() #== to connect with the DATABASE
+#         cur.execute("INSERT INTO admin (login, password, n_livingroom, n_Beedroom, n_Kitchen, n_Stairs, n_Garage) VALUES ("+log+','  +psw+','+nlr+','+nbr+','+nk+','+ns+','+ng+")")
+#         fetchdata = cur.fetchall()
+#         cur.close()
+#         return redirect(f_end+'console') # redirect(URL_page_admin) soit "http://localhost:3000/console"
 
-#@app.route('login/', methods=['GET', 'POST'])
+# @app.route('login/', methods=['GET', 'POST'])
 # def login():
+#     log=request.form.get("log")
+#     psw=request.form.get("psw")
 #     cur = mysql.connection.cursor() 
-#     cursor.execute('SELECT * FROM admin WHERE login = %s AND mdp = %s', (login, mdp,))
+#     cursor.execute('SELECT * FROM admin WHERE login = %s AND mdp = %s', (log, psw))
 #     donnee = cur.fetchall()
-
 # khas nchouf wach les variables existe ou pas
 # khas nzid la condition lta7t
 # If account exists in accounts table in out database
-        # if donnee:
-        #     # Create session data, we can access this data in other routes
-        #     session['login'] = True
-        #     session['mdp'] = True
-        #     # Redirect to home page
-        #     return 'Logged in successfully!'
-        # else:
-        #     # Account doesnt exist or username/password incorrect
-        #     msg = 'Incorrect username/password!'
+    # if donnee:
+# Create session data, we can access this data in other routes
+    #     session['login'] = True
+    #     session['mdp'] = True
+    #     # Redirect to home page
+    #     return 'Logged in successfully!'
+    # else:
+# Account doesnt exist or username/password incorrect
+    #     msg = 'Incorrect username/password!'
 
         
 # FIN DATABASE CONFIG
