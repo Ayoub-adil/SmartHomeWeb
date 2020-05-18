@@ -40,7 +40,7 @@ class Rooms extends Component{
             valid:true  
         } 
         this.getRoom();  
-        // this.getLampState();
+        this.getLampState();
         // this.getTemperature();
         this.getWindowState();
 
