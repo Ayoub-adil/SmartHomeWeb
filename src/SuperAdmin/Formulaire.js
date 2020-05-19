@@ -6,17 +6,17 @@ class Formulaire extends Component{
       return(
         <div className="App">
 
-            <form action="#" method="post">
+            <form action="/traitementForm" method="post">
 
                 <div className="formStyle">
                 <label>Login : <br/>
-                    <input type="text" name="log" id="username" required />
+                    <input type="text" name="log" required />
 			    </label>
                 </div>
 
                 <div className="formStyle">
 				<label>Password :<br/>
-                    <input type="password" name="psw" id="password" required />	
+                    <input type="password" name="psw" required />	
 				</label>
                 </div>
 
