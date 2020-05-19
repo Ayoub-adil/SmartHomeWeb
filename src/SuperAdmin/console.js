@@ -6,7 +6,7 @@ import '../App.css';
 import Title from 'antd/lib/typography/Title';
 import Password from 'antd/lib/input/Password';
 import Dashboard  from './Dashboard.js';
-
+import Formulaire from './Formulaire.js';
 const { TabPane } = Tabs;
 
 const { Header, Footer, Content } = Layout;
@@ -84,8 +84,9 @@ class Console extends Component{
                                         }
                                         key="2"
                                         >
+                                            <Formulaire />
                                             {/*Write this in form ? 7itach gltila matkhdmich b url_for : action="{{ url_for('traitementForm') }}" method="post" */}
-                                        <Form method="post" {...layout} onFinish={onFinish} validateMessages={validateMessages}>
+                                        {/* <Form method="post" {...layout} onFinish={onFinish} validateMessages={validateMessages}>
                                             <Form.Item
                                             name={['log']}
                                             label="Login: "
@@ -166,7 +167,7 @@ class Console extends Component{
                                             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                                                 <Button onclick="Traitement()" type="primary" htmlType="submit">Add an admin</Button>
                                             </Form.Item>
-                                        </Form>
+                                        </Form> */}
                             </TabPane>
                         </Tabs>
                         </div>
