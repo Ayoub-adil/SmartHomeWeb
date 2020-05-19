@@ -1,41 +1,53 @@
 import flask
 from flask import request,redirect,session
 import Home
-from flask_mysqldb import MySQL
-import MySQLdb.cursors
+# from flask_mysqldb import MySQL
+# import MySQLdb.cursors
 
 app = flask.Flask(__name__)
 
 f_end="http://localhost:3000/"
+
+secretlogin="SuperAdmin"
+secretpsw="1234"
+
 nl,nb,nk,ns,ng=1,2,1,1,1
 H=Home.Home(nl,nb,nk,ns,ng)
 
 # DATABASE CONFIG 
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'smarthome'
+# app.config['MYSQL_HOST'] = 'localhost'
+# app.config['MYSQL_USER'] = 'root'
+# app.config['MYSQL_PASSWORD'] = ''
+# app.config['MYSQL_DB'] = 'smarthome'
 
-mysql = MySQL(app)
+# mysql = MySQL(app)
 
 # insertion des info du formulaire d'admin dans la table admin dans la BD
 
-# @app.route('/traitementForm', methods=['GET', 'POST'])
-# def traitementForm():
-#     if request.method=='POST':
-#         log=request.Form.get("log")
-#         psw=request.Form.get("psw")
-#         nbr=request.Form.get("nbr")
-#         nlr=request.Form.get("nlr")
-#         nk=request.Form.get("nk")
-#         ns=request.Form.get("ns")
-#         ng=request.Form.get("ng")
-#         cur = mysql.connection.cursor() # to connect with the DATABASE
-#         cur.execute("INSERT INTO admin (login, mdp, n_livingroom, n_Beedroom, n_Kitchen, n_Stairs, n_Garage) VALUES ("+log+','  +psw+','+nlr+','+nbr+','+nk+','+ns+','+ng+")")
-#         fetchdata = cur.fetchall()
-#         cur.close()
-#         return redirect(f_end+'console') # redirect(URL_page_admin) soit "http://localhost:3000/console"
+@app.route('/traitementForm', methods=['GET', 'POST'])
+def traitementForm():
+    if request.method=='POST':
+        log=request.form.get("log")
+        psw=request.form.get("psw")
+        nlr=request.form.get("nlr")
+        # nbr=request.form.get("nbr")
+        # nk=request.form.get("nk")
+        # ns=request.form.get("ns")
+        # ng=request.form.get("ng")
+
+        return {
+            'login':log,
+            'password':psw,
+            'livingRooms':nlr
+        }
+    return "<h1>You shouldn't be here <h1>"
+
+        # cur = mysql.connection.cursor() # to connect with the DATABASE
+        # cur.execute("INSERT INTO admin (login, mdp, n_livingroom, n_Beedroom, n_Kitchen, n_Stairs, n_Garage) VALUES ("+log+','  +psw+','+nlr+','+nbr+','+nk+','+ns+','+ng+")")
+        # fetchdata = cur.fetchall()
+        # cur.close()
+        # return redirect(f_end+'console') # redirect(URL_page_admin) soit "http://localhost:3000/console"
 
 
 
@@ -85,22 +97,25 @@ mysql = MySQL(app)
 def loginDirecteur():
 
 # creer des variables internes pour le login et mdp du directeur
-    secretlogin="SuperAdmin"
-    secretpsw="1234"
+# definition hors fonction sous raison de la portée des variables
+
 
 # check if username and password exist in the form
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+    if request.method == 'POST': #and 'username' in request.form and 'password' in request.form:
         log = request.form.get("username")
         psw = request.form.get("password")
-    
-#condition
-    if 'log' == 'secretlogin' and 'psw' == 'secretpsw':
-        return redirect(f_end+'console')
+        return {
+        'login':log,
+        'password':psw
+        }
+# verification
+        if log == secretlogin and psw == secretpsw :
+            return redirect(f_end+'console')
         # return 'Logged in successfully!'
-    else:
+        else:
 #message d'erreur
-        return redirect(f_end+'login')
-        msg = 'Incorrect username/password!'
+            return redirect(f_end+'login')
+        # msg = 'Incorrect username/password!'
         # return 'Incorrect username/password!'
 
 # FIN DATABASE CONFIG

@@ -10,9 +10,11 @@ import Dashboard  from './Dashboard.js';
 const { TabPane } = Tabs;
 
 const { Header, Footer, Content } = Layout;
+
 function onChange(value) {
     console.log('changed', value);
-  }
+}
+
 const layout = {
     labelCol: {
       span: 8,
@@ -20,8 +22,9 @@ const layout = {
     wrapperCol: {
       span: 16,
     },
-  };
-  const validateMessages = {
+};
+
+const validateMessages = {
     required: '${label} is required!',
     types: {
       email: '${label} is not validate email!',
@@ -30,28 +33,30 @@ const layout = {
     number: {
       range: '${label} must be between ${min} and ${max}',
     },
-  };
-  const onFinish = values => {
+};
+
+const onFinish = values => {
     console.log(values);
-  };
+};
 
   
 
 class Console extends Component{
 
-    Traitement() {
-        fetch('/traitementForm')
-      }
+    // on annule had fetch 7it faut qu'on enovie les donnees du formulaire machi ghir nmchiw la page
+    // Traitement() {
+    //     fetch('/traitementForm')
+    // }
 
     render(){
       return(
         <div className="App">
             <Layout>
                 <Header style={{padding:14}}>
-                <Button style={{float:'right' , fontWeight:800}} >Déconnexion</Button>
-                {/* <a href='#' style={{float:'right'}} icon={<UserOutlined />}  /> */}
-                <Title style={{color:'#F9F9F9'}} level={4}>Smarthome-App console</Title>
-                </Header>
+                    <Button style={{float:'right' , fontWeight:800}} >Déconnexion</Button>
+                    {/* <a href='#' style={{float:'right'}} icon={<UserOutlined />}  /> */}
+                    <Title style={{color:'#F9F9F9'}} level={4}>Smarthome-App console</Title>
+                    </Header>
                 <Layout>
                     
                     <Layout>
@@ -84,19 +89,29 @@ class Console extends Component{
                                         }
                                         key="2"
                                         >
-                                            {/*Write this in form ? 7itach gltila matkhdmich b url_for : action="{{ url_for('traitementForm') }}" method="post" */}
-                                        <Form method="post" {...layout} onFinish={onFinish} validateMessages={validateMessages}>
+                                            {/*Write this in form ? 7itach gltila matkhdmich b url_for : action="{{ url_for('traitementForm') }}" method="post" 
+                                            ACH GHANGOLIK HHHHHH.. RA URLFOR KATKON F FLASK CHNO JABHA L HNA 
+                                            HNA GHATKETBI action="/traitementForm"
+                                            */}
+                                        <Form 
+                                            method="post" 
+                                            action="/traitementForm" 
+                                            // {...layout}
+                                            // onFinish={onFinish} 
+                                            // validateMessages={validateMessages}
+                                        >
                                             <Form.Item
-                                            name={['log']}
-                                            label="Login: "
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                },
-                                            ]}
+                                                name={['log']}
+                                                label="Login: "
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                    },
+                                                ]}
                                             >
-                                            <Input />
+                                                <Input />
                                             </Form.Item>
+
                                             <Form.Item
                                                 name={['psw']}
                                                 label="Password :"
@@ -105,9 +120,10 @@ class Console extends Component{
                                                         required: true,
                                                     },
                                                 ]}
-                                                >
-                                            <Input.Password />
+                                            >
+                                                <Input.Password />
                                             </Form.Item>
+
                                             <Form.Item
                                                 name={['nlr']}
                                                 label="Living room number :"
@@ -116,9 +132,10 @@ class Console extends Component{
                                                         required: true,
                                                     },
                                                 ]}
-                                                >
-                                            <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
+                                            >
+                                                <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
                                             </Form.Item>
+
                                             <Form.Item
                                                 name={['nbr']}
                                                 label="Bedroom number :"
@@ -127,9 +144,10 @@ class Console extends Component{
                                                         required: true,
                                                     },
                                                 ]}
-                                                >
-                                            <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
+                                            >
+                                                <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
                                             </Form.Item>
+
                                             <Form.Item
                                                 name={['nk']}
                                                 label="Kitchen number :"
@@ -138,9 +156,10 @@ class Console extends Component{
                                                         required: true,
                                                     },
                                                 ]}
-                                                >
-                                            <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
+                                            >
+                                                <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
                                             </Form.Item>
+
                                             <Form.Item
                                                 name={['ns']}
                                                 label="Stairs number :"
@@ -149,9 +168,10 @@ class Console extends Component{
                                                         required: true,
                                                     },
                                                 ]}
-                                                >
-                                            <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
+                                            >
+                                                <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
                                             </Form.Item>
+
                                             <Form.Item
                                                 name={['ng']}
                                                 label="Garage number :"
@@ -160,11 +180,16 @@ class Console extends Component{
                                                         required: true,
                                                     },
                                                 ]}
-                                                >
-                                            <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
+                                            >
+                                                <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
                                             </Form.Item>
+
                                             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                                                <Button onclick="Traitement()" type="primary" htmlType="submit">Add an admin</Button>
+                                                <Button
+                                                    // onclick="Traitement()" 
+                                                    type="primary" 
+                                                    htmlType="submit"
+                                                >Add an admin</Button>
                                             </Form.Item>
                                         </Form>
                             </TabPane>
