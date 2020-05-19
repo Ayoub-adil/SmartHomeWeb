@@ -7,7 +7,7 @@ class Login extends Component{
         <div className="App">
             <div class="login">
 			<h1>Login</h1>
-			<form method="post">
+			<form action="loginDirecteur" method="post">
 				<label for="username">
 					<i class="fas fa-user"></i>
 				</label>
