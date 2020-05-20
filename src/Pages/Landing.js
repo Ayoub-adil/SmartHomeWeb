@@ -18,6 +18,7 @@ class Landing extends Component{
 
     <div className='btnStart'>
          <Link to="/SignIn"><Button type="primary" shape="round">Get Started</Button></Link>
+         <Link style={{marginLeft:15}} to="/login"><Button type="primary" shape="round">Espace Société</Button></Link>
     </div>
     </div>
     );
