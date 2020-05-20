@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Layout, Tabs , Avatar, Breadcrumb,Form, Input, InputNumber, Button,Row,Col  } from 'antd';
+import { Layout, Tabs , Breadcrumb, Input, InputNumber, Button,Row,Col  } from 'antd';
 import { UserOutlined, TableOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 import './console.css';
 import '../App.css';
@@ -11,42 +11,9 @@ const { TabPane } = Tabs;
 
 const { Header, Footer, Content } = Layout;
 
-function onChange(value) {
-    console.log('changed', value);
-}
-
-const layout = {
-    labelCol: {
-      span: 8,
-    },
-    wrapperCol: {
-      span: 16,
-    },
-};
-
-const validateMessages = {
-    required: '${label} is required!',
-    types: {
-      email: '${label} is not validate email!',
-      number: '${label} is not a validate number!',
-    },
-    number: {
-      range: '${label} must be between ${min} and ${max}',
-    },
-};
-
-const onFinish = values => {
-    console.log(values);
-};
-
-  
 
 class Cons extends Component{
 
-    // on annule had fetch 7it faut qu'on enovie les donnees du formulaire machi ghir nmchiw la page
-    // Traitement() {
-    //     fetch('/traitementForm')
-    // }
 
     render(){
       return(
@@ -92,9 +59,6 @@ class Cons extends Component{
 <form 
     method="post" 
     action="/traitementForm" 
-    // {...layout}
-    // onFinish={onFinish} 
-    // validateMessages={validateMessages}
 >
     <Row>
     <Col>
@@ -134,106 +98,6 @@ class Cons extends Component{
     />
 </form>
 
-
-
-
-{/* 
-    <Form.Item
-        name={['log']}
-        label="Login: "
-        rules={[
-            {
-                required: true,
-            },
-        ]}
-    >
-    <Input />
-    </Form.Item>
-
-    <Form.Item
-        name={['psw']}
-        label="Password :"
-        rules={[
-            {
-                required: true,
-            },
-        ]}
-    >
-        <Input.Password />
-    </Form.Item>
-
-    <Form.Item
-        name={['nlr']}
-        label="Living room number :"
-        rules={[
-            {
-                required: true,
-            },
-        ]}
-    >
-        <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
-    </Form.Item>
-
-    <Form.Item
-        name={['nbr']}
-        label="Bedroom number :"
-        rules={[
-            {
-                required: true,
-            },
-        ]}
-    >
-        <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
-    </Form.Item>
-
-    <Form.Item
-        name={['nk']}
-        label="Kitchen number :"
-        rules={[
-            {
-                required: true,
-            },
-        ]}
-    >
-        <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
-    </Form.Item>
-
-    <Form.Item
-        name={['ns']}
-        label="Stairs number :"
-        rules={[
-            {
-                required: true,
-            },
-        ]}
-    >
-        <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
-    </Form.Item>
-
-    <Form.Item
-        name={['ng']}
-        label="Garage number :"
-        rules={[
-            {
-                required: true,
-            },
-        ]}
-    >
-        <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
-    </Form.Item>
-
-    <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-        <Button
-            // onclick="Traitement()" 
-            type="primary" 
-            htmlType="submit"
-        >Add an admin</Button>
-    </Form.Item>
-    <Input type="submit" value="send"/> */}
-{/* </Form> */}
-                            
-                            
-                            
                             </TabPane>
                         </Tabs>
                         </div>

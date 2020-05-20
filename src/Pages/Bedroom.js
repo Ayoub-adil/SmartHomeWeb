@@ -3,7 +3,6 @@ import { Switch,Row,Col,Input, Slider } from 'antd';
 import Header from './Header.js';
 import '../App.css';
 import bedroomRoom from '../images/bedroomRoom.png';
-import LivingroomRoom from '../images/LivingroomRoom.png';
 
 const marks = {
     15: '15°C',

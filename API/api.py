@@ -11,10 +11,235 @@ f_end="http://localhost:3000/"
 secretlogin="SuperAdmin"
 secretpsw="1234"
 
-nl,nb,nk,ns,ng=1,2,1,1,1
+nl,nb,nk,ns,ng=2,4,2,1,1
 H=Home.Home(nl,nb,nk,ns,ng)
 
-# DATABASE CONFIG 
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
+@app.route('/')
+def landing():
+    return "<h1>Home Simulator Server</h1>"+"<h2>You shouldn't be here.. </h2>"+"<h3>This server is not for users.. SORRY</h3>"
+
+@app.route('/frontend')
+def frontend(link=''):
+    return redirect(f_end+link)
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
+@app.route('/home/plan')
+def get_plan():
+    return {
+        'plan':{
+            'livingroom':H.n_livingroom,
+            'bedroom':H.n_bedroom,
+            'kitchen':H.n_kitchen,
+            'stairs':H.n_stairs,
+            'garage':H.n_garage
+        }
+    }
+
+@app.route('/home/outsideTemperature')
+def get_outside_temperature():
+    outsideT=H.outsideT
+    rain=H.rain
+    return {
+        "outsideTemperature":outsideT,
+        "rain":rain
+    } 
+    
+@app.route('/home/door')
+def get_door():
+    door=H.lock
+    return {
+        "door":door,
+    } 
+    
+@app.route('/home/garageDoor')
+def get_garage_door():
+    door=H.garages[0].door
+    return {
+        "garageDoor":door,
+    } 
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
+@app.route('/home/room')
+def active_room():
+    return {
+        'room':H.r,
+        'type':H.type_r
+    }
+
+@app.route('/home/lamp')
+def get_lamp_state():
+    lrlamps=[]
+    for i in range(H.n_livingroom):
+        lrlamps.append(H.livingrooms[i].lamp)
+    brlamps=[]
+    for i in range(H.n_bedroom):
+        brlamps.append(H.bedrooms[i].lamp)
+    return {
+        'livingroom':lrlamps,
+        'bedroom':brlamps
+    }
+
+@app.route('/home/temperature')
+def get_temperature():
+    templr=[]
+    climlr=[]
+    for i in range(H.n_livingroom):
+        templr.append(H.livingrooms[i].temperature)
+        climlr.append(H.livingrooms[i].airConditioner)
+    tempbr=[]
+    climbr=[]
+    for i in range(H.n_bedroom):
+        tempbr.append(H.bedrooms[i].temperature)
+        climbr.append(H.bedrooms[i].airConditioner)
+    return {
+        "temperature":{
+            'livingroom':templr,
+            'bedroom':tempbr
+        },
+        "airConditioner":{
+            'livingroom':climlr,
+            'bedroom':climbr
+        }
+    }
+
+@app.route('/home/window')
+def get_window_state():
+    windowlr=[]
+    for i in range(H.n_livingroom):
+        windowlr.append(H.livingrooms[i].window)
+    windowbr=[]
+    for i in range(H.n_bedroom):
+        windowbr.append(H.bedrooms[i].window)
+    windowk=[]
+    for i in range(H.n_kitchen):
+        windowk.append(H.kitchens[i].window)
+    return {
+        'livingroom':windowlr,
+        'bedroom':windowbr,
+        'kitchen':windowk
+    }
+    
+@app.route('/home/smoke')
+def get_smoke_state():
+    ksmoke=[]
+    for i in range(H.n_kitchen):
+        ksmoke.append(H.kitchens[i].smoke)
+    gsmoke=[]
+    for i in range(H.n_garage):
+        gsmoke.append(H.garages[i].smoke)
+    ssmoke=[]
+    for i in range(H.n_stairs):
+        ssmoke.append(H.stairs[i].smoke)
+    return {
+        'kitchen':ksmoke,
+        'garage':gsmoke,
+        'stairs':ssmoke
+    }
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
+@app.route('/change/room',methods=["POST","GET"])
+def set_room():
+    if request.method=='POST':
+        rooom=request.form.get("rooom")
+        typeOfRoom=request.form.get("typeofroom")
+        H.setRoom(typeOfRoom, int(rooom))
+        return redirect(f_end+H.type_r)
+        # if typeOfRoom=="bedroom":
+        #     return redirect(f_end+'Bedroom')
+        # if typeOfRoom=="livingroom":
+        #     return redirect(f_end+'Livingroom')
+        # elif typeOfRoom=="kitchen":
+        #     return redirect(f_end+'kitchen')
+    return "<h1>You shouldn't be here.. </h1>" 
+
+@app.route('/change/lamp')
+def set_lamp_state():
+    if(H.type_r=='bedroom'):
+        if(H.bedrooms[H.r].lamp=="on"):
+            H.bedrooms[H.r].lamp="off"
+        else:
+            H.bedrooms[H.r].lamp="on"
+        return "<h1>"+H.type_r+" "+str(H.r+1)+": Lamp is "+H.bedrooms[H.r].lamp+"</h1>"
+    elif(H.type_r=='livingroom'):
+        if(H.livingrooms[H.r].lamp=="off"):
+            H.livingrooms[H.r].lamp="on"
+        else:
+            H.livingrooms[H.r].lamp="off"
+        return "<h1>"+H.type_r+" "+str(H.r+1)+": Lamp is "+H.livingrooms[H.r].lamp+"</h1>"
+    return "<h1>You shouldn't be here.. </h1>"   
+
+@app.route('/change/temperature',methods=["POST","GET"])
+def set_temperature():
+    if request.method=='POST':
+        tmp=request.form.get('tmp')
+        if H.type_r=='bedroom':
+            H.bedrooms[H.r].temperature=int(tmp)
+        elif H.type_r=='livingroom':
+            H.livingrooms[H.r].temperature=int(tmp)
+        return redirect(f_end+H.type_r)
+    return "<h1>You shouldn't be here.. </h1>"
+
+@app.route('/change/airConditioner',methods=["POST","GET"])
+def set_air_conditioner_state():
+    if(H.type_r=='bedroom'):
+        if(H.bedrooms[H.r].airConditioner=="on"):
+            H.bedrooms[H.r].airConditioner="off"
+        else:
+            H.bedrooms[H.r].airConditioner="on"
+        return "<h1>"+H.type_r+" "+str(H.r+1)+": Air Conditioner is "+H.bedrooms[H.r].airConditioner+"</h1>"
+    elif(H.type_r=='livingroom'):
+        if(H.livingrooms[H.r].airConditioner=="on"):
+            H.livingrooms[H.r].airConditioner="off"
+        else:
+            H.livingrooms[H.r].airConditioner="on"
+        return "<h1>"+H.type_r+" "+str(H.r+1)+": Air Conditioner is "+H.bedrooms[H.r].airConditioner+"</h1>"
+    return "<h1>You shouldn't be here.. </h1>"
+
+@app.route('/change/window',methods=["POST","GET"])
+def set_window_state():
+    if(H.type_r=='bedroom'):
+        if(H.bedrooms[H.r].window=="opened"):
+            H.bedrooms[H.r].window="closed"
+        else:
+            H.bedrooms[H.r].window="opened"
+        return "<h1>"+H.type_r+" "+str(H.r+1)+": window is "+H.bedrooms[H.r].window+"</h1>"
+    elif(H.type_r=='livingroom'):
+        if(H.livingrooms[H.r].window=="opened"):
+            H.livingrooms[H.r].window="closed"
+        else:
+            H.livingrooms[H.r].window="opened"
+        return "<h1>"+H.type_r+" "+str(H.r+1)+": window is "+H.livingrooms[H.r].window+"</h1>"
+    elif(H.type_r=='kitchen'):
+        if(H.kitchens[H.r].window=="opened"):
+            H.kitchens[H.r].window="closed"
+        else:
+            H.kitchens[H.r].window="opened"
+        return "<h1>"+H.type_r+" "+str(H.r+1)+": window is "+H.kitchens[H.r].window+"</h1>"
+    return "<h1>You shouldn't be here.. </h1>"
+
+@app.route('/change/door')
+def set_door_state():
+    H.lock=not H.lock
+    if H.lock:
+        return "<h1>The Door is Locked</h1>"  
+    return "<h1>The Door is Unlocked</h1>"
+
+@app.route('/change/garageDoor')
+def set_garage_door_state():
+    if (H.garages[0].door=='opened'):
+        #return "<h1> opened </h1>"
+        H.garages[0].door='closed'
+    else:
+        #return "<h1> closed </h1>"
+        H.garages[0].door='opened'
+    return "<h1>The Garage Door is "+ H.garages[0].door +"</h1>"
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
+
+    # DATABASE CONFIG 
 
 # app.config['MYSQL_HOST'] = 'localhost'
 # app.config['MYSQL_USER'] = 'root'
@@ -121,163 +346,8 @@ def loginDirecteur():
 # FIN DATABASE CONFIG
 
 
-@app.route('/home/room')
-def active_room():
-    return {
-        'room':H.r,
-        'type':H.type_r
-    }
 
-@app.route('/home/plan')
-def get_plan():
-    return {
-        'plan':{
-            'livingroom':H.n_livingroom,
-            'bedroom':H.n_bedroom,
-            'kitchen':H.n_kitchen,
-            'stairs':H.n_stairs,
-            'garage':H.n_garage
-        }
-    }
-@app.route('/home/lamp')
-def get_lamp_state():
-    lrlamps=[]
-    for i in range(H.n_livingroom):
-        lrlamps.append(H.livingrooms[i].lamp)
-    brlamps=[]
-    for i in range(H.n_bedroom):
-        brlamps.append(H.bedrooms[i].lamp)
-    return {
-        'livingroom':lrlamps,
-        'bedroom':brlamps
-    }
-@app.route('/home/temperature')
-def get_temperature():
-    templr=[]
-    climlr=[]
-    for i in range(H.n_livingroom):
-        templr.append(H.livingrooms[i].temperature)
-        climlr.append(H.livingrooms[i].airConditioner)
-    tempbr=[]
-    climbr=[]
-    for i in range(H.n_bedroom):
-        tempbr.append(H.bedrooms[i].temperature)
-        climbr.append(H.bedrooms[i].airConditioner)
-    return {
-        "temperature":{
-            'livingroom':templr,
-            'bedroom':tempbr
-        },
-        "airConditioner":{
-            'livingroom':climlr,
-            'bedroom':climbr
-        }
-    }
-@app.route('/home/window')
-def get_window_state():
-    windowlr=[]
-    for i in range(H.n_livingroom):
-        windowlr.append(H.livingrooms[i].window)
-    windowbr=[]
-    for i in range(H.n_bedroom):
-        windowbr.append(H.bedrooms[i].window)
-    windowk=[]
-    for i in range(H.n_kitchen):
-        windowk.append(H.kitchens[i].window)
-    return {
-        'livingroom':windowlr,
-        'bedroom':windowbr,
-        'kitchen':windowk
-    }
-
-  
-
-
-@app.route('/change/room',methods=["POST","GET"])
-def set_room():
-    if request.method=='POST':
-        rooom=request.form.get("rooom")
-        typeOfRoom=request.form.get("typeofroom")
-        H.setRoom(typeOfRoom, int(rooom))
-        return redirect(f_end+H.type_r)
-        # if typeOfRoom=="bedroom":
-        #     return redirect(f_end+'Bedroom')
-        # if typeOfRoom=="livingroom":
-        #     return redirect(f_end+'Livingroom')
-        # elif typeOfRoom=="kitchen":
-        #     return redirect(f_end+'kitchen')
-    return "<h1>You shouldn't be here.. </h1>" 
-
-
-
-@app.route('/change/lamp')
-def set_lamp_state():
-    if(H.type_r=='bedroom'):
-        if(H.bedrooms[H.r].lamp=="on"):
-            H.bedrooms[H.r].lamp="off"
-        else:
-            H.bedrooms[H.r].lamp="on"
-        return "<h1>"+H.type_r+" "+str(H.r+1)+": Lamp is "+H.bedrooms[H.r].lamp+"</h1>"
-    elif(H.type_r=='livingroom'):
-        if(H.livingrooms[H.r].lamp=="off"):
-            H.livingrooms[H.r].lamp="on"
-        else:
-            H.livingrooms[H.r].lamp="off"
-        return "<h1>"+H.type_r+" "+str(H.r+1)+": Lamp is "+H.livingrooms[H.r].lamp+"</h1>"
-    return "<h1>You shouldn't be here.. </h1>"   
-
-@app.route('/change/temperature',methods=["POST","GET"])
-def set_temperature():
-    if request.method=='POST':
-        tmp=request.form.get('tmp')
-        if H.type_r=='bedroom':
-            H.bedrooms[H.r].temperature=int(tmp)
-        elif H.type_r=='livingroom':
-            H.livingrooms[H.r].temperature=int(tmp)
-        return redirect(f_end+H.type_r)
-    return "<h1>You shouldn't be here.. </h1>"
-
-@app.route('/change/airConditioner',methods=["POST","GET"])
-def set_air_conditioner_state():
-    if(H.type_r=='bedroom'):
-        if(H.bedrooms[H.r].airConditioner=="on"):
-            H.bedrooms[H.r].airConditioner="off"
-        else:
-            H.bedrooms[H.r].airConditioner="on"
-        return "<h1>"+H.type_r+" "+str(H.r+1)+": Air Conditioner is "+H.bedrooms[H.r].airConditioner+"</h1>"
-    elif(H.type_r=='livingroom'):
-        if(H.livingrooms[H.r].airConditioner=="on"):
-            H.livingrooms[H.r].airConditioner="off"
-        else:
-            H.livingrooms[H.r].airConditioner="on"
-        return "<h1>"+H.type_r+" "+str(H.r+1)+": Air Conditioner is "+H.bedrooms[H.r].airConditioner+"</h1>"
-    return "<h1>You shouldn't be here.. </h1>"
-
-@app.route('/change/window',methods=["POST","GET"])
-def set_window_state():
-    if(H.type_r=='bedroom'):
-        if(H.bedrooms[H.r].window=="opened"):
-            H.bedrooms[H.r].window="closed"
-        else:
-            H.bedrooms[H.r].window="opened"
-        return "<h1>"+H.type_r+" "+str(H.r+1)+": window is "+H.bedrooms[H.r].window+"</h1>"
-    elif(H.type_r=='livingroom'):
-        if(H.livingrooms[H.r].window=="opened"):
-            H.livingrooms[H.r].window="closed"
-        else:
-            H.livingrooms[H.r].window="opened"
-        return "<h1>"+H.type_r+" "+str(H.r+1)+": window is "+H.livingrooms[H.r].window+"</h1>"
-    elif(H.type_r=='kitchen'):
-        if(H.kitchens[H.r].window=="opened"):
-            H.kitchens[H.r].window="closed"
-        else:
-            H.kitchens[H.r].window="opened"
-        return "<h1>"+H.type_r+" "+str(H.r+1)+": window is "+H.kitchens[H.r].window+"</h1>"
-    return "<h1>You shouldn't be here.. </h1>"
-
-@app.route('/frontend')
-def frontend(link=''):
-    return redirect(frontend+link)
-
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
 if __name__ == "__main__":
     app.run(debug=True)

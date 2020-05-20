@@ -1,20 +1,8 @@
 import React, {Component} from 'react';
-import { Switch,Row,Col,Input, Slider } from 'antd';
+import { Switch,Row,Col } from 'antd';
 import Header from './Header.js';
 import '../App.css';
 import kitchenRoom from '../images/kitchenRoom.png';
-
-const marks = {
-    15: '15°C',
-    // 30: '30°C',
-    // 40: '40°C',
-    50: {
-        style: {
-        color: '#f50',
-        },
-        label: <strong>50°C</strong>,
-    },
-};
 
 class Rooms extends Component{
     
@@ -52,7 +40,7 @@ class Rooms extends Component{
             <div className="App">
                 <Header/>
                 <div className="theRight">
-                    <img className="kitchenImg" src={kitchenRoom}/>
+                    <img className="kitchenImg" src={kitchenRoom} alt="manage your kitchen"/>
                 </div>
                 <div className="theLeft">
                     <Row gutter={[8, 48]}>
