@@ -332,7 +332,6 @@ def loginDirecteur():
 # creer des variables internes pour le login et mdp du directeur
 # definition hors fonction sous raison de la portée des variables
 
-
 # check if username and password exist in the form
     if request.method == 'POST': #and 'username' in request.form and 'password' in request.form:
         log = request.form.get("username")
@@ -350,7 +349,6 @@ def loginDirecteur():
 #message d'erreur
             return redirect(f_end+'login')
         # msg = 'Incorrect username/password!'
-        # return 'Incorrect username/password!'
 
 # FIN DATABASE CONFIG
 
