@@ -1,8 +1,8 @@
 import flask
 from flask import request,redirect,session
 import Home
-# from flask_mysqldb import MySQL
-# import MySQLdb.cursors
+from flask_mysqldb import MySQL
+import MySQLdb.cursors
 
 app = flask.Flask(__name__)
 
@@ -19,6 +19,7 @@ H=Home.Home(nl,nb,nk,ns,ng)
 @app.route('/')
 def landing():
     return "<h1>Home Simulator Server</h1>"+"<h2>You shouldn't be here.. </h2>"+"<h3>This server is not for users.. SORRY</h3>"
+
 
 @app.route('/frontend')
 def frontend(link=''):
@@ -239,14 +240,14 @@ def set_garage_door_state():
 #**********************************************************************************************************************************
 #**********************************************************************************************************************************
 
-    # DATABASE CONFIG 
+# DATABASE CONFIG 
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'smarthome'
 
-# app.config['MYSQL_HOST'] = 'localhost'
-# app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = ''
-# app.config['MYSQL_DB'] = 'smarthome'
-
-# mysql = MySQL(app)
+# Intialize MySQL
+mysql = MySQL(app)
 
 # insertion des info du formulaire d'admin dans la table admin dans la BD
 
@@ -256,23 +257,27 @@ def traitementForm():
         log=request.form.get("log")
         psw=request.form.get("psw")
         nlr=request.form.get("nlr")
-        # nbr=request.form.get("nbr")
-        # nk=request.form.get("nk")
-        # ns=request.form.get("ns")
-        # ng=request.form.get("ng")
+        nbr=request.form.get("nbr")
+        nk=request.form.get("nk")
+        ns=request.form.get("ns")
+        ng=request.form.get("ng")
 
-        return {
-            'login':log,
-            'password':psw,
-            'livingRooms':nlr
-        }
-    return "<h1>You shouldn't be here <h1>"
+    #     return {
+    #         'login':log,
+    #         'password':psw,
+    #         'livingRooms':nlr,
+    #         'bedroom':nbr,
+    #         'kitchen':nk,
+    #         'stairs':ns,
+    #         'garage':ng
+    #     }
+    # return "<h1>You shouldn't be here <h1>"
 
-        # cur = mysql.connection.cursor() # to connect with the DATABASE
-        # cur.execute("INSERT INTO admin (login, mdp, n_livingroom, n_Beedroom, n_Kitchen, n_Stairs, n_Garage) VALUES ("+log+','  +psw+','+nlr+','+nbr+','+nk+','+ns+','+ng+")")
-        # fetchdata = cur.fetchall()
-        # cur.close()
-        # return redirect(f_end+'console') # redirect(URL_page_admin) soit "http://localhost:3000/console"
+        cur = mysql.connection.cursor() # to connect with the DATABASE
+        cur.execute("INSERT INTO admin ( login, mdp, n_livingroom, n_bedroom, n_kitchen, n_garage, n_stairs) VALUES ("'+log+','+psw+','+nlr+','+nbr+','+nk+','+ng+','+ns+'")")
+        fetchdata = cur.fetchall()
+        cur.close()
+        return redirect(f_end+'console') # redirect(URL_page_admin) soit "http://localhost:3000/console"
 
 
 
@@ -321,6 +326,9 @@ def traitementForm():
 @app.route('/SuperAdmin/loginDirecteur', methods=['GET', 'POST'])
 def loginDirecteur():
 
+    secretlogin = "superadmin"
+    secretpsw = "123"
+
 # creer des variables internes pour le login et mdp du directeur
 # definition hors fonction sous raison de la portée des variables
 
@@ -329,10 +337,11 @@ def loginDirecteur():
     if request.method == 'POST': #and 'username' in request.form and 'password' in request.form:
         log = request.form.get("username")
         psw = request.form.get("password")
-        return {
-        'login':log,
-        'password':psw
-        }
+        # return {
+        # 'login':log,
+        # 'password':psw
+        # }
+        
 # verification
         if log == secretlogin and psw == secretpsw :
             return redirect(f_end+'console')
@@ -344,8 +353,6 @@ def loginDirecteur():
         # return 'Incorrect username/password!'
 
 # FIN DATABASE CONFIG
-
-
 
 #**********************************************************************************************************************************
 #**********************************************************************************************************************************

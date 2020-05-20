@@ -6,7 +6,7 @@ import '../App.css';
 import Title from 'antd/lib/typography/Title';
 import Password from 'antd/lib/input/Password';
 import Dashboard  from './Dashboard.js';
-
+import Formulaire from './Formulaire.js';
 const { TabPane } = Tabs;
 
 const { Header, Footer, Content } = Layout;
@@ -80,7 +80,7 @@ class Console extends Component{
                                 <Dashboard />
 
                             </TabPane>
-                                    <TabPane
+                            <TabPane
                                     tab={
                                     <span>
                                         <UsergroupAddOutlined />
@@ -89,109 +89,7 @@ class Console extends Component{
                                         }
                                         key="2"
                                         >
-                                            {/*Write this in form ? 7itach gltila matkhdmich b url_for : action="{{ url_for('traitementForm') }}" method="post" 
-                                            ACH GHANGOLIK HHHHHH.. RA URLFOR KATKON F FLASK CHNO JABHA L HNA 
-                                            HNA GHATKETBI action="/traitementForm"
-                                            */}
-                                        <Form 
-                                            method="post" 
-                                            action="/traitementForm" 
-                                            // {...layout}
-                                            // onFinish={onFinish} 
-                                            // validateMessages={validateMessages}
-                                        >
-                                            <Form.Item
-                                                name={['log']}
-                                                label="Login: "
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                    },
-                                                ]}
-                                            >
-                                                <Input />
-                                            </Form.Item>
-
-                                            <Form.Item
-                                                name={['psw']}
-                                                label="Password :"
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                    },
-                                                ]}
-                                            >
-                                                <Input.Password />
-                                            </Form.Item>
-
-                                            <Form.Item
-                                                name={['nlr']}
-                                                label="Living room number :"
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                    },
-                                                ]}
-                                            >
-                                                <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
-                                            </Form.Item>
-
-                                            <Form.Item
-                                                name={['nbr']}
-                                                label="Bedroom number :"
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                    },
-                                                ]}
-                                            >
-                                                <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
-                                            </Form.Item>
-
-                                            <Form.Item
-                                                name={['nk']}
-                                                label="Kitchen number :"
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                    },
-                                                ]}
-                                            >
-                                                <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
-                                            </Form.Item>
-
-                                            <Form.Item
-                                                name={['ns']}
-                                                label="Stairs number :"
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                    },
-                                                ]}
-                                            >
-                                                <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
-                                            </Form.Item>
-
-                                            <Form.Item
-                                                name={['ng']}
-                                                label="Garage number :"
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                    },
-                                                ]}
-                                            >
-                                                <InputNumber min={0} max={11} defaultValue={3} onChange={onChange} />
-                                            </Form.Item>
-
-                                            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                                                <Button
-                                                    // onclick="Traitement()" 
-                                                    type="primary" 
-                                                    htmlType="submit"
-                                                >Add an admin</Button>
-                                            </Form.Item>
-                                        </Form>
+                                        <Formulaire />
                             </TabPane>
                         </Tabs>
                         </div>
