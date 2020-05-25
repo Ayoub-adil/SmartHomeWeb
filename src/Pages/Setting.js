@@ -27,17 +27,27 @@ class Setting extends Component{
             door:'Conexion au capteur',
             garageDoor:'Conexion au capteur',
             timeLamp:null,
+            alert:"obtention de l'etat ...",
+            watering:"obtention de l'etat ...",
+            mvt:"connexion au capteur de mouvement"
         } 
         this.getOutsideTemperature();
         this.getDoorState();
         this.getGarageDoorState();
+        this.getAlert();
+        this.getMvtLight();
 
         this.getOutsideTemperature=this.getOutsideTemperature.bind(this);
         this.getDoorState=this.getDoorState.bind(this);
         this.getGarageDoorState=this.getGarageDoorState.bind(this);
+        this.getAlert=this.getAlert.bind(this);
+        this.getMvtLight=this.getMvtLight.bind(this);
 
         this.changeDoorState=this.changeDoorState.bind(this) 
         this.changeGarageDoorState=this.changeGarageDoorState.bind(this) 
+        this.changeAlert=this.changeAlert.bind(this) 
+        this.changeWatering=this.changeWatering.bind(this) 
+        this.changeMvtLight=this.changeMvtLight.bind(this) 
     }
 
     timeLampChange=(time)=>{
@@ -69,6 +79,21 @@ class Setting extends Component{
           });
         })
     }
+    getAlert(){
+        fetch('/home/alert').then(res=>res.json()).then(data=>{
+          this.setState({
+            alert: data.alert,
+            watering: data.watering,
+          });
+        })
+    }
+    getMvtLight(){
+        fetch('/home/mvtLight').then(res=>res.json()).then(data=>{
+          this.setState({
+            mvt: data.mvt,
+          });
+        })
+    }
 
     render(){
         return(
@@ -82,14 +107,34 @@ class Setting extends Component{
                 </Card>
                 <Card style={{ marginTop: 16 }} type="inner">
                     <Avatar size={40} style={{ color: '#007bff' , background:'none' }}icon={<AlertOutlined />}/>
-                    Alert
-                    <div className="onOff">ON/OFF <Switch size="small" defaultChecked onChange={onChange} /></div>
+                    Alert 
+                    <div className="onOff">{this.state.alert} 
+                    <Switch 
+                        size="small" 
+                        checked={this.state.alert==='on'?true:false} 
+                        onChange={this.changeAlert}
+                    />
+                    </div>
+                    <div className="onOff"><>Watering : </>{this.state.watering} 
+                    <Switch 
+                        size="small" 
+                        checked={this.state.watering==='on'?true:false} 
+                        onChange={this.changeWatering}
+                    />
+                    </div>
                 </Card>
 
                 <Card style={{ marginTop: 16 }} type="inner">
                     <Avatar size={40} src={lampe} />
-                    Mouvement ligth
-                    <div className="onOff">Auto <Switch size="small" defaultChecked onChange={this.test} /></div>
+                    Hall ligth
+                    <div className="onOff">
+                        {this.state.mvt} 
+                        <Switch 
+                            size="small" 
+                            checked={this.state.mvt} 
+                            onChange={this.changeMvtLight} 
+                        />
+                    </div>
                 </Card>
 
                 <Card style={{ marginTop: 16 }} type="inner">
@@ -150,6 +195,18 @@ class Setting extends Component{
     changeGarageDoorState() {
         fetch('/change/garageDoor');
         this.getGarageDoorState();
+    }
+    changeAlert() {
+        fetch('/change/alert');
+        this.getAlert();
+    }
+    changeWatering() {
+        fetch('/change/watering');
+        this.getAlert();
+    }
+    changeMvtLight() {
+        fetch('/change/mvtLight');
+        this.getMvtLight();
     }
 }
 

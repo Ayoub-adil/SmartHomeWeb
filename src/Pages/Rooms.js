@@ -44,7 +44,9 @@ class Rooms extends Component{
 
 
                 {/* {this.state.plan.bedroom} */}
+                {this.state.plan.bedroom===0?null:
                 <h1>Bedrooms</h1>
+                }
                 <Row>
                 {[...Array(this.state.plan.bedroom)].map((e,i)=>
 
@@ -75,8 +77,10 @@ class Rooms extends Component{
                 </>
                 )}
                 </Row>
-
+                {this.state.plan.livingroom===0?null:
                 <h1>livingrooms</h1>
+                }
+                
                 <Row>
                 {[...Array(this.state.plan.livingroom)].map((e,i)=>
                 <>
@@ -105,8 +109,10 @@ class Rooms extends Component{
                 </>
                 )}
                 </Row>
-
+                {this.state.plan.kitchen===0?null:
                 <h1>kitchens</h1>
+                }
+                
                 <Row>
                 {[...Array(this.state.plan.kitchen)].map((e,i)=>
                 <>

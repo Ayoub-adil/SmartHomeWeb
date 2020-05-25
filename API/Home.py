@@ -8,6 +8,9 @@ class Home:
     # outsideT
     # rain
     # lock
+    # alert
+    # watering
+    # hallLight
 
     # r   
     # type_r
@@ -45,6 +48,9 @@ class Home:
     def __init__(self,n_livingroom,n_bedroom,n_kitchen,n_stairs,n_garage):
         self.r=-1
         self.type_r='outdoor'
+        self.alert='on'
+        self.watering='on'
+        self.hallLight=True
         self.n_livingroom=n_livingroom
         self.n_bedroom=n_bedroom
         self.n_kitchen=n_kitchen
