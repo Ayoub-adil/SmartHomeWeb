@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 import { Col, Row,Divider} from 'antd';
 import '../App.css';
-import bedroom from '../images/bedroom.png';
-import kitchen from '../images/kitchen.png';
-import livingroom from '../images/livingroom.png';
+import bedroom from '../images/bedroomN.png';
+import kitchen from '../images/kitchenN.png';
+import livingroom from '../images/livingroomN.png';
 import Header from './Header.js';
 
 class Rooms extends Component{
@@ -38,9 +38,9 @@ class Rooms extends Component{
                 <Header />
                 <div className='Rooms'>
                 </div>
-               <Divider orientation="left">
+               <h2 orientation="left">
                    <h1>Hello <span className="smarthome">User</span></h1>
-               </Divider>
+               </h2>
 
 
                 {/* {this.state.plan.bedroom} */}
@@ -63,8 +63,8 @@ class Rooms extends Component{
                     >  
                    <form method='post' action='/change/room'>
                         <input name='typeofroom' type='text' value='bedroom' hidden></input>
-                        <button name='rooom' type='submit' value={i}>
-                            {i+1}
+                        <button className="btnRoom" name='rooom' type='submit' value={i}>
+                            {i}
                             <img className="imgRoom" src={bedroom} alt="bedroom"></img>
                         </button>
                     </form> 
@@ -100,8 +100,8 @@ class Rooms extends Component{
                    </NavLink> */}
                     <form method='post' action='/change/room'>
                         <input name='typeofroom' type='text' value='livingroom' hidden></input>
-                        <button name='rooom' type='submit' value={i}>
-                            {i+1}
+                        <button className="btnRoom" name='rooom' type='submit' value={i}>
+                            {i}
                             <img className="imgRoom" src={livingroom} alt="livingroom"></img>
                         </button>
                     </form> 
@@ -131,8 +131,8 @@ class Rooms extends Component{
                     </NavLink> */}
                     <form method='post' action='/change/room'>
                         <input name='typeofroom' type='text' value='kitchen' hidden></input>
-                        <button name='rooom' type='submit' value={i}>
-                            {i+1}
+                        <button className="btnRoom" name='rooom' type='submit' value={i}>
+                            {i}
                             <img className="imgRoom" src={kitchen} alt="kitchen"></img>
                         </button>
                     </form>  
