@@ -44,7 +44,9 @@ class Rooms extends Component{
 
 
                 {/* {this.state.plan.bedroom} */}
+                {this.state.plan.bedroom===0?null:
                 <h1>Bedrooms</h1>
+                }
                 <Row>
                 {[...Array(this.state.plan.bedroom)].map((e,i)=>
 
@@ -62,7 +64,7 @@ class Rooms extends Component{
                    <form method='post' action='/change/room'>
                         <input name='typeofroom' type='text' value='bedroom' hidden></input>
                         <button name='rooom' type='submit' value={i}>
-                            {i}
+                            {i+1}
                             <img className="imgRoom" src={bedroom} alt="bedroom"></img>
                         </button>
                     </form> 
@@ -75,8 +77,10 @@ class Rooms extends Component{
                 </>
                 )}
                 </Row>
-
+                {this.state.plan.livingroom===0?null:
                 <h1>livingrooms</h1>
+                }
+                
                 <Row>
                 {[...Array(this.state.plan.livingroom)].map((e,i)=>
                 <>
@@ -97,7 +101,7 @@ class Rooms extends Component{
                     <form method='post' action='/change/room'>
                         <input name='typeofroom' type='text' value='livingroom' hidden></input>
                         <button name='rooom' type='submit' value={i}>
-                            {i}
+                            {i+1}
                             <img className="imgRoom" src={livingroom} alt="livingroom"></img>
                         </button>
                     </form> 
@@ -105,8 +109,10 @@ class Rooms extends Component{
                 </>
                 )}
                 </Row>
-
+                {this.state.plan.kitchen===0?null:
                 <h1>kitchens</h1>
+                }
+                
                 <Row>
                 {[...Array(this.state.plan.kitchen)].map((e,i)=>
                 <>
@@ -126,7 +132,7 @@ class Rooms extends Component{
                     <form method='post' action='/change/room'>
                         <input name='typeofroom' type='text' value='kitchen' hidden></input>
                         <button name='rooom' type='submit' value={i}>
-                            {i}
+                            {i+1}
                             <img className="imgRoom" src={kitchen} alt="kitchen"></img>
                         </button>
                     </form>  
