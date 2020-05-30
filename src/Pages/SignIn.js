@@ -24,7 +24,24 @@ class SignIn extends Component{
     <div className="left">
         <h1>Hello <span className="smarthome">User</span></h1>
         <p>Authenticate your account</p>
-        <Form>
+
+        <form> 
+            <div className="formStyle">
+            <label>Login : <br/>
+                <input style={{width: '100%', margin: '4px 0'}} type="text" name="log" required />
+			</label>
+            </div>
+
+            <div className="formStyle">
+			<label>Password :<br/>
+                <input style={{width: '100%', margin: '4px 0'}} type="password" name="psw" required />	
+			</label>
+            </div>
+
+            <Link to="/Home" ><input style={{width: '80%', padding: '10px 20px' , margin: '20% 0%'}} className='signIn' type="submit" value="Sign in" /></Link>
+
+        </form>
+        {/* <Form>
 
             <Form.Item
             label="Username"
@@ -47,7 +64,7 @@ class SignIn extends Component{
             </center>
             
             
-        </Form>
+        </Form> */}
     </div>
   </div>
 );

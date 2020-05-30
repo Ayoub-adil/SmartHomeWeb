@@ -361,32 +361,32 @@ def set_mvt_light():
 
 
 
-# @app.route('/SuperAdmin/loginDirecteur', methods=['GET', 'POST'])
-# def loginDirecteur():
+@app.route('/SuperAdmin/loginDirecteur', methods=['GET', 'POST'])
+def loginDirecteur():
 
-#     secretlogin = "superadmin"
-#     secretpsw = "123"
+    secretlogin = "superadmin"
+    secretpsw = "123"
 
-# # creer des variables internes pour le login et mdp du directeur
-# # definition hors fonction sous raison de la portée des variables
+# creer des variables internes pour le login et mdp du directeur
+# definition hors fonction sous raison de la portée des variables
 
-# # check if username and password exist in the form
-#     if request.method == 'POST': #and 'username' in request.form and 'password' in request.form:
-#         log = request.form.get("username")
-#         psw = request.form.get("password")
-#         # return {
-#         # 'login':log,
-#         # 'password':psw
-#         # }
+# check if username and password exist in the form
+    if request.method == 'POST': #and 'username' in request.form and 'password' in request.form:
+        log = request.form.get("username")
+        psw = request.form.get("password")
+        # return {
+        # 'login':log,
+        # 'password':psw
+        # }
         
-# # verification
-#         if log == secretlogin and psw == secretpsw :
-#             return redirect(f_end+'console')
-#         # return 'Logged in successfully!'
-#         else:
-# #message d'erreur
-#             return redirect(f_end+'login')
-        # msg = 'Incorrect username/password!'
+# verification
+        if log == secretlogin and psw == secretpsw :
+            return redirect(f_end+'console')
+        # return 'Logged in successfully!'
+        else:
+#message d'erreur
+            return redirect(f_end+'login')
+        msg = 'Incorrect username/password!'
 
 # # FIN DATABASE CONFIG
 
