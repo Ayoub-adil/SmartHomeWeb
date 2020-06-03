@@ -46,6 +46,7 @@ class Home:
         
 # Home Plan
     def __init__(self,n_livingroom,n_bedroom,n_kitchen,n_stairs,n_garage):
+        self.msg = 'pas de message'
         self.r=-1
         self.type_r='outdoor'
         self.alert='on'

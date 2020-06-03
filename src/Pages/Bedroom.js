@@ -45,7 +45,7 @@ class Rooms extends Component{
         this.changeAirConditionerState=this.changeAirConditionerState.bind(this) 
         this.changeWindowState=this.changeWindowState.bind(this) 
       }
-      
+
       getRoom(){
         fetch('/home/room').then(res=>res.json()).then(data=>{
           this.setState({ rooom: data.room })
@@ -74,7 +74,6 @@ class Rooms extends Component{
           this.setState({ window: data.bedroom[this.state.rooom] })
         })
       }
-
 
     render(){
         return(

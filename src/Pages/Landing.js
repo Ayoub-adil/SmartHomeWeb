@@ -5,6 +5,12 @@ import '../App.css';
 import Smarthome from '../images/home.png';
 
 class Landing extends Component{
+
+  restart()
+	{
+		fetch('/SuperAdmin/message')
+  }
+  
   render(){
     return(
       <div className="App">
@@ -18,7 +24,7 @@ class Landing extends Component{
 
     <div className='btnStart'>
          <Link to="/SignIn"><Button type="primary" shape="round">Get Started</Button></Link>
-         <Link style={{marginLeft:25}} to="/login"><Button type="primary" shape="round">Espace Société</Button></Link>
+         <Link style={{marginLeft:25}} to="/login"><Button onClick={this.restart} type="primary" shape="round">Espace Société</Button></Link>
     </div>
     </div>
     );

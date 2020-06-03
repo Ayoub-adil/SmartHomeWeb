@@ -1,5 +1,5 @@
 import flask
-from flask import request,redirect,session
+from flask import request,redirect,session, jsonify
 import Home
 # from flask_mysqldb import MySQL
 # import MySQLdb.cursors
@@ -10,7 +10,7 @@ f_end="http://localhost:3000/"
 
 secretlogin="SuperAdmin"
 secretpsw="1234"
-
+msg = "pas de message!"
 nl,nb,nk,ns,ng=5,4,2,1,1
 H=Home.Home(nl,nb,nk,ns,ng)
 
@@ -356,37 +356,35 @@ def set_mvt_light():
 # #     donnee = cur.fetchall()
 # # # je dois afficher selon des <td> f le tableau dashboard: HOW !!
 
+# return jsonify({
+#     'status':"ok",
+#     'message' : "Logged in successfully!"
+# })
 
-
-
-
+@app.route('/SuperAdmin/message')
+def message():
+    H.msg="pas de message"
+    return {"msg":H.msg}
 
 @app.route('/SuperAdmin/loginDirecteur', methods=['GET', 'POST'])
 def loginDirecteur():
 
-    secretlogin = "superadmin"
-    secretpsw = "123"
-
-# creer des variables internes pour le login et mdp du directeur
-# definition hors fonction sous raison de la portée des variables
-
 # check if username and password exist in the form
     if request.method == 'POST': #and 'username' in request.form and 'password' in request.form:
-        log = request.form.get("username")
-        psw = request.form.get("password")
-        # return {
-        # 'login':log,
-        # 'password':psw
-        # }
         
+        username = request.form.get("username")
+        psw = request.form.get("password")
 # verification
-        if log == secretlogin and psw == secretpsw :
+        if username == secretlogin and psw == secretpsw :
             return redirect(f_end+'console')
         # return 'Logged in successfully!'
         else:
-#message d'erreur
+            # message d'erreur
+            H.msg="Your username or password are incorrect, Retry again!"
+            # H.msg = "err"
             return redirect(f_end+'login')
-        msg = 'Incorrect username/password!'
+    else:
+        return {"msg":H.msg}
 
 # # FIN DATABASE CONFIG
 
