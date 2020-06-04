@@ -25,7 +25,7 @@ class SignIn extends Component{
         <h1>Hello <span className="smarthome">User</span></h1>
         <p>Authenticate your account</p>
 
-        <form> 
+        <form action="/user/login" method="post"> 
             <div className="formStyle">
             <label>Login : <br/>
                 <input style={{width: '100%', margin: '4px 0'}} type="text" name="log" required />
@@ -38,8 +38,8 @@ class SignIn extends Component{
 			</label>
             </div>
 
-            <Link to="/Home" ><input style={{width: '80%', padding: '10px 20px' , margin: '20% 0%'}} className='signIn' type="submit" value="Sign in" /></Link>
-
+            <input style={{width: '80%', padding: '10px 20px' , margin: '20% 0%'}} className='signIn' type="submit" value="Sign in" />
+            
         </form>
         {/* <Form>
 

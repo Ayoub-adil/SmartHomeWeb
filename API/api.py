@@ -4,6 +4,17 @@ import Home
 # from flask_mysqldb import MySQL
 # import MySQLdb.cursors
 
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+
+
+cred = credentials.Certificate("./Firebase/db-fb-1609e-firebase-adminsdk-f948g-0bcbc6ee26.json")
+firebase_admin.initialize_app(cred)
+db = firestore.client()
+
+
+
 app = flask.Flask(__name__)
 
 f_end="http://localhost:3000/"
@@ -387,6 +398,37 @@ def loginDirecteur():
 #message d'erreur
             return redirect(f_end+'login')
         msg = 'Incorrect username/password!'
+
+
+
+
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
+@app.route('/user/login', methods=['GET', 'POST'])
+def login():
+
+    #recuperer l'email et le mot de passe de l'utilisateur 
+    doc_ref = db.collection(u'users').document(u'admin')
+    doc = doc_ref.get().to_dict()
+    email=doc["email"]
+    passw=doc["pass"]
+    # print(email+" "+passw)
+    
+    
+    if request.method == 'POST': 
+        mail = request.form.get("log")
+        psw = request.form.get("psw")
+        
+
+        # verif
+        if email == mail and passw == psw :
+            return redirect(f_end+'Home')
+        # connex reussie
+        else:
+        #error
+            return redirect(f_end+'SignIn')
+        
+
 
 # # FIN DATABASE CONFIG
 
