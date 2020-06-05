@@ -21,7 +21,7 @@ f_end="http://localhost:3000/"
 
 secretlogin="SuperAdmin"
 secretpsw="1234"
-msg = "pas de message!"
+
 nl,nb,nk,ns,ng=5,4,2,1,1
 H=Home.Home(nl,nb,nk,ns,ng)
 
@@ -391,7 +391,7 @@ def loginDirecteur():
         # return 'Logged in successfully!'
         else:
             # message d'erreur
-            H.msg="Your username or password are incorrect, Retry again!"
+            H.msg="Your login/password are incorrect, try again!"
             # H.msg = "err"
             return redirect(f_end+'login')
     else:
@@ -416,15 +416,17 @@ def login():
     if request.method == 'POST': 
         mail = request.form.get("log")
         psw = request.form.get("psw")
-        
 
         # verif
         if email == mail and passw == psw :
             return redirect(f_end+'Home')
         # connex reussie
         else:
+            H.msg="Your login/password are incorrect"
         #error
             return redirect(f_end+'SignIn')
+    else:
+        return {"msg":H.msg}
         
 
 

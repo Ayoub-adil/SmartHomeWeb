@@ -23,7 +23,7 @@ class Landing extends Component{
     </div>
 
     <div className='btnStart'>
-         <Link to="/SignIn"><Button type="primary" shape="round">Get Started</Button></Link>
+         <Link to="/SignIn"><Button type="primary" onClick={this.restart} shape="round">Get Started</Button></Link>
          <Link style={{marginLeft:25}} to="/login"><Button onClick={this.restart} type="primary" shape="round">Espace Société</Button></Link>
     </div>
     </div>

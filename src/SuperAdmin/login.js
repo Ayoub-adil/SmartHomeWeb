@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Alert, Input, Button} from 'antd';
 import './style.css';
 
 class Login extends Component{
@@ -6,19 +7,17 @@ class Login extends Component{
 		super(props);
 		this.state={
 			msg : "pas de message",
-			err : false,
 		} 
 		this.login();
 		this.login=this.login.bind(this)
 	}
 
 	login(){
-		// {this.restart()}
 		fetch('/SuperAdmin/loginDirecteur')
 		.then(res=>res.json())
 		.then(data=>{this.setState({ msg : data.msg })})
 	}
-
+	
 	
     render(){
 
@@ -39,8 +38,7 @@ class Login extends Component{
 				<div class="msg"></div>
 				<input type="submit" value="Login" />
 			</form>
-			{(this.state.msg === "pas de message")? this.state.err=false:this.state.err=true}
-			<div style={{backgroundColor: "white" , color:'red', padding:20, textAlign:"center"}}>{(this.state.err)? <> Login failed :<br/> {this.state.msg} </>:null}</div>
+			{(this.state.msg === "pas de message")? null:<> <Alert message={this.state.msg} type="error" closeText="Close" showIcon/> </>}
 		</div>
 		</div>
 		</>
