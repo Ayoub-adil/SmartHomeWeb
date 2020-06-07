@@ -429,6 +429,21 @@ def login():
         return {"msg":H.msg}
         
 
+#********************************************* FOR MOBILE DEVICE *******************************************************
+
+@app.route('/user/loginMobile', methods=['GET', 'POST'])
+def loginMobile():
+
+    #recuperer l'email et le mot de passe de l'utilisateur 
+    doc_ref = db.collection(u'users').document(u'admin')
+    doc = doc_ref.get().to_dict()
+    login=doc["email"]
+    psw=doc["pass"]
+    return {
+        "login":login,
+        "psw":psw
+    }
+
 
 # # FIN DATABASE CONFIG
 
