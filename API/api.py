@@ -406,28 +406,83 @@ def loginDirecteur():
 def login():
 
     #recuperer l'email et le mot de passe de l'utilisateur 
-    doc_ref = db.collection(u'users').document(u'admin')
-    doc = doc_ref.get().to_dict()
-    email=doc["email"]
-    passw=doc["pass"]
+    # doc_ref = db.collection(u'users').document(u'admin')
+    # doc = doc_ref.get().to_dict()
+    # email=doc["login"]
+    # passw=doc["psw"]
     # print(email+" "+passw)
     
     
     if request.method == 'POST': 
-        mail = request.form.get("log")
+        login = request.form.get("log")
         psw = request.form.get("psw")
 
-        # verif
-        if email == mail and passw == psw :
-            return redirect(f_end+'Home')
-        # connex reussie
+        doc_ref = db.collection(u'users').document(login)
+        doc = doc_ref.get()
+        
+        if doc.exists:
+            doc =doc.to_dict()
+            passw=doc["psw"]
+            # verif
+            if passw == psw :
+                return redirect(f_end+'Home')
+            # connex reussie
+            else:
+                H.msg="Your password is incorrect"
+            #error
+                return redirect(f_end+'SignIn')
         else:
-            H.msg="Your login/password are incorrect"
-        #error
+            H.msg="Your login is incorrect"
             return redirect(f_end+'SignIn')
     else:
-        return {"msg":H.msg}
-        
+            return {"msg":H.msg}
+            
+
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
+
+
+
+@app.route('/spForm', methods=['GET', 'POST'])
+def AddAdmin():
+    
+    #recuperation du formulaire
+    if request.method == 'POST':
+        login=request.form.get("log")
+        psw=request.form.get("psw")
+        livingroom=request.form.get("nlr")
+        bednum=request.form.get("nbr")
+        kitchen=request.form.get("nk")
+        stairs=request.form.get("ns")
+        garage=request.form.get("ng")
+
+
+        data={
+            u'Login': login,
+            u'psw': psw,
+            u'livingroom':livingroom,
+            u'bednum':bednum,
+            u'kitchen':kitchen,
+            u'stairs':stairs,
+            u'garage':garage,
+            u'propriete': u'admin'
+        }
+
+        db.collection(u'users').document(login).set(data)
+        return redirect(f_end+'console')
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # # FIN DATABASE CONFIG
