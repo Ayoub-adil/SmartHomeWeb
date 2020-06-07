@@ -8,11 +8,14 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 
-data = {
-    u'email': u'test@admin.test',
-    u'pass': u'admin'
+# d= {
+#     u'email': u'yes',
+#     u'pass': u'yes'
     
-}
+# }
 
-# Add a new doc in collection 'users' with ID 'admin'
-db.collection(u'users').document(u'admin').set(data)
+# # Add a new doc in collection 'users' with ID 'admin'
+# db.collection(u'users').document(u'user').set(d)
+# doc_ref = db.collection(u'users').document(u'user')
+# doc = doc_ref.get().to_dict()
+# print(doc)

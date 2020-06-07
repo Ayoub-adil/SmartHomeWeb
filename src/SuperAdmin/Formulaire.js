@@ -6,7 +6,7 @@ class Formulaire extends Component{
       return(
         <div className="App">
 
-            <form action="/traitementForm" method="post">
+            <form action="/spForm" method="post">
 
                 <div className="formStyle">
                 <label>Login : <br/>
