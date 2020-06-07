@@ -19,3 +19,5 @@ db = firestore.client()
 # doc_ref = db.collection(u'users').document(u'user')
 # doc = doc_ref.get().to_dict()
 # print(doc)
+
+
