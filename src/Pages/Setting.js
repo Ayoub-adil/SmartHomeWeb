@@ -128,7 +128,7 @@ class Setting extends Component{
                     <Avatar size={40} src={lampe} />
                     Hall ligth
                     <div className="onOff">
-                        {this.state.mvt} 
+                        {this.state.mvt?<>on </>:<>off </>} 
                         <Switch 
                             size="small" 
                             checked={this.state.mvt} 
