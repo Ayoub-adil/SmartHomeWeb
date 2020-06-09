@@ -1,19 +1,15 @@
 import flask
 from flask import request,redirect,session, jsonify
 import Home
-# from flask_mysqldb import MySQL
-# import MySQLdb.cursors
 
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 
-
+# Firebase Config
 cred = credentials.Certificate("./Firebase/db-fb-1609e-firebase-adminsdk-f948g-0bcbc6ee26.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
-
-
 
 app = flask.Flask(__name__)
 
@@ -285,92 +281,8 @@ def set_watering():
 def set_mvt_light():
     H.hallLight=not H.hallLight
     return "<h1>You shouldn't be here.. </h1>"
-#**********************************************************************************************************************************
-#**********************************************************************************************************************************
-#**********************************************************************************************************************************
 
-# # DATABASE CONFIG 
-# app.config['MYSQL_HOST'] = 'localhost'
-# app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = ''
-# app.config['MYSQL_DB'] = 'smarthome'
-
-# # Intialize MySQL
-# mysql = MySQL(app)
-
-# # insertion des info du formulaire d'admin dans la table admin dans la BD
-
-# @app.route('/traitementForm', methods=['GET', 'POST'])
-# def traitementForm():
-#     if request.method=='POST':
-#         log=request.form.get("log")
-#         psw=request.form.get("psw")
-#         nlr=request.form.get("nlr")
-#         nbr=request.form.get("nbr")
-#         nk=request.form.get("nk")
-#         ns=request.form.get("ns")
-#         ng=request.form.get("ng")
-
-#     #     return {
-#     #         'login':log,
-#     #         'password':psw,
-#     #         'livingRooms':nlr,
-#     #         'bedroom':nbr,
-#     #         'kitchen':nk,
-#     #         'stairs':ns,
-#     #         'garage':ng
-#     #     }
-#     # return "<h1>You shouldn't be here <h1>"
-
-#         cur = mysql.connection.cursor() # to connect with the DATABASE
-#         cur.execute("INSERT INTO admin ( login, mdp, n_livingroom, n_bedroom, n_kitchen, n_garage, n_stairs) VALUES ("'+log+','+psw+','+nlr+','+nbr+','+nk+','+ng+','+ns+'")")
-#         fetchdata = cur.fetchall()
-#         cur.close()
-#         return redirect(f_end+'console') # redirect(URL_page_admin) soit "http://localhost:3000/console"
-
-
-
-
-# # @app.route('/login', methods=['GET', 'POST'])
-# # def login():
-
-# # # check if username and password exist in the form
-# #     if request.method == 'POST' and 'log' in request.form and 'psw' in request.form:
-# #         log=request.form.get("log")
-# #         psw=request.form.get("psw")
-    
-# #     cur = mysql.connection.cursor() 
-# #     cur.execute('SELECT * FROM admin WHERE login = %s AND mdp = %s', (log, psw))
-# #     donnee = cur.fetchall()
-
-# # #condition
-# #     if donnee:
-# # #Create session data
-# #         session['login'] = donnee['log']
-# #         return redirect(f_end+'Home')
-# #         # return 'Logged in successfully!'
-# #     else:
-# # #Account doesnt exist or username/password incorrect
-# #         return redirect(f_end+'SignIn')
-# #         msg = 'Incorrect username/password!'
-
-
-
-
-
-
-# # @app.route('/SuperAdmin/dashboard', methods=['GET', 'POST'])
-# # def dashboard():
-
-# #     cur = mysql.connection.cursor() 
-# #     cursor.execute('SELECT * FROM admin')
-# #     donnee = cur.fetchall()
-# # # je dois afficher selon des <td> f le tableau dashboard: HOW !!
-
-# return jsonify({
-#     'status':"ok",
-#     'message' : "Logged in successfully!"
-# })
+#********************************************** Authentification SuperAdmin ************************************************************
 
 @app.route('/SuperAdmin/message')
 def message():
@@ -398,14 +310,15 @@ def loginDirecteur():
         return {"msg":H.msg}
 
 
+# # DATABASE 
+
+#********************************************** Authentification Users | FIREBASE ************************************************************
 
 
-#**********************************************************************************************************************************
-#**********************************************************************************************************************************
+# SignIn users : 
 @app.route('/user/login', methods=['GET', 'POST'])
 def login():
 
-     
     # doc_ref = db.collection(u'users').document(u'admin')
     # doc = doc_ref.get().to_dict()
     # email=doc["login"]
@@ -439,10 +352,7 @@ def login():
             return {"msg":H.msg}
             
 
-#**********************************************************************************************************************************
-#**********************************************************************************************************************************
-
-
+#****************************************************** Stockage des données dans la BD | form Add Admin **************************************************************
 
 @app.route('/spForm', methods=['GET', 'POST'])
 def AddAdmin():
@@ -473,8 +383,7 @@ def AddAdmin():
         return redirect(f_end+'console')
 
 
-
-#********************************************* FOR MOBILE DEVICE *******************************************************
+#********************************************* Authentification FOR MOBILE DEVICE | Firebase *******************************************************
 
 @app.route('/user/loginMobile', methods=['GET', 'POST'])
 def loginMobile():
@@ -518,7 +427,7 @@ def loginMobile():
     # else:
     #         return {"msg":H.msg}
 
-# # FIN DATABASE CONFIG
+# # FIN DATABASE 
 
 #**********************************************************************************************************************************
 #**********************************************************************************************************************************
