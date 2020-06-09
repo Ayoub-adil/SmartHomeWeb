@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Layout, Tabs , Avatar, Breadcrumb,Form, Input, InputNumber, Button  } from 'antd';
+import { Layout, Tabs , Alert, Breadcrumb,Form, Input, InputNumber, Button  } from 'antd';
 import { UserOutlined, TableOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 import './console.css';
 import '../App.css';
@@ -63,7 +63,7 @@ class Console extends Component{
                     <Content style={{ padding: '0 50px' }}>
                         <Breadcrumb style={{ margin: '16px 0' }}>
                             <Breadcrumb.Item>
-                            Espace réservé pour l'administrateur de la société :
+                            <Alert message="Informational Notes" description="Space reserved for the company's SuperAdmin." type="info" showIcon />
                             </Breadcrumb.Item>
                         </Breadcrumb>
                         <div className="site-layout-content" style={{background:'#fff' , padding:24, minHeight:580}}>

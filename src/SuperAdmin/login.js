@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import { Alert, Input, Button} from 'antd';
+import { Alert } from 'antd';
 import './style.css';
+
+import logo from '../images/logo.png';
 
 class Login extends Component{
 	constructor(props){
@@ -26,11 +28,15 @@ class Login extends Component{
         <div className="App">
             <div class="login">
 			<h1>Login</h1>
+			<Alert message="Warning" description="Space reserved for the company's SuperAdmin / rohibited to the public" type="warning" showIcon />
+			{/* <Alert message="Warning : Space reserved for the company's SuperAdmin" type="warning" showIcon/> */}
 			<form action="/SuperAdmin/loginDirecteur" method="post">
 				<label for="username">
 					<i class="fas fa-user"></i>
 				</label>
+				<br/>
 				<input type="text" name="username" placeholder="Username" id="username" required />
+				
 				<label for="password">
 					<i class="fas fa-lock"></i>
 				</label>
@@ -39,6 +45,9 @@ class Login extends Component{
 				<input type="submit" value="Login" />
 			</form>
 			{(this.state.msg === "pas de message")? null:<> <Alert message={this.state.msg} type="error" closeText="Close" showIcon/> </>}
+		</div>
+		<div>
+			<img className='imglogo' src={logo}></img>
 		</div>
 		</div>
 		</>

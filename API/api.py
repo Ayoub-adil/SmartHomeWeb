@@ -473,32 +473,49 @@ def AddAdmin():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 #********************************************* FOR MOBILE DEVICE *******************************************************
 
 @app.route('/user/loginMobile', methods=['GET', 'POST'])
 def loginMobile():
 
-    #recuperer l'email et le mot de passe de l'utilisateur 
-    doc_ref = db.collection(u'users').document(u'admin')
-    doc = doc_ref.get().to_dict()
-    login=doc["email"]
-    psw=doc["pass"]
-    return {
+    # #recuperer l'email et le mot de passe de l'utilisateur 
+    # doc_ref = db.collection(u'users').document(u'admin')
+    # doc = doc_ref.get().to_dict()
+    # login=doc["email"]
+    # psw=doc["pass"]
+    # return {
+    #     "login":login,
+    #     "psw":psw
+    # }
+    if request.method == 'POST': 
+        login = request.form.get("log")
+        psw = request.form.get("psw")
+
+        doc_ref = db.collection(u'users').document(login)
+        doc = doc_ref.get()
+
+        if doc.exists:
+            doc =doc.to_dict()
+            passw=doc["psw"]
+            login=doc["login"]
+    return  
+    {
         "login":login,
         "psw":psw
     }
-
+    #         # verif
+    #         if passw == psw :
+    #             return redirect(f_end+'Home')
+    #         # connex reussie
+    #         else:
+    #             H.msg="Your password is incorrect"
+    #         #error
+    #             return redirect(f_end+'SignIn')
+    #     else:
+    #         H.msg="Your login is incorrect"
+    #         return redirect(f_end+'SignIn')
+    # else:
+    #         return {"msg":H.msg}
 
 # # FIN DATABASE CONFIG
 
