@@ -9,7 +9,7 @@ class ServerError extends Component{
       return( 
       <div className="App" style={{textAlign:"center"}}>
           <h1 className="Err">You are not connected to the server</h1>
-          <button className="btnErr" >Go back!</button> <br/>
+          <Link to="/Home"><button className="btnErr" >Go Home!</button> </Link> <br/>
           <img className="imgErr" src={ImgErr}></img>
       </div>
 );
