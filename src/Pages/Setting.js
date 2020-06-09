@@ -1,22 +1,10 @@
 import React, {Component} from 'react';
-import { Card, Avatar, Switch, Button } from 'antd';
-import { KeyOutlined, WindowsOutlined, AlertOutlined } from '@ant-design/icons';
+import { Card, Avatar, Switch} from 'antd';
+import { KeyOutlined, AlertOutlined } from '@ant-design/icons';
 import '../App.css';
 import lampe from '../images/lampe.jpg';
 import temperature from '../images/temperature.jpg';
 import Header from './Header.js';
-import { TimePicker } from 'antd';
-import moment from 'moment';
-
-const format = 'HH:mm';
-
-function onChange(checked) {
-    console.log(`switch to ${checked}`);
-}
-
-function onChang(objectTime,timeString) {
-    console.log(timeString);
-}
 
 class Setting extends Component{
     constructor(props){
@@ -48,13 +36,6 @@ class Setting extends Component{
         this.changeAlert=this.changeAlert.bind(this) 
         this.changeWatering=this.changeWatering.bind(this) 
         this.changeMvtLight=this.changeMvtLight.bind(this) 
-    }
-
-    timeLampChange=(time)=>{
-        this.setState({timeLamp:time})
-    }
-    test=()=>{
-        console.log(this.state.timeLamp.hour);
     }
 
     getOutsideTemperature(){
@@ -108,7 +89,7 @@ class Setting extends Component{
                 <Card style={{ marginTop: 30 }} type="inner">
                     <Avatar size={40} style={{ color: '#007bff' , background:'none' }}icon={<AlertOutlined />}/>
                     Alert 
-                    <div className="onOff">{this.state.alert} 
+                    <div className="onOff"><>Alarm : </>{this.state.alert} 
                     <Switch 
                         size="small" 
                         checked={this.state.alert==='on'?true:false} 
@@ -128,13 +109,8 @@ class Setting extends Component{
                     <Avatar size={40} src={lampe} />
                     Hall ligth
                     <div className="onOff">
-<<<<<<< HEAD
-                        {this.state.mvt?<>on </>:<>off </>} 
+                        {this.state.mvt?<span>on </span>:<span>off </span>} 
                         <Switch 
-=======
-                        {this.state.mvt} 
-                        Auto <Switch 
->>>>>>> ffa415743b231d0310c4ee0a16548c791677b65b
                             size="small" 
                             checked={this.state.mvt} 
                             onChange={this.changeMvtLight} 
@@ -142,25 +118,10 @@ class Setting extends Component{
                     </div>
                 </Card>
 
-                {/* <Card style={{ marginTop: 16 }} type="inner">
-                    <Avatar size={40} src={lampe} />
-                    Light
-                    <div className="onOff">Auto <Switch size="small" defaultChecked onChange={onChange} /></div> */}
-                    {/* <div className="onOff">All lights OFF at : 
-                    <TimePicker 
-                        onChange={this.timeLampChange} 
-                        // defaultValue={moment('12:08', format)} 
-                        value={this.state.timeLamp} 
-                        format={format} 
-                    />
-                    </div> */}
-                    
-                {/* </Card> */}
-
                 <Card style={{ marginTop: 30 }} type="inner">
                     <Avatar size={40} style={{ color: '#007bff' , background:'none' }}icon={<KeyOutlined />}/>
                     Door System
-                    <div className="onOff">{this.state.door?<>Locked </>:<>Unlocked </>} 
+                    <div className="onOff">{this.state.door?<span>Locked </span>:<span>Unlocked </span>} 
                     <Switch 
                         size="small" 
                         checked={this.state.door}  

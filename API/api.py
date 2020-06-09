@@ -7,7 +7,7 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 
 # Firebase Config
-cred = credentials.Certificate("./Firebase/db-fb-1609e-firebase-adminsdk-f948g-0bcbc6ee26.json")
+cred = credentials.Certificate("./API/db-fb-1609e-firebase-adminsdk-f948g-0bcbc6ee26.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
