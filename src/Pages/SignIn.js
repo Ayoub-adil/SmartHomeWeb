@@ -41,7 +41,7 @@ class SignIn extends Component{
     <div className="left">
         <h1>Hello <span className="smarthome">User</span></h1>
         <p>Authenticate your account</p>
-        {(this.state.msg === "pas de message")? null:<> <Alert message={this.state.msg} type="error" closeText="Close" showIcon /> </>}
+        {(this.state.msg === "pas de message")? null:<Alert message={this.state.msg} type="error" closeText="Close" showIcon />}
         <form action="/user/login" method="post"> 
             <div className="formStyle">
             <label>Login : <br/>
