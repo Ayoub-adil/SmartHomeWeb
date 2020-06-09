@@ -132,7 +132,7 @@ class Setting extends Component{
                 
                 <Card style={{ marginTop: 30 }} type="inner">
                     <Avatar size={40} style={{ color: '#007bff' , background:'none' }}icon={<KeyOutlined />}/>
-                    Door System : Garage
+                    Door: Garage
                     <div className="onOff">{this.state.garageDoor}<> </> 
                     <Switch 
                         size="small" 

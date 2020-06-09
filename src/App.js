@@ -14,6 +14,7 @@ import Kitchen from './Pages/kitchen.js';
 import Login from './SuperAdmin/login.js';
 import Console from './SuperAdmin/console.js';
 import Cons from './SuperAdmin/cons.js';
+import ServerError from './Pages/ServerError.js';
 
 
 class App extends Component{
@@ -34,6 +35,7 @@ class App extends Component{
         <Route path="/login" component={Login} />
         <Route path="/console" component={Console} />
         <Route path="/cons" component={Cons} />
+        <Route path="/ServerError" component={ServerError} />
       </div>
       </BrowserRouter>
     );
