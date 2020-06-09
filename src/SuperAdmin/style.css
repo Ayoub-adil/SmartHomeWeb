@@ -3,6 +3,9 @@ body {
     margin: 0;
 }
 
+/* .AppLogin{
+    background-image: linear-gradient(to right, red , yellow);
+} */
 .login{
     float: left;
     /* text-align: center; */
@@ -146,8 +149,8 @@ body.loggedin {
 }
 
 .imglogo{
-    width: 40%;
+    width: 35%;
     height: auto;
     display: flex;
-    margin: 15% auto; 
+    margin: 14% 51%; 
 }

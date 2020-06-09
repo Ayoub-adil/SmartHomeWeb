@@ -36,7 +36,7 @@ input[type=number]{
     margin: 4px 0;
 }
 input[type=password]{
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     width: 30%;
     border-radius: 4px;
     margin: 4px 0;

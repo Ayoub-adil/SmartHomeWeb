@@ -25,7 +25,7 @@ class Login extends Component{
 
       return(
 		<>		
-        <div className="App">
+        <div className="AppLogin">
             <div class="login">
 			<h1>Login</h1>
 			<Alert message="Warning" description="Space reserved for the company's SuperAdmin / rohibited to the public" type="warning" showIcon />
