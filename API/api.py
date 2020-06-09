@@ -405,25 +405,25 @@ def loginDirecteur():
 @app.route('/user/login', methods=['GET', 'POST'])
 def login():
 
-    #recuperer l'email et le mot de passe de l'utilisateur 
+     
     # doc_ref = db.collection(u'users').document(u'admin')
     # doc = doc_ref.get().to_dict()
     # email=doc["login"]
     # passw=doc["psw"]
     # print(email+" "+passw)
     
-    
+    #recuperer l'email et le mot de passe saisi par l'utilisateur
     if request.method == 'POST': 
         login = request.form.get("log")
         psw = request.form.get("psw")
 
         doc_ref = db.collection(u'users').document(login)
         doc = doc_ref.get()
-        
+        #verif de si le nom d'utilisateur existe 
         if doc.exists:
             doc =doc.to_dict()
             passw=doc["psw"]
-            # verif
+            # verif du mdp
             if passw == psw :
                 return redirect(f_end+'Home')
             # connex reussie
@@ -432,6 +432,7 @@ def login():
             #error
                 return redirect(f_end+'SignIn')
         else:
+            #error
             H.msg="Your login is incorrect"
             return redirect(f_end+'SignIn')
     else:
@@ -456,7 +457,7 @@ def AddAdmin():
         stairs=request.form.get("ns")
         garage=request.form.get("ng")
 
-
+        #remplisage des donnees saisies
         data={
             u'Login': login,
             u'psw': psw,
@@ -467,7 +468,7 @@ def AddAdmin():
             u'garage':garage,
             u'propriete': u'admin'
         }
-
+        #ajout dans la base de donnee
         db.collection(u'users').document(login).set(data)
         return redirect(f_end+'console')
 
