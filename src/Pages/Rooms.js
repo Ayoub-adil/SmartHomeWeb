@@ -48,6 +48,8 @@ class Rooms extends Component{
                 <h1>Bedrooms</h1>
                 }
                 <Row>
+
+
                 {[...Array(this.state.plan.bedroom)].map((e,i)=>
 
                 <>
