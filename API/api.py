@@ -1,8 +1,19 @@
 import flask
-from flask import request,redirect,session
+from flask import request,redirect,session, jsonify
 import Home
 # from flask_mysqldb import MySQL
 # import MySQLdb.cursors
+
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+
+
+cred = credentials.Certificate("./Firebase/db-fb-1609e-firebase-adminsdk-f948g-0bcbc6ee26.json")
+firebase_admin.initialize_app(cred)
+db = firestore.client()
+
+
 
 app = flask.Flask(__name__)
 
@@ -356,41 +367,164 @@ def set_mvt_light():
 # #     donnee = cur.fetchall()
 # # # je dois afficher selon des <td> f le tableau dashboard: HOW !!
 
+# return jsonify({
+#     'status':"ok",
+#     'message' : "Logged in successfully!"
+# })
 
+@app.route('/SuperAdmin/message')
+def message():
+    H.msg="pas de message"
+    return {"msg":H.msg}
 
+@app.route('/SuperAdmin/loginDirecteur', methods=['GET', 'POST'])
+def loginDirecteur():
 
-
-
-# @app.route('/SuperAdmin/loginDirecteur', methods=['GET', 'POST'])
-# def loginDirecteur():
-
-#     secretlogin = "superadmin"
-#     secretpsw = "123"
-
-# # creer des variables internes pour le login et mdp du directeur
-# # definition hors fonction sous raison de la portée des variables
-
-# # check if username and password exist in the form
-#     if request.method == 'POST': #and 'username' in request.form and 'password' in request.form:
-#         log = request.form.get("username")
-#         psw = request.form.get("password")
-#         # return {
-#         # 'login':log,
-#         # 'password':psw
-#         # }
+# check if username and password exist in the form
+    if request.method == 'POST': #and 'username' in request.form and 'password' in request.form:
         
-# # verification
-#         if log == secretlogin and psw == secretpsw :
-#             return redirect(f_end+'console')
-#         # return 'Logged in successfully!'
-#         else:
-# #message d'erreur
-#             return redirect(f_end+'login')
-        # msg = 'Incorrect username/password!'
+        username = request.form.get("username")
+        psw = request.form.get("password")
+# verification
+        if username == secretlogin and psw == secretpsw :
+            return redirect(f_end+'console')
+        # return 'Logged in successfully!'
+        else:
+            # message d'erreur
+            H.msg="Your login/password are incorrect, try again!"
+            # H.msg = "err"
+            return redirect(f_end+'login')
+    else:
+        return {"msg":H.msg}
+
+
+
+
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
+@app.route('/user/login', methods=['GET', 'POST'])
+def login():
+
+     
+    # doc_ref = db.collection(u'users').document(u'admin')
+    # doc = doc_ref.get().to_dict()
+    # email=doc["login"]
+    # passw=doc["psw"]
+    # print(email+" "+passw)
+    
+    #recuperer l'email et le mot de passe saisi par l'utilisateur
+    if request.method == 'POST': 
+        login = request.form.get("log")
+        psw = request.form.get("psw")
+
+        doc_ref = db.collection(u'users').document(login)
+        doc = doc_ref.get()
+        #verif de si le nom d'utilisateur existe 
+        if doc.exists:
+            doc =doc.to_dict()
+            passw=doc["psw"]
+            # verif du mdp
+            if passw == psw :
+                return redirect(f_end+'Home')
+            # connex reussie
+            else:
+                H.msg="Your password is incorrect"
+            #error
+                return redirect(f_end+'SignIn')
+        else:
+            #error
+            H.msg="Your login is incorrect"
+            return redirect(f_end+'SignIn')
+    else:
+            return {"msg":H.msg}
+            
+
+#**********************************************************************************************************************************
+#**********************************************************************************************************************************
+
+
+
+@app.route('/spForm', methods=['GET', 'POST'])
+def AddAdmin():
+    
+    #recuperation du formulaire
+    if request.method == 'POST':
+        login=request.form.get("log")
+        psw=request.form.get("psw")
+        livingroom=request.form.get("nlr")
+        bednum=request.form.get("nbr")
+        kitchen=request.form.get("nk")
+        stairs=request.form.get("ns")
+        garage=request.form.get("ng")
+
+        #remplisage des donnees saisies
+        data={
+            u'Login': login,
+            u'psw': psw,
+            u'livingroom':livingroom,
+            u'bednum':bednum,
+            u'kitchen':kitchen,
+            u'stairs':stairs,
+            u'garage':garage,
+            u'propriete': u'admin'
+        }
+        #ajout dans la base de donnee
+        db.collection(u'users').document(login).set(data)
+        return redirect(f_end+'console')
+
+
+
+#********************************************* FOR MOBILE DEVICE *******************************************************
+
+@app.route('/user/loginMobile', methods=['GET', 'POST'])
+def loginMobile():
+
+    # #recuperer l'email et le mot de passe de l'utilisateur 
+    # doc_ref = db.collection(u'users').document(u'admin')
+    # doc = doc_ref.get().to_dict()
+    # login=doc["email"]
+    # psw=doc["pass"]
+    # return {
+    #     "login":login,
+    #     "psw":psw
+    # }
+    if request.method == 'POST': 
+        login = request.form.get("log")
+        psw = request.form.get("psw")
+
+        doc_ref = db.collection(u'users').document(login)
+        doc = doc_ref.get()
+
+        if doc.exists:
+            doc =doc.to_dict()
+            passw=doc["psw"]
+            login=doc["login"]
+    return  
+    {
+        "login":login,
+        "psw":psw
+    }
+    #         # verif
+    #         if passw == psw :
+    #             return redirect(f_end+'Home')
+    #         # connex reussie
+    #         else:
+    #             H.msg="Your password is incorrect"
+    #         #error
+    #             return redirect(f_end+'SignIn')
+    #     else:
+    #         H.msg="Your login is incorrect"
+    #         return redirect(f_end+'SignIn')
+    # else:
+    #         return {"msg":H.msg}
 
 # # FIN DATABASE CONFIG
 
 #**********************************************************************************************************************************
 #**********************************************************************************************************************************
 if __name__ == "__main__":
+<<<<<<< HEAD
     app.run(debug=True,host='0.0.0.0')
+=======
+    app.run(debug=True , host='0.0.0.0')
+>>>>>>> ffa415743b231d0310c4ee0a16548c791677b65b

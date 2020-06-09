@@ -6,19 +6,20 @@ class Formulaire extends Component{
       return(
         <div className="App">
 
-            <form action="/traitementForm" method="post">
+            <form action="/spForm" method="post">
 
                 <div className="formStyle">
-                <label>Login : <br/>
-                    <input type="text" name="log" required />
+                <label style={{marginRight:10}}>Login : 
+                    <input type="text" name="log" required style={{marginLeft:10}}/>
 			    </label>
-                </div>
-
-                <div className="formStyle">
-				<label>Password :<br/>
-                    <input type="password" name="psw" required />	
+                <label style={{marginLeft:30}}>Password : 
+                    <input type="password" name="psw" required style={{marginLeft:10}}/>	
 				</label>
                 </div>
+
+                {/* <div className="formStyle">
+				
+                </div> */}
 
                 <div className="formStyle">
 				<label>Living room number :<br/>
@@ -46,7 +47,7 @@ class Formulaire extends Component{
 
                 <div className="formStyle">
 				<label>Garage number :<br/>
-                    <input type="number" name="ng" min="1" max="11" required />	
+                    <input type="number" name="ng" min="0" max="11" required />	
 				</label>
                 </div>
 

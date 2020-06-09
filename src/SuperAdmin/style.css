@@ -2,11 +2,20 @@ body {
     background-color: #435165;
     margin: 0;
 }
+
+/* .AppLogin{
+    background-image: linear-gradient(to right, red , yellow);
+} */
+.login{
+    float: left;
+    /* text-align: center; */
+}
+
 .login, .register {
-    width: 400px;
+    width: 450px;
     background-color: #ffffff;
     box-shadow: 0px 10px 50px -10px rgba(0, 0, 0, 0.2);
-    margin: 200px auto;
+    margin: -4% 10%;
 }
 .login h1, .register h1 {
     text-align: center;
@@ -49,7 +58,7 @@ body {
     color: #ffffff;
 }
 .login form input[type="password"], .login form input[type="text"], .login form input[type="email"], .register form input[type="password"], .register form input[type="text"], .register form input[type="email"] {
-    width: 310px;
+    width: 360px;
     height: 50px;
     border: 1px solid #dee0e4;
     margin-bottom: 20px;
@@ -137,4 +146,11 @@ body.loggedin {
 .content > div p {
   padding: 5px;
   margin: 0 0 10px 0;
+}
+
+.imglogo{
+    width: 35%;
+    height: auto;
+    display: flex;
+    margin: 14% 51%; 
 }

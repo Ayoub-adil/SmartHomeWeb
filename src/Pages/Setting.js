@@ -99,13 +99,13 @@ class Setting extends Component{
         return(
             <div className="App">
                 <Header />
-                <Card style={{ marginTop: 16 }} type="inner">
+                <Card style={{ marginTop: 30 }} type="inner">
                     <Avatar size={40} src={temperature} />
                     Weather
                     <div className="onOff">{this.state.outsideT}°C</div>
                     <div className="onOff">{this.state.rain?null:<span>Pas de </span>}Pluie</div>
                 </Card>
-                <Card style={{ marginTop: 16 }} type="inner">
+                <Card style={{ marginTop: 30 }} type="inner">
                     <Avatar size={40} style={{ color: '#007bff' , background:'none' }}icon={<AlertOutlined />}/>
                     Alert 
                     <div className="onOff">{this.state.alert} 
@@ -124,12 +124,17 @@ class Setting extends Component{
                     </div>
                 </Card>
 
-                <Card style={{ marginTop: 16 }} type="inner">
+                <Card style={{ marginTop: 30 }} type="inner">
                     <Avatar size={40} src={lampe} />
                     Hall ligth
                     <div className="onOff">
+<<<<<<< HEAD
                         {this.state.mvt?<>on </>:<>off </>} 
                         <Switch 
+=======
+                        {this.state.mvt} 
+                        Auto <Switch 
+>>>>>>> ffa415743b231d0310c4ee0a16548c791677b65b
                             size="small" 
                             checked={this.state.mvt} 
                             onChange={this.changeMvtLight} 
@@ -137,21 +142,22 @@ class Setting extends Component{
                     </div>
                 </Card>
 
-                <Card style={{ marginTop: 16 }} type="inner">
+                {/* <Card style={{ marginTop: 16 }} type="inner">
                     <Avatar size={40} src={lampe} />
-                    <div className="onOff">Auto <Switch size="small" defaultChecked onChange={onChange} /></div>
-                    <div className="onOff">All lights OFF at : 
+                    Light
+                    <div className="onOff">Auto <Switch size="small" defaultChecked onChange={onChange} /></div> */}
+                    {/* <div className="onOff">All lights OFF at : 
                     <TimePicker 
                         onChange={this.timeLampChange} 
                         // defaultValue={moment('12:08', format)} 
                         value={this.state.timeLamp} 
                         format={format} 
                     />
-                    </div>
-                    Light
-                </Card>
+                    </div> */}
+                    
+                {/* </Card> */}
 
-                <Card style={{ marginTop: 16 }} type="inner">
+                <Card style={{ marginTop: 30 }} type="inner">
                     <Avatar size={40} style={{ color: '#007bff' , background:'none' }}icon={<KeyOutlined />}/>
                     Door System
                     <div className="onOff">{this.state.door?<>Locked </>:<>Unlocked </>} 
@@ -163,9 +169,9 @@ class Setting extends Component{
                     </div>
                 </Card>
                 
-                <Card style={{ marginTop: 16 }} type="inner">
+                <Card style={{ marginTop: 30 }} type="inner">
                     <Avatar size={40} style={{ color: '#007bff' , background:'none' }}icon={<KeyOutlined />}/>
-                    Door : Garage
+                    Door System : Garage
                     <div className="onOff">{this.state.garageDoor}<> </> 
                     <Switch 
                         size="small" 
@@ -175,12 +181,12 @@ class Setting extends Component{
                     </div>
                 </Card>
 
-                <Card style={{ marginTop: 16 }} type="inner">
+                {/* <Card style={{ marginTop: 16 }} type="inner">
                     <Avatar size={40} style={{ color: '#007bff' , background:'none' }}icon={<WindowsOutlined />}/>
                     Window
                     <div className="onOff">Auto <Switch size="small" defaultChecked onChange={onChange} /></div>
-                    <div className="onOff">All Windows close at : <TimePicker defaultValue={moment('12:08', format)} format={format} /></div>
-                </Card>
+                    <div className="onOff">All Windows close at : <TimePicker defaultValue={moment('12:08', format)} format={format} /></div> */}
+                {/* </Card> */}
 
             </div>
 

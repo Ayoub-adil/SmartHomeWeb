@@ -13,8 +13,8 @@ class Home extends Component{
         <div className="home">
           <div className="hometext">
              <h1>SmartHome-App</h1>
-             <p>Contrôlez votre maison depuis l’application SmartHome-App sur votre téléphone mobile.</p>
-             <p>Découvrez plus de façons de contrôler votre maison :</p>
+             <p>Control your home from SmartHome-App on your mobile phone.</p>
+             <p>Discover more ways to control your home :</p>
           </div>
 
             <NavLink to="/Rooms">
