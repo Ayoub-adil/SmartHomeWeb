@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import { Alert, Input, Button} from 'antd';
 import ImgErr from '../images/3819285.jpg';
 import '../App.css';
 

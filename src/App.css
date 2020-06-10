@@ -357,4 +357,20 @@ p{
     font-size: 20px;
   }
   
+  .imgErr{
+    width: 90%;
+    margin: 0% 0% 0% 2%;
+  }
+  
+  .Err{
+    margin-top: 30%;
+    font-size: 25px;
+  }
+  
+  .btnErr{
+    margin: 7%;
+    font-size: 20px;
+    padding: 1%;
+  }
+
   }
