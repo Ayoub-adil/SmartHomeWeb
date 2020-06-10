@@ -1,15 +1,17 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import { Card, Avatar, Switch} from 'antd';
 import { KeyOutlined, AlertOutlined } from '@ant-design/icons';
 import '../App.css';
 import lampe from '../images/lampe.jpg';
 import temperature from '../images/temperature.jpg';
 import Header from './Header.js';
+import ServerError from './ServerError';
 
 class Setting extends Component{
     constructor(props){
         super(props);
         this.state={
+            server:false,
             outsideT:'Conexion au termometre',
             rain:'Conexion au capteur de pluie',
             door:'Conexion au capteur',
@@ -19,6 +21,9 @@ class Setting extends Component{
             watering:"obtention de l'etat ...",
             mvt:"connexion au capteur de mouvement"
         } 
+        this.WorkingServer();
+        this.WorkingServer=this.WorkingServer.bind(this);
+
         this.getOutsideTemperature();
         this.getDoorState();
         this.getGarageDoorState();
@@ -37,6 +42,13 @@ class Setting extends Component{
         this.changeWatering=this.changeWatering.bind(this) 
         this.changeMvtLight=this.changeMvtLight.bind(this) 
     }
+    WorkingServer(){
+        fetch('/server').then(res=>res.json()).then(data=>{
+          this.setState({
+            server: data.server,
+          });
+        })
+      }
 
     getOutsideTemperature(){
         fetch('/home/outsideTemperature').then(res=>res.json()).then(data=>{
@@ -79,6 +91,9 @@ class Setting extends Component{
     render(){
         return(
             <div className="App">
+            {this.state.server
+            ?
+            <Fragment>
                 <Header />
                 <Card style={{ marginTop: 30 }} type="inner">
                     <Avatar size={40} src={temperature} />
@@ -141,14 +156,10 @@ class Setting extends Component{
                     />
                     </div>
                 </Card>
-
-                {/* <Card style={{ marginTop: 16 }} type="inner">
-                    <Avatar size={40} style={{ color: '#007bff' , background:'none' }}icon={<WindowsOutlined />}/>
-                    Window
-                    <div className="onOff">Auto <Switch size="small" defaultChecked onChange={onChange} /></div>
-                    <div className="onOff">All Windows close at : <TimePicker defaultValue={moment('12:08', format)} format={format} /></div> */}
-                {/* </Card> */}
-
+            </Fragment>
+            :
+            <ServerError/>
+            }
             </div>
 
         );

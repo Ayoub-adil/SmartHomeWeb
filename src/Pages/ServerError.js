@@ -8,8 +8,8 @@ class ServerError extends Component{
     render(){
       return( 
       <div className="App" style={{textAlign:"center"}}>
-          <h1 className="Err">The server is down, try again later.</h1>
-          <Link to="/Home"><button className="btnErr" >Go Home!</button> </Link> <br/>
+          <h1 className="Err">The server is down, please come back later..</h1>
+          <br/>
           <img className="imgErr" src={ImgErr}></img>
       </div>
 );
