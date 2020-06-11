@@ -34,7 +34,7 @@ class Rooms extends Component{
     
     render(){
         return(
-            <div className="App">
+            <div className="App" style={{margin:25}}>
                 <Header />
                 <div className='Rooms'>
                 </div>

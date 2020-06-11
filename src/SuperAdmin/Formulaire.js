@@ -46,8 +46,8 @@ class Formulaire extends Component{
                 </div>
 
                 <div className="formStyle">
-				<label>Garage number :<br/>
-                    <input type="number" name="ng" min="0" max="11" required />	
+				<label>Garage : 
+                    <input style={{margin:10}} type="checkbox"name="ng" required />	
 				</label>
                 </div>
 

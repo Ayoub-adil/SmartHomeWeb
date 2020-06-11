@@ -63,7 +63,7 @@ class Console extends Component{
                     <Content style={{ padding: '0 50px' }}>
                         <Breadcrumb style={{ margin: '16px 0' }}>
                             <Breadcrumb.Item>
-                            <Alert message="Informational Notes" description="Space reserved for the company's SuperAdmin." type="info" showIcon />
+                            <Alert message="Informational Notes" description="Space reserved for the company" type="info" showIcon />
                             </Breadcrumb.Item>
                         </Breadcrumb>
                         <div className="site-layout-content" style={{background:'#fff' , padding:24, minHeight:580}}>
