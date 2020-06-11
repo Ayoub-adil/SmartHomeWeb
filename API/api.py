@@ -391,6 +391,7 @@ def AddAdmin():
             
         #ajout dans la base de donnee
         else:
+            H.msg="succes"
             db.collection(u'users').document(login).set(data)
             return redirect(f_end+'console')
            

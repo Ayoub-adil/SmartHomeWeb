@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import './console.css';
 import { List } from 'antd/lib/form/Form';
-
+import { Alert,} from 'antd';
 class Dashboard extends Component{
     constructor(props){
       super(props);
@@ -13,11 +13,14 @@ class Dashboard extends Component{
                  kitchen:"",
                  stairs:"",
                  garage:"",
+                 msg : ""
       }
       
       this.recup();
       this.recup=this.recup.bind(this)
 
+      this.AddAdmin();
+		  this.AddAdmin=this.AddAdmin.bind(this)
 
     }
 
@@ -33,8 +36,12 @@ class Dashboard extends Component{
         garage:data.garage})})
     }
 
-    
-
+    AddAdmin(){
+      fetch('/spForm')
+      .then(res=>res.json())
+      .then(data=>{this.setState({ msg : data.msg })})
+      }
+      
 
 
     render(){
@@ -46,7 +53,11 @@ class Dashboard extends Component{
            <h1>{this.state.psw[i]}</h1></p>
           )} */}
            
-          
+           {(this.state.msg === "succes")?<Alert
+            message="Success"
+            description="ajout effectue avec succes"
+            type="success"
+            showIcon/>:null}
           <table>
             <tr>
               <th>ID</th>
