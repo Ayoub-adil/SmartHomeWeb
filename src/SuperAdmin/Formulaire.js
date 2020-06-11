@@ -1,7 +1,39 @@
 import React, {Component} from 'react';
 import './console.css';
+import { Alert,} from 'antd';
 
 class Formulaire extends Component{
+    constructor(props){
+		super(props);
+		this.state={
+            server:false,
+			msg : "pas de message"
+        } 
+        this.WorkingServer();
+        this.WorkingServer=this.WorkingServer.bind(this);
+
+		this.AddAdmin();
+		this.AddAdmin=this.AddAdmin.bind(this)
+    }
+    WorkingServer(){
+        fetch('/server').then(res=>res.json()).then(data=>{
+          this.setState({
+            server: data.server,
+          });
+        })
+      }
+
+	AddAdmin(){
+		fetch('/spForm')
+		.then(res=>res.json())
+		.then(data=>{this.setState({ msg : data.msg })})
+    }
+    
+
+
+
+
+
     render(){
       return(
         <div className="App">
@@ -9,6 +41,7 @@ class Formulaire extends Component{
             <form action="/spForm" method="post">
 
                 <div className="formStyle">
+                {(this.state.msg === "pas de message")?null:<Alert message={this.state.msg} type="error" closeText="Close" showIcon  />}
                 <label style={{marginRight:10}}>Login : 
                     <input type="text" name="log" required style={{marginLeft:10}}/>
 			    </label>

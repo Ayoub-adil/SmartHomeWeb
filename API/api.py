@@ -382,9 +382,47 @@ def AddAdmin():
             u'garage':garage,
             u'propriete': u'admin'
         }
+        #verif de l'existant
+        doc=db.collection(u'users').document(login)
+        doc=doc.get()
+        if doc.exists:
+            H.msg="login deja existant"
+            return redirect(f_end+'console')
+            
         #ajout dans la base de donnee
-        db.collection(u'users').document(login).set(data)
-        return redirect(f_end+'console')
+        else:
+            db.collection(u'users').document(login).set(data)
+            return redirect(f_end+'console')
+           
+    else:
+        return {"msg":H.msg}
+
+    
+
+
+#********************************************* Recuperation de tous les admin et l'affichage | Firebase *******************************************************
+@app.route('/Dash/recupp')
+def recup():
+    login=[]
+    livingroom=[]
+    bednum=[]
+    kitchen=[]
+    stairs=[]
+    garage=[]
+    docs = db.collection(u'users').where(u'propriete', u'==', u'admin').stream()
+    for doc in docs:
+        if doc.exists:
+            #recup of the admin's dets
+            doc =doc.to_dict()
+            login.append(doc["Login"])
+            livingroom.append(doc["livingroom"])
+            bednum.append(doc["bednum"])
+            kitchen.append(doc["kitchen"])
+            stairs.append(doc["stairs"])
+            garage.append(doc["garage"])
+    return {'login' : login, 'garage':garage,'livingroom':livingroom,'bednum':bednum,'kitchen':kitchen,'stairs':stairs}
+
+
 
 
 #********************************************* Authentification FOR MOBILE DEVICE | Firebase *******************************************************
@@ -430,6 +468,11 @@ def loginMobile():
     #         return redirect(f_end+'SignIn')
     # else:
     #         return {"msg":H.msg}
+
+    
+
+
+
 
 # # FIN DATABASE 
 
