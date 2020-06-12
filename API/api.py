@@ -443,46 +443,49 @@ def recup():
 
 @app.route('/user/loginMobile', methods=['GET', 'POST'])
 def loginMobile():
-
-    # #recuperer l'email et le mot de passe de l'utilisateur 
-    # doc_ref = db.collection(u'users').document(u'admin')
-    # doc = doc_ref.get().to_dict()
-    # login=doc["email"]
-    # psw=doc["pass"]
-    # return {
-    #     "login":login,
-    #     "psw":psw
-    # }
+    #recuperer l'email et le mot de passe saisi par l'utilisateur
     if request.method == 'POST': 
-        login = request.form.get("log")
-        psw = request.form.get("psw")
+
+        data = request.get_json()
+
+        login = data["login"]
+        psw = data['psw']
 
         doc_ref = db.collection(u'users').document(login)
         doc = doc_ref.get()
-
+        #verif de si le nom d'utilisateur existe 
         if doc.exists:
             doc =doc.to_dict()
             passw=doc["psw"]
-            login=doc["login"]
-    return  
-    {
-        "login":login,
-        "psw":psw
-    }
-    #         # verif
-    #         if passw == psw :
-    #             return redirect(f_end+'Home')
-    #         # connex reussie
-    #         else:
-    #             H.msg="Your password is incorrect"
-    #         #error
-    #             return redirect(f_end+'SignIn')
-    #     else:
-    #         H.msg="Your login is incorrect"
-    #         return redirect(f_end+'SignIn')
-    # else:
-    #         return {"msg":H.msg}
+            nl=doc["livingroom"]
+            nb=doc["bednum"]
+            nk=doc["kitchen"]
+            ns=doc["stairs"]
+            nbrg=doc["garage"]
 
+            H.nl=int(nl)
+            H.nb=int(nb)
+            H.nk=int(nk)
+            H.ns=int(ns)
+            
+            if nbrg == "on":
+                H.ng = 1
+            else :
+                H.ng = 0
+                
+            # verif du mdp
+            if passw == psw :
+                H=Home.Home()
+                H.islogged=True
+                return {"islogged":H.islogged}
+            # connex reussie
+            else:
+                H.msg="Your login/password is incorrect"
+                H.islogged=False
+            #error
+                return {"islogged":H.islogged}
+    else:
+        return {"msg":H.msg}
     
 
 

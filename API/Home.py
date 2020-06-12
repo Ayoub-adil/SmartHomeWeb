@@ -47,6 +47,7 @@ class Home:
 # Home Plan
     def __init__(self):
         self.msg = 'pas de message'
+        self.islogged =False
         self.r=-1
         self.type_r='outdoor'
         self.alert='on'
