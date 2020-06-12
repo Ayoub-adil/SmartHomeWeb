@@ -18,10 +18,8 @@ f_end="http://localhost:3000/"
 secretlogin="SuperAdmin"
 secretpsw="1234"
 
-nl,nb,nk,ns,ng=2,2,1,1,1
-H=Home.Home(nl,nb,nk,ns,ng)
-
-#**********************************************************************************************************************************
+# nl,nb,nk,ns,ng=0,0,0,0,0
+H=Home.Home()
 #**********************************************************************************************************************************
 @app.route('/')
 def landing():
@@ -36,16 +34,15 @@ def frontend(link=''):
 def server():
     return {"server":True} 
 #**********************************************************************************************************************************
-#**********************************************************************************************************************************
 @app.route('/home/plan')
 def get_plan():
     return {
         'plan':{
-            'livingroom':H.n_livingroom,
-            'bedroom':H.n_bedroom,
-            'kitchen':H.n_kitchen,
-            'stairs':H.n_stairs,
-            'garage':H.n_garage
+            'livingroom':H.nl,
+            'bedroom':H.nb,
+            'kitchen':H.nk,
+            'stairs':H.ns,
+            'garage':H.ng
         }
     }
 
@@ -90,10 +87,10 @@ def active_room():
 @app.route('/home/lamp')
 def get_lamp_state():
     lrlamps=[]
-    for i in range(H.n_livingroom):
+    for i in range(H.nl):
         lrlamps.append(H.livingrooms[i].lamp)
     brlamps=[]
-    for i in range(H.n_bedroom):
+    for i in range(H.nb):
         brlamps.append(H.bedrooms[i].lamp)
     return {
         'livingroom':lrlamps,
@@ -104,12 +101,12 @@ def get_lamp_state():
 def get_temperature():
     templr=[]
     climlr=[]
-    for i in range(H.n_livingroom):
+    for i in range(H.nl):
         templr.append(H.livingrooms[i].temperature)
         climlr.append(H.livingrooms[i].airConditioner)
     tempbr=[]
     climbr=[]
-    for i in range(H.n_bedroom):
+    for i in range(H.nb):
         tempbr.append(H.bedrooms[i].temperature)
         climbr.append(H.bedrooms[i].airConditioner)
     return {
@@ -126,13 +123,13 @@ def get_temperature():
 @app.route('/home/window')
 def get_window_state():
     windowlr=[]
-    for i in range(H.n_livingroom):
+    for i in range(H.nl):
         windowlr.append(H.livingrooms[i].window)
     windowbr=[]
-    for i in range(H.n_bedroom):
+    for i in range(H.nb):
         windowbr.append(H.bedrooms[i].window)
     windowk=[]
-    for i in range(H.n_kitchen):
+    for i in range(H.nk):
         windowk.append(H.kitchens[i].window)
     return {
         'livingroom':windowlr,
@@ -143,13 +140,13 @@ def get_window_state():
 @app.route('/home/smoke')
 def get_smoke_state():
     ksmoke=[]
-    for i in range(H.n_kitchen):
+    for i in range(H.nk):
         ksmoke.append(H.kitchens[i].smoke)
     gsmoke=[]
-    for i in range(H.n_garage):
+    for i in range(H.ng):
         gsmoke.append(H.garages[i].smoke)
     ssmoke=[]
-    for i in range(H.n_stairs):
+    for i in range(H.ns):
         ssmoke.append(H.stairs[i].smoke)
     return {
         'kitchen':ksmoke,
@@ -346,13 +343,19 @@ def login():
             ns=doc["stairs"]
             nbrg=doc["garage"]
 
+            H.nl=int(nl)
+            H.nb=int(nb)
+            H.nk=int(nk)
+            H.ns=int(ns)
+            
             if nbrg == "on":
-                ng == 1
+                H.ng = 1
             else :
-                ng == 0
+                H.ng = 0
                 
             # verif du mdp
             if passw == psw :
+                H=Home.Home()
                 return redirect(f_end+'Home')
             # connex reussie
             else:

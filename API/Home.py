@@ -45,36 +45,41 @@ class Home:
         self.lock=self.doorLocked()
         
 # Home Plan
-    def __init__(self,n_livingroom,n_bedroom,n_kitchen,n_stairs,n_garage):
+    def __init__(self):
         self.msg = 'pas de message'
         self.r=-1
         self.type_r='outdoor'
         self.alert='on'
         self.watering='on'
         self.hallLight=True
-        self.n_livingroom=n_livingroom
-        self.n_bedroom=n_bedroom
-        self.n_kitchen=n_kitchen
-        self.n_stairs=n_stairs
-        self.n_garage=n_garage
+        # self.n_livingroom=n_livingroom
+        # self.n_bedroom=n_bedroom
+        # self.n_kitchen=n_kitchen
+        # self.n_stairs=n_stairs
+        # self.n_garage=n_garage
+        self.nl=0
+        self.nb=0
+        self.nk=0
+        self.ns=0
+        self.ng=0
         self.simulate()
         self.setStates()
 
     def simulate(self):
         self.livingrooms=[]
-        for i in range(self.n_livingroom):
+        for i in range(self.nl):
             self.livingrooms.append(Room.Room())
         self.bedrooms=[]
-        for i in range(self.n_bedroom):
+        for i in range(self.nb):
             self.bedrooms.append(Room.Room())
         self.kitchens=[]
-        for i in range(self.n_kitchen):
+        for i in range(self.nk):
             self.kitchens.append(Kitchen.Kitchen())
         self.stairs=[]
-        for i in range(self.n_stairs):
+        for i in range(self.ns):
             self.stairs.append(Stair.Stair())
         self.garages=[]
-        for i in range(self.n_garage):
+        for i in range(self.ng):
             self.garages.append(Garage.Garage())
     
     def setRoom(self,type_r,rooom):
