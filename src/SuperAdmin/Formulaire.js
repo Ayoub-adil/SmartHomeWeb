@@ -12,7 +12,7 @@ class Formulaire extends Component{
                 <label style={{marginRight:10}}>Login : 
                     <input type="text" name="log" required style={{marginLeft:10}}/>
 			    </label>
-                <label style={{marginLeft:30}}>Password : 
+                <label className="pasw">Password : 
                     <input type="password" name="psw" required style={{marginLeft:10}}/>	
 				</label>
                 </div>

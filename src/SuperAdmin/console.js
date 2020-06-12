@@ -5,6 +5,7 @@ import './console.css';
 import '../App.css';
 import Title from 'antd/lib/typography/Title';
 import Password from 'antd/lib/input/Password';
+import { Link } from 'react-router-dom';
 import Dashboard  from './Dashboard.js';
 import Formulaire from './Formulaire.js';
 const { TabPane } = Tabs;
@@ -53,7 +54,7 @@ class Console extends Component{
         <div className="App">
             <Layout>
                 <Header style={{padding:14}}>
-                    <Button style={{float:'right' , fontWeight:800}} >Déconnexion</Button>
+                    <Link to="/"><Button style={{float:'right' , fontWeight:800}} >Déconnexion</Button></Link>
                     {/* <a href='#' style={{float:'right'}} icon={<UserOutlined />}  /> */}
                     <Title style={{color:'#F9F9F9'}} level={4}>Smarthome-App console</Title>
                     </Header>

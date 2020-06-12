@@ -336,6 +336,17 @@ def login():
         if doc.exists:
             doc =doc.to_dict()
             passw=doc["psw"]
+            nl=doc["livingroom"]
+            nb=doc["bednum"]
+            nk=doc["kitchen"]
+            ns=doc["stairs"]
+            nbrg=doc["garage"]
+
+            if nbrg == "on":
+                ng == 1
+            else :
+                ng == 0
+                
             # verif du mdp
             if passw == psw :
                 return redirect(f_end+'Home')
@@ -351,7 +362,6 @@ def login():
     else:
             return {"msg":H.msg}
             
-
 #****************************************************** Stockage des données dans la BD | form Add Admin **************************************************************
 
 @app.route('/spForm', methods=['GET', 'POST'])

@@ -229,15 +229,15 @@ p{
     display: none;
   }
   .img {
-    width: 66%;
+    width: 55%;
     height: auto;
     margin-left: 25%;
-    margin-top: -17%;
+    margin-top: -11%;
 }
 
   .titlee{
     /* font-family: 'Bebas Neue', cursive; */
-    font-size: 45px;
+    font-size: 29px;
   }
 
   .imgkey{
@@ -248,7 +248,7 @@ p{
   }
 
   .welcome{
-    padding: 13% 0% 6% 21%;
+    padding: 13% 0% 6% 4%;
   }
   
   .smartH_img{
@@ -262,7 +262,7 @@ p{
     float: none;
     text-align: center;
     margin-top: 7%;
-    margin-left: 25%;
+    margin-left: 0%;
   }
 
   .left{
