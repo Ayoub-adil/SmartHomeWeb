@@ -1,8 +1,10 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import { Switch,Row,Col,Input, Slider } from 'antd';
 import Header from './Header.js';
 import '../App.css';
 import LivingroomRoom from '../images/LivingroomRoom.png';
+import ServerError from './ServerError.js';
+import SignIn from './SignIn.js';
 
 const marks = {
     15: '15°C',
@@ -21,6 +23,8 @@ class Rooms extends Component{
     constructor(props){
         super(props);
         this.state={
+          server:false,
+          user:'user',
             rooom:0,
             lamp: "broken",
             window:'broken',      
@@ -28,6 +32,11 @@ class Rooms extends Component{
             temperature:0,
             temp: 0,  
         } 
+      this.WorkingServer();
+      this.WorkingServer=this.WorkingServer.bind(this); 
+      this.session();
+      this.session=this.session.bind(this)
+
         this.getRoom();  
         this.getLampState();
         this.getTemperature();
@@ -44,6 +53,16 @@ class Rooms extends Component{
         // this.changeTemperature=this.changeTemperature.bind(this) 
         this.changeAirConditionerState=this.changeAirConditionerState.bind(this) 
         this.changeWindowState=this.changeWindowState.bind(this) 
+      }
+    WorkingServer(){
+        fetch('/server')
+        .then(res=>res.json())
+        .then(data=>{this.setState({server: data.server})})
+      }
+    session(){
+      fetch('/session')
+      .then(res=>res.json())
+      .then(data=>{this.setState({ user: data.user })})
       }
       
       getRoom(){
@@ -79,16 +98,19 @@ class Rooms extends Component{
     render(){
         return(
           <div className="App">
+          {this.state.server
+            ?
+            <Fragment>
+            {this.state.user==='User'?
+            <SignIn/>
+            :
+            <Fragment>
+
             <Header/>
-
-
             <div className="theRight">
                 <img className="livingroomImg" src={LivingroomRoom} alt="manage your livingroom"/>
             </div>
-
-
             <div className="theLeft">
-
               <Row gutter={[8, 48]}>
                 <Col>
                   Climatiseur:
@@ -101,7 +123,6 @@ class Rooms extends Component{
                   /> 
                 </Col>
               </Row>
-
               <Row gutter={[8, 48]}>
                 <Col>
                   Temperature :
@@ -177,7 +198,12 @@ class Rooms extends Component{
               </Row>
 
             </div>
-                
+            </Fragment>
+          }
+          </Fragment>
+          :
+          <ServerError/>
+          }   
           </div>     
         );
     }

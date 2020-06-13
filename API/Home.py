@@ -53,17 +53,8 @@ class Home:
         self.alert='on'
         self.watering='on'
         self.hallLight=True
-        # self.n_livingroom=n_livingroom
-        # self.n_bedroom=n_bedroom
-        # self.n_kitchen=n_kitchen
-        # self.n_stairs=n_stairs
-        # self.n_garage=n_garage
-        # self.nl=1
-        # self.nb=1
-        # self.nk=1
-        # self.ns=1
-        # self.ng=1
-        self.simulate(1,1,1,1,1)
+        self.user='User'
+        self.simulate(0,0,0,0,0)
         self.setStates()
 
     def simulate(self,nl,nb,nk,ns,ng):
