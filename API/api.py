@@ -12,13 +12,13 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 app = flask.Flask(__name__)
+app.secret_key='irm'
 
-f_end="http://localhost:3000/"
+f_end="http://192.168.1.12:3000/"
 
 secretlogin="SuperAdmin"
 secretpsw="1234"
 
-# nl,nb,nk,ns,ng=0,0,0,0,0
 H=Home.Home()
 #**********************************************************************************************************************************
 @app.route('/')
@@ -33,6 +33,21 @@ def frontend(link=''):
 @app.route('/server')
 def server():
     return {"server":True} 
+
+@app.route('/session')
+def session():
+    return {"user":H.user} 
+    
+@app.route('/connect')
+def connect():
+    return redirect(f_end+'SignIn')
+@app.route('/disconnect')
+def disconnect():
+    H.user='User'
+    H.simulate(0,0,0,0,0)
+    return "<h1>You are out of Home</h1>"
+    # return H.user
+    # return redirect(f_end)
 #**********************************************************************************************************************************
 @app.route('/home/plan')
 def get_plan():
@@ -168,12 +183,6 @@ def set_room():
         typeOfRoom=request.form.get("typeofroom")
         H.setRoom(typeOfRoom, int(rooom))
         return redirect(f_end+H.type_r)
-        # if typeOfRoom=="bedroom":
-        #     return redirect(f_end+'Bedroom')
-        # if typeOfRoom=="livingroom":
-        #     return redirect(f_end+'Livingroom')
-        # elif typeOfRoom=="kitchen":
-        #     return redirect(f_end+'kitchen')
     return "<h1>You shouldn't be here.. </h1>" 
 
 @app.route('/change/lamp')
@@ -251,10 +260,8 @@ def set_door_state():
 @app.route('/change/garageDoor')
 def set_garage_door_state():
     if (H.garages[0].door=='opened'):
-        #return "<h1> opened </h1>"
         H.garages[0].door='closed'
     else:
-        #return "<h1> closed </h1>"
         H.garages[0].door='opened'
     return "<h1>The Garage Door is "+ H.garages[0].door +"</h1>"
     
@@ -308,7 +315,7 @@ def loginDirecteur():
             # H.msg = "err"
             return redirect(f_end+'login')
     else:
-        return {"msg":H.msg}
+        return "<h1>You shouldn't be here.. </h1>"
 
 
 # # DATABASE 
@@ -328,46 +335,43 @@ def login():
     
     #recuperer l'email et le mot de passe saisi par l'utilisateur
     if request.method == 'POST': 
+        # session.pop('login',None)
         login = request.form.get("log")
         psw = request.form.get("psw")
 
         doc_ref = db.collection(u'users').document(login)
         doc = doc_ref.get()
-        #verif de si le nom d'utilisateur existe 
+        #verif si le nom d'utilisateur existe 
         if doc.exists:
             doc =doc.to_dict()
             passw=doc["psw"]
-            nl=doc["livingroom"]
-            nb=doc["bednum"]
-            nk=doc["kitchen"]
-            ns=doc["stairs"]
-            nbrg=doc["garage"]
-
-            H.nl=int(nl)
-            H.nb=int(nb)
-            H.nk=int(nk)
-            H.ns=int(ns)
-            
-            if nbrg == "on":
-                H.ng = 1
-            else :
-                H.ng = 0
                 
             # verif du mdp
             if passw == psw :
-                H=Home.Home()
+                nl=int(doc["livingroom"])
+                nb=int(doc["bednum"])
+                nk=int(doc["kitchen"])
+                ns=int(doc["stairs"])
+                nbrg=doc["garage"]
+                if nbrg == "on":
+                    ng = 1
+                else :
+                    ng = 0
+                H.simulate(nl,nb,nk,ns,ng)
+                # session['login']=login
+                H.user=login
                 return redirect(f_end+'Home')
             # connex reussie
             else:
-                H.msg="Your password is incorrect"
+                H.msg="Incorrect password"
             #error
                 return redirect(f_end+'SignIn')
         else:
             #error
-            H.msg="Your login is incorrect"
+            H.msg="Inexistant account"
             return redirect(f_end+'SignIn')
     else:
-            return {"msg":H.msg}
+        return "<h1>You shouldn't be here.. </h1>"
             
 #****************************************************** Stockage des données dans la BD | form Add Admin **************************************************************
 

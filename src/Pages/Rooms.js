@@ -6,6 +6,7 @@ import kitchen from '../images/kitchenN.png';
 import livingroom from '../images/livingroomN.png';
 import Header from './Header.js';
 import ServerError from './ServerError';
+import SignIn from './SignIn';
 
 class Rooms extends Component{
     
@@ -19,6 +20,9 @@ class Rooms extends Component{
         this.WorkingServer();
         this.WorkingServer=this.WorkingServer.bind(this);
 
+        this.session();
+        this.session=this.session.bind(this);
+        
         this.getplan();
         this.getplan=this.getplan.bind(this);
         
@@ -27,6 +31,13 @@ class Rooms extends Component{
         fetch('/server').then(res=>res.json()).then(data=>{
           this.setState({
             server: data.server,
+          });
+        })
+      }    
+    session(){
+        fetch('/session').then(res=>res.json()).then(data=>{
+          this.setState({
+            user: data.user,
           });
         })
       }
@@ -45,6 +56,10 @@ class Rooms extends Component{
             <div className="App">
             {this.state.server
             ?
+            <Fragment>
+            {this.state.user==='User'?
+            <SignIn/>
+            :
             <Fragment>
                 <Header />
                 <div className='Rooms'></div>
@@ -107,11 +122,14 @@ class Rooms extends Component{
                             <img className="imgRoom" src={kitchen} alt="kitchen"></img>
                         </button>
                     </form>  
-                   </Col> 
+                   </Col>
+                    
                 </Fragment>
                 )}
                 </Row>
                
+            </Fragment>
+            }
             </Fragment>
             :
             <ServerError/>

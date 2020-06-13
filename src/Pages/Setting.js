@@ -6,12 +6,14 @@ import lampe from '../images/lampe.jpg';
 import temperature from '../images/temperature.jpg';
 import Header from './Header.js';
 import ServerError from './ServerError';
+import SignIn from './SignIn';
 
 class Setting extends Component{
     constructor(props){
         super(props);
         this.state={
             server:false,
+            user:'User',
             outsideT:'Conexion au termometre',
             rain:'Conexion au capteur de pluie',
             door:'Conexion au capteur',
@@ -23,6 +25,8 @@ class Setting extends Component{
         } 
         this.WorkingServer();
         this.WorkingServer=this.WorkingServer.bind(this);
+        this.session();
+        this.session=this.session.bind(this);
 
         this.getOutsideTemperature();
         this.getDoorState();
@@ -46,6 +50,13 @@ class Setting extends Component{
         fetch('/server').then(res=>res.json()).then(data=>{
           this.setState({
             server: data.server,
+          });
+        })
+      }
+    session(){
+        fetch('/session').then(res=>res.json()).then(data=>{
+          this.setState({
+            user: data.user,
           });
         })
       }
@@ -93,6 +104,10 @@ class Setting extends Component{
             <div className="App">
             {this.state.server
             ?
+            <Fragment>
+            {this.state.user==='User'?
+            <SignIn/>
+            :
             <Fragment>
                 <Header />
                 <Card style={{ marginTop: 30 }} type="inner">
@@ -156,6 +171,8 @@ class Setting extends Component{
                     />
                     </div>
                 </Card>
+                </Fragment>
+            }
             </Fragment>
             :
             <ServerError/>

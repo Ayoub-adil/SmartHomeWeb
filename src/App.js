@@ -8,7 +8,6 @@ import Home from './Pages/Home.js';
 import Rooms from './Pages/Rooms.js';
 import Setting from './Pages/Setting.js';
 import Bedroom from './Pages/Bedroom.js';
-import Bedroom2 from './Pages/Bedroom2.js';
 import LivingRoom from './Pages/LivingRoom.js';
 import Kitchen from './Pages/kitchen.js';
 import Login from './SuperAdmin/login.js';
@@ -29,7 +28,6 @@ class App extends Component{
         <Route path="/Rooms" component={Rooms} />        
         <Route path="/Setting" component={Setting} />
         <Route path="/Bedroom" component={Bedroom} />
-        <Route path="/Bedroom2" component={Bedroom2} />
         <Route path="/kitchen" component={Kitchen} />
         <Route path="/LivingRoom" component={LivingRoom} />
         <Route path="/login" component={Login} />

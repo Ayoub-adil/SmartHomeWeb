@@ -8,7 +8,7 @@ class Landing extends Component{
 
   restart()
 	{
-		fetch('/SuperAdmin/message')
+    fetch('/SuperAdmin/message')
   }
   
   render(){
