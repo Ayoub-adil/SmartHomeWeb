@@ -18,7 +18,7 @@ f_end="http://192.168.1.12:3000/"
 secretlogin="SuperAdmin"
 secretpsw="1234"
 
-# nl,nb,nk,ns,ng=0,0,0,0,0
+# nl,nb,nk,ns,ng=2,3,1,1,1
 H=Home.Home()
 #**********************************************************************************************************************************
 @app.route('/')
@@ -333,41 +333,39 @@ def login():
 
         doc_ref = db.collection(u'users').document(login)
         doc = doc_ref.get()
-        #verif de si le nom d'utilisateur existe 
+        #verif si le nom d'utilisateur existe 
         if doc.exists:
+            # H=Home.Home()
             doc =doc.to_dict()
             passw=doc["psw"]
-            nl=doc["livingroom"]
-            nb=doc["bednum"]
-            nk=doc["kitchen"]
-            ns=doc["stairs"]
+            nl=int(doc["livingroom"])
+            nb=int(doc["bednum"])
+            nk=int(doc["kitchen"])
+            ns=int(doc["stairs"])
             nbrg=doc["garage"]
 
-            H.nl=int(nl)
-            H.nb=int(nb)
-            H.nk=int(nk)
-            H.ns=int(ns)
             
             if nbrg == "on":
-                H.ng = 1
+                ng = 1
             else :
-                H.ng = 0
+                ng = 0
                 
             # verif du mdp
             if passw == psw :
-                H=Home.Home()
+                # H=Home.Home()
+                H.simulate(nl,nb,nk,ns,ng)
                 return redirect(f_end+'Home')
             # connex reussie
             else:
-                H.msg="Your password is incorrect"
+                H.msg="Incorrect password"
             #error
                 return redirect(f_end+'SignIn')
         else:
             #error
-            H.msg="Your login is incorrect"
+            H.msg="Inexistant account"
             return redirect(f_end+'SignIn')
     else:
-            return {"msg":H.msg}
+        return {"msg":H.msg}
             
 #****************************************************** Stockage des données dans la BD | form Add Admin **************************************************************
 

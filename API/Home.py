@@ -58,30 +58,35 @@ class Home:
         # self.n_kitchen=n_kitchen
         # self.n_stairs=n_stairs
         # self.n_garage=n_garage
-        self.nl=0
-        self.nb=0
-        self.nk=0
-        self.ns=0
-        self.ng=0
-        self.simulate()
+        # self.nl=1
+        # self.nb=1
+        # self.nk=1
+        # self.ns=1
+        # self.ng=1
+        self.simulate(1,1,1,1,1)
         self.setStates()
 
-    def simulate(self):
+    def simulate(self,nl,nb,nk,ns,ng):
         self.livingrooms=[]
-        for i in range(self.nl):
+        for i in range(nl):
             self.livingrooms.append(Room.Room())
         self.bedrooms=[]
-        for i in range(self.nb):
+        for i in range(nb):
             self.bedrooms.append(Room.Room())
         self.kitchens=[]
-        for i in range(self.nk):
+        for i in range(nk):
             self.kitchens.append(Kitchen.Kitchen())
         self.stairs=[]
-        for i in range(self.ns):
+        for i in range(ns):
             self.stairs.append(Stair.Stair())
         self.garages=[]
-        for i in range(self.ng):
+        for i in range(ng):
             self.garages.append(Garage.Garage())
+        self.nl=nl
+        self.nb=nb
+        self.nk=nk
+        self.ns=ns
+        self.ng=ng
     
     def setRoom(self,type_r,rooom):
         self.type_r=type_r
