@@ -462,7 +462,7 @@ def loginMobile():
             nk=doc["kitchen"]
             ns=doc["stairs"]
             nbrg=doc["garage"]
-
+            
             H.nl=int(nl)
             H.nb=int(nb)
             H.nk=int(nk)
