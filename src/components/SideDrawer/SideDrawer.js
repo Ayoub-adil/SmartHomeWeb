@@ -16,7 +16,7 @@ if(props.show) {
         <li><NavLink to="/Rooms">Rooms</NavLink></li>
         <li><NavLink to="/Setting">Setting</NavLink></li>
         <li><NavLink to="/Profil">Profil</NavLink></li>
-        <li><NavLink exact to="/">Disconnect</NavLink></li>
+        <li><NavLink onClick={()=>fetch('/disconnect')} exact to="/">Disconnect</NavLink></li> 
     </ul>
 </nav>
     );
