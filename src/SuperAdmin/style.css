@@ -154,3 +154,12 @@ body.loggedin {
     display: flex;
     margin: 14% 51%; 
 }
+
+@media screen and (max-width: 700px){
+    .imglogo{
+        display: none;
+    }
+    .login, .register {
+        margin: 40% -20px;
+    }
+}

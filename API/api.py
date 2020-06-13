@@ -18,10 +18,8 @@ f_end="http://192.168.1.12:3000/"
 secretlogin="SuperAdmin"
 secretpsw="1234"
 
-nl,nb,nk,ns,ng=2,2,1,1,1
-H=Home.Home(nl,nb,nk,ns,ng)
-
-#**********************************************************************************************************************************
+# nl,nb,nk,ns,ng=0,0,0,0,0
+H=Home.Home()
 #**********************************************************************************************************************************
 @app.route('/')
 def landing():
@@ -36,16 +34,15 @@ def frontend(link=''):
 def server():
     return {"server":True} 
 #**********************************************************************************************************************************
-#**********************************************************************************************************************************
 @app.route('/home/plan')
 def get_plan():
     return {
         'plan':{
-            'livingroom':H.n_livingroom,
-            'bedroom':H.n_bedroom,
-            'kitchen':H.n_kitchen,
-            'stairs':H.n_stairs,
-            'garage':H.n_garage
+            'livingroom':H.nl,
+            'bedroom':H.nb,
+            'kitchen':H.nk,
+            'stairs':H.ns,
+            'garage':H.ng
         }
     }
 
@@ -90,10 +87,10 @@ def active_room():
 @app.route('/home/lamp')
 def get_lamp_state():
     lrlamps=[]
-    for i in range(H.n_livingroom):
+    for i in range(H.nl):
         lrlamps.append(H.livingrooms[i].lamp)
     brlamps=[]
-    for i in range(H.n_bedroom):
+    for i in range(H.nb):
         brlamps.append(H.bedrooms[i].lamp)
     return {
         'livingroom':lrlamps,
@@ -104,12 +101,12 @@ def get_lamp_state():
 def get_temperature():
     templr=[]
     climlr=[]
-    for i in range(H.n_livingroom):
+    for i in range(H.nl):
         templr.append(H.livingrooms[i].temperature)
         climlr.append(H.livingrooms[i].airConditioner)
     tempbr=[]
     climbr=[]
-    for i in range(H.n_bedroom):
+    for i in range(H.nb):
         tempbr.append(H.bedrooms[i].temperature)
         climbr.append(H.bedrooms[i].airConditioner)
     return {
@@ -126,13 +123,13 @@ def get_temperature():
 @app.route('/home/window')
 def get_window_state():
     windowlr=[]
-    for i in range(H.n_livingroom):
+    for i in range(H.nl):
         windowlr.append(H.livingrooms[i].window)
     windowbr=[]
-    for i in range(H.n_bedroom):
+    for i in range(H.nb):
         windowbr.append(H.bedrooms[i].window)
     windowk=[]
-    for i in range(H.n_kitchen):
+    for i in range(H.nk):
         windowk.append(H.kitchens[i].window)
     return {
         'livingroom':windowlr,
@@ -143,13 +140,13 @@ def get_window_state():
 @app.route('/home/smoke')
 def get_smoke_state():
     ksmoke=[]
-    for i in range(H.n_kitchen):
+    for i in range(H.nk):
         ksmoke.append(H.kitchens[i].smoke)
     gsmoke=[]
-    for i in range(H.n_garage):
+    for i in range(H.ng):
         gsmoke.append(H.garages[i].smoke)
     ssmoke=[]
-    for i in range(H.n_stairs):
+    for i in range(H.ns):
         ssmoke.append(H.stairs[i].smoke)
     return {
         'kitchen':ksmoke,
@@ -340,8 +337,25 @@ def login():
         if doc.exists:
             doc =doc.to_dict()
             passw=doc["psw"]
+            nl=doc["livingroom"]
+            nb=doc["bednum"]
+            nk=doc["kitchen"]
+            ns=doc["stairs"]
+            nbrg=doc["garage"]
+
+            H.nl=int(nl)
+            H.nb=int(nb)
+            H.nk=int(nk)
+            H.ns=int(ns)
+            
+            if nbrg == "on":
+                H.ng = 1
+            else :
+                H.ng = 0
+                
             # verif du mdp
             if passw == psw :
+                H=Home.Home()
                 return redirect(f_end+'Home')
             # connex reussie
             else:
@@ -355,7 +369,6 @@ def login():
     else:
             return {"msg":H.msg}
             
-
 #****************************************************** Stockage des données dans la BD | form Add Admin **************************************************************
 
 @app.route('/spForm', methods=['GET', 'POST'])
@@ -382,54 +395,101 @@ def AddAdmin():
             u'garage':garage,
             u'propriete': u'admin'
         }
+        #verif de l'existant
+        doc=db.collection(u'users').document(login)
+        doc=doc.get()
+        if doc.exists:
+            H.msg="login deja existant"
+            return redirect(f_end+'console')
+            
         #ajout dans la base de donnee
-        db.collection(u'users').document(login).set(data)
-        return redirect(f_end+'console')
+        else:
+            H.msg="succes"
+            db.collection(u'users').document(login).set(data)
+            return redirect(f_end+'console')
+           
+    else:
+        return {"msg":H.msg}
+
+    
+
+
+#********************************************* Recuperation de tous les admin et l'affichage | Firebase *******************************************************
+@app.route('/Dash/recupp')
+def recup():
+    login=[]
+    livingroom=[]
+    bednum=[]
+    kitchen=[]
+    stairs=[]
+    garage=[]
+    docs = db.collection(u'users').where(u'propriete', u'==', u'admin').stream()
+    for doc in docs:
+        if doc.exists:
+            #recup of the admin's dets
+            doc =doc.to_dict()
+            login.append(doc["Login"])
+            livingroom.append(doc["livingroom"])
+            bednum.append(doc["bednum"])
+            kitchen.append(doc["kitchen"])
+            stairs.append(doc["stairs"])
+            garage.append(doc["garage"])
+    return {'login' : login, 'garage':garage,'livingroom':livingroom,'bednum':bednum,'kitchen':kitchen,'stairs':stairs}
+
+
 
 
 #********************************************* Authentification FOR MOBILE DEVICE | Firebase *******************************************************
 
 @app.route('/user/loginMobile', methods=['GET', 'POST'])
 def loginMobile():
-
-    # #recuperer l'email et le mot de passe de l'utilisateur 
-    # doc_ref = db.collection(u'users').document(u'admin')
-    # doc = doc_ref.get().to_dict()
-    # login=doc["email"]
-    # psw=doc["pass"]
-    # return {
-    #     "login":login,
-    #     "psw":psw
-    # }
+    #recuperer l'email et le mot de passe saisi par l'utilisateur
     if request.method == 'POST': 
-        login = request.form.get("log")
-        psw = request.form.get("psw")
+
+        data = request.get_json()
+
+        login = data["login"]
+        psw = data['psw']
 
         doc_ref = db.collection(u'users').document(login)
         doc = doc_ref.get()
-
+        #verif de si le nom d'utilisateur existe 
         if doc.exists:
             doc =doc.to_dict()
             passw=doc["psw"]
-            login=doc["login"]
-    return  
-    {
-        "login":login,
-        "psw":psw
-    }
-    #         # verif
-    #         if passw == psw :
-    #             return redirect(f_end+'Home')
-    #         # connex reussie
-    #         else:
-    #             H.msg="Your password is incorrect"
-    #         #error
-    #             return redirect(f_end+'SignIn')
-    #     else:
-    #         H.msg="Your login is incorrect"
-    #         return redirect(f_end+'SignIn')
-    # else:
-    #         return {"msg":H.msg}
+            nl=doc["livingroom"]
+            nb=doc["bednum"]
+            nk=doc["kitchen"]
+            ns=doc["stairs"]
+            nbrg=doc["garage"]
+
+            H.nl=int(nl)
+            H.nb=int(nb)
+            H.nk=int(nk)
+            H.ns=int(ns)
+            
+            if nbrg == "on":
+                H.ng = 1
+            else :
+                H.ng = 0
+                
+            # verif du mdp
+            if passw == psw :
+                H=Home.Home()
+                H.islogged=True
+                return {"islogged":H.islogged}
+            # connex reussie
+            else:
+                H.msg="Your login/password is incorrect"
+                H.islogged=False
+            #error
+                return {"islogged":H.islogged}
+    else:
+        return {"msg":H.msg}
+    
+
+
+
 
 # # FIN DATABASE 
 

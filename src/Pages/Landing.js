@@ -15,7 +15,7 @@ class Landing extends Component{
     return(
       <div className="App">
       <div className='welcome'>
-      <p className='titlee'>Welcome to <br/> <span className="smarthome">Smarthome</span></p>
+      <h1 className='titlee'>Welcome to <span className="smarthome">Smarthome</span></h1>
       <p>Let's manage your smart home NOW!</p>
     </div>
     <div className="smartH_img">
