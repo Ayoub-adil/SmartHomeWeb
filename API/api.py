@@ -13,7 +13,7 @@ db = firestore.client()
 
 app = flask.Flask(__name__)
 
-f_end="http://localhost:3000/"
+f_end="http://192.168.1.12:3000/"
 
 secretlogin="SuperAdmin"
 secretpsw="1234"
