@@ -1,5 +1,5 @@
 import flask
-from flask import request,redirect,session, jsonify
+from flask import request,redirect, jsonify
 import Home
 
 import firebase_admin
@@ -387,11 +387,14 @@ def AddAdmin():
         kitchen=request.form.get("nk")
         stairs=request.form.get("ns")
         garage=request.form.get("ng")
-
+        adress=request.form.get("adress")
+        date=request.form.get("date")
         #remplisage des donnees saisies
         data={
             u'Login': login,
             u'psw': psw,
+            u'adress':adress,
+            u'date':date,
             u'livingroom':livingroom,
             u'bednum':bednum,
             u'kitchen':kitchen,
@@ -427,18 +430,22 @@ def recup():
     kitchen=[]
     stairs=[]
     garage=[]
+    adr=[]
+    date=[]
     docs = db.collection(u'users').where(u'propriete', u'==', u'admin').stream()
     for doc in docs:
         if doc.exists:
             #recup of the admin's dets
             doc =doc.to_dict()
             login.append(doc["Login"])
+            adr.append(doc["adress"])
+            date.append(doc["date"])
             livingroom.append(doc["livingroom"])
             bednum.append(doc["bednum"])
             kitchen.append(doc["kitchen"])
             stairs.append(doc["stairs"])
             garage.append(doc["garage"])
-    return {'login' : login, 'garage':garage,'livingroom':livingroom,'bednum':bednum,'kitchen':kitchen,'stairs':stairs}
+    return {'login' : login, 'adress':adr,'date':date,'garage':garage,'livingroom':livingroom,'bednum':bednum,'kitchen':kitchen,'stairs':stairs}
 
 
 

@@ -13,6 +13,8 @@ class Dashboard extends Component{
                  kitchen:"",
                  stairs:"",
                  garage:"",
+                 adress:"",
+                 date:"",
                  msg : ""
       }
       
@@ -29,6 +31,8 @@ class Dashboard extends Component{
       .then(res=>res.json())
       .then(data=>{this.setState({ 
         login : data.login,
+        adress:data.adress,
+        date:data.date,
         livingroom : data.livingroom,
         bednum:data.bednum,
         kitchen: data.kitchen,
@@ -66,8 +70,9 @@ class Dashboard extends Component{
               <th>Beedroom number</th>
               <th>Kitchen number</th>
               <th>Stairs number</th>
-              <th>Garage number</th>
-              <th>Action</th>
+              <th>Garage </th>
+              <th>installation date</th>
+              <th>adress</th>
             </tr>
             {[...this.state.login].map((e,i)=>
             <tr>
@@ -78,8 +83,10 @@ class Dashboard extends Component{
             <td>{this.state.kitchen[i]}</td>
             <td>{this.state.stairs[i]}</td>
             <td>{this.state.garage[i]}</td>
+            <td>{this.state.date[i]}</td>
+            <td>{this.state.adress[i]}</td>
            
-            <td><a href='#'>Delete</a></td>
+            
           </tr>)}
           
            
