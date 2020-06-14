@@ -53,7 +53,16 @@ class Formulaire extends Component{
                 {/* <div className="formStyle">
 				
                 </div> */}
-
+                <div className="formStyle">
+				<label style={{marginRight:10}}>Adress :
+                  <input style={{margin:10}} type="text"name="adress" required style={{marginRight:10}}/>	
+				</label>
+        
+        
+        <label>Installation date : 
+                   <input  type="date" name="date" required style={{marginRight:10}} />	
+				</label>
+                </div>
                 <div className="formStyle">
 				<label>Living room number :<br/>
                     <input type="number" name="nlr" min="0" max="11" required />	
@@ -83,8 +92,9 @@ class Formulaire extends Component{
                     <input style={{margin:10}} type="checkbox"name="ng" />	
 				</label>
                 </div>
+                
 
-                <input className='addAdmin' type="submit" value="Add an admin" />
+                <input className='addAdmin' type="submit" value="Add admin" />
 
 				
             </form>
