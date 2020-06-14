@@ -57,7 +57,8 @@ class Dashboard extends Component{
             message="Success"
             description="ajout effectue avec succes"
             type="success"
-            showIcon/>:null}
+            showIcon
+            closeText="Close"/>:null}
           <table>
             <tr>
               <th>ID</th>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './console.css';
-import { Alert,} from 'antd';
+import { Alert} from 'antd';
 
 class Formulaire extends Component{
     constructor(props){
@@ -80,7 +80,7 @@ class Formulaire extends Component{
 
                 <div className="formStyle">
 				<label>Garage : 
-                    <input style={{margin:10}} type="checkbox"name="ng" required />	
+                    <input style={{margin:10}} type="checkbox"name="ng" />	
 				</label>
                 </div>
 

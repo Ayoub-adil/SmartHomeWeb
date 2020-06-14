@@ -419,6 +419,7 @@ def AddAdmin():
 
 
 #********************************************* Recuperation de tous les admin et l'affichage | Firebase *******************************************************
+
 @app.route('/Dash/recupp')
 def recup():
     login=[]
@@ -444,6 +445,12 @@ def recup():
 
 
 #********************************************* Authentification FOR MOBILE DEVICE | Firebase *******************************************************
+@app.route('/user/FakeloginMobile')
+def FakeloginMobile():
+    H.login = "walo"
+    H.psw = "ma psw ma walo"
+    return {'login' : H.login, 'psw':H.psw}
+
 
 @app.route('/user/loginMobile', methods=['GET', 'POST'])
 def loginMobile():
@@ -452,44 +459,50 @@ def loginMobile():
 
         data = request.get_json()
 
-        login = data["login"]
-        psw = data['psw']
+        a = print(data)
 
-        doc_ref = db.collection(u'users').document(login)
-        doc = doc_ref.get()
-        #verif de si le nom d'utilisateur existe 
-        if doc.exists:
-            doc =doc.to_dict()
-            passw=doc["psw"]
-            nl=doc["livingroom"]
-            nb=doc["bednum"]
-            nk=doc["kitchen"]
-            ns=doc["stairs"]
-            nbrg=doc["garage"]
-            
-            H.nl=int(nl)
-            H.nb=int(nb)
-            H.nk=int(nk)
-            H.ns=int(ns)
-            
-            if nbrg == "on":
-                H.ng = 1
-            else :
-                H.ng = 0
-                
-            # verif du mdp
-            if passw == psw :
-                H=Home.Home()
-                H.islogged=True
-                return {"islogged":H.islogged}
-            # connex reussie
-            else:
-                H.msg="Your login/password is incorrect"
-                H.islogged=False
-            #error
-                return {"islogged":H.islogged}
+        H.login = data['login']
+        H.psw = data['psw']
+
+        return a
     else:
-        return {"msg":H.msg}
+        return "<h1>You shouldn't be here.. </h1>"
+
+
+    #     return {'login' : H.login, 'psw':H.psw}
+    # else:
+    #     return {"msg":H.msg}
+
+    #     doc_ref = db.collection(u'users').document(login)
+    #     doc = doc_ref.get()
+    #     #verif de si le nom d'utilisateur existe 
+    #     if doc.exists:
+    #         doc =doc.to_dict()
+    #         passw=doc["psw"]
+                
+    #         # verif du mdp
+    #         if passw == psw :
+    #             if passw == psw :
+    #                 nl=int(doc["livingroom"])
+    #                 nb=int(doc["bednum"])
+    #                 nk=int(doc["kitchen"])
+    #                 ns=int(doc["stairs"])
+    #                 nbrg=doc["garage"]
+    #                 if nbrg == "on":
+    #                     ng = 1
+    #                 else :
+    #                     ng = 0  
+    #                 H.simulate(nl,nb,nk,ns,ng)
+    #                 H.islogged=True
+    #                 return {"islogged":H.islogged}
+    #         # connex reussie
+    #         else:
+    #             H.msg="Your login/password is incorrect"
+    #             H.islogged=False
+    #         #error
+    #             return {"islogged":H.islogged}
+    # else:
+    #     return {"msg":H.msg}
     
 
 
