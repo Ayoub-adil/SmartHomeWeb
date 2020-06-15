@@ -54,9 +54,9 @@ class Console extends Component{
         <div className="App">
             <Layout>
                 <Header style={{padding:14}}>
-                    <Link to="/"><Button style={{float:'right' , fontWeight:800}} >Déconnexion</Button></Link>
+                    <Link to="/"><Button style={{float:'right' , fontWeight:800}} >Disconnect</Button></Link>
                     {/* <a href='#' style={{float:'right'}} icon={<UserOutlined />}  /> */}
-                    <Title style={{color:'#F9F9F9'}} level={4}>Smarthome-App console</Title>
+                    <Title style={{color:'#F9F9F9'}} level={4}>SMARTHOME GROUP console</Title>
                     </Header>
                 <Layout>
                     

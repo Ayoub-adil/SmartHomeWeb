@@ -1,5 +1,5 @@
 import flask
-from flask import request,redirect,session, jsonify
+from flask import request,redirect, jsonify
 import Home
 
 import firebase_admin
@@ -315,7 +315,7 @@ def loginDirecteur():
             # H.msg = "err"
             return redirect(f_end+'login')
     else:
-        return "<h1>You shouldn't be here.. </h1>"
+        return {"msg":H.msg}
 
 
 # # DATABASE 
@@ -387,11 +387,14 @@ def AddAdmin():
         kitchen=request.form.get("nk")
         stairs=request.form.get("ns")
         garage=request.form.get("ng")
-
+        adress=request.form.get("adress")
+        date=request.form.get("date")
         #remplisage des donnees saisies
         data={
             u'Login': login,
             u'psw': psw,
+            u'adress':adress,
+            u'date':date,
             u'livingroom':livingroom,
             u'bednum':bednum,
             u'kitchen':kitchen,
@@ -403,7 +406,7 @@ def AddAdmin():
         doc=db.collection(u'users').document(login)
         doc=doc.get()
         if doc.exists:
-            H.msg="login deja existant"
+            H.msg="already existing login"
             return redirect(f_end+'console')
             
         #ajout dans la base de donnee
@@ -419,6 +422,7 @@ def AddAdmin():
 
 
 #********************************************* Recuperation de tous les admin et l'affichage | Firebase *******************************************************
+
 @app.route('/Dash/recupp')
 def recup():
     login=[]
@@ -427,23 +431,33 @@ def recup():
     kitchen=[]
     stairs=[]
     garage=[]
+    adr=[]
+    date=[]
     docs = db.collection(u'users').where(u'propriete', u'==', u'admin').stream()
     for doc in docs:
         if doc.exists:
             #recup of the admin's dets
             doc =doc.to_dict()
             login.append(doc["Login"])
+            adr.append(doc["adress"])
+            date.append(doc["date"])
             livingroom.append(doc["livingroom"])
             bednum.append(doc["bednum"])
             kitchen.append(doc["kitchen"])
             stairs.append(doc["stairs"])
             garage.append(doc["garage"])
-    return {'login' : login, 'garage':garage,'livingroom':livingroom,'bednum':bednum,'kitchen':kitchen,'stairs':stairs}
+    return {'login' : login, 'adress':adr,'date':date,'garage':garage,'livingroom':livingroom,'bednum':bednum,'kitchen':kitchen,'stairs':stairs}
 
 
 
 
 #********************************************* Authentification FOR MOBILE DEVICE | Firebase *******************************************************
+@app.route('/user/FakeloginMobile')
+def FakeloginMobile():
+    H.login = "walo"
+    H.psw = "ma psw ma walo"
+    return {'login' : H.login, 'psw':H.psw}
+
 
 @app.route('/user/loginMobile', methods=['GET', 'POST'])
 def loginMobile():
@@ -451,45 +465,46 @@ def loginMobile():
     if request.method == 'POST': 
 
         data = request.get_json()
+        data=data['dt'] 
+        data=data['_parts'] 
+        # a = print(data)
+        H.login = data['login']
+        H.psw = data['psw']
 
-        login = data["login"]
-        psw = data['psw']
-
-        doc_ref = db.collection(u'users').document(login)
-        doc = doc_ref.get()
-        #verif de si le nom d'utilisateur existe 
-        if doc.exists:
-            doc =doc.to_dict()
-            passw=doc["psw"]
-            nl=doc["livingroom"]
-            nb=doc["bednum"]
-            nk=doc["kitchen"]
-            ns=doc["stairs"]
-            nbrg=doc["garage"]
-
-            H.nl=int(nl)
-            H.nb=int(nb)
-            H.nk=int(nk)
-            H.ns=int(ns)
-            
-            if nbrg == "on":
-                H.ng = 1
-            else :
-                H.ng = 0
-                
-            # verif du mdp
-            if passw == psw :
-                H=Home.Home()
-                H.islogged=True
-                return {"islogged":H.islogged}
-            # connex reussie
-            else:
-                H.msg="Your login/password is incorrect"
-                H.islogged=False
-            #error
-                return {"islogged":H.islogged}
+        return {'login' : H.login, 'psw':H.psw}
     else:
         return {"msg":H.msg}
+
+    #     doc_ref = db.collection(u'users').document(login)
+    #     doc = doc_ref.get()
+    #     #verif de si le nom d'utilisateur existe 
+    #     if doc.exists:
+    #         doc =doc.to_dict()
+    #         passw=doc["psw"]
+                
+    #         # verif du mdp
+    #         if passw == psw :
+    #             if passw == psw :
+    #                 nl=int(doc["livingroom"])
+    #                 nb=int(doc["bednum"])
+    #                 nk=int(doc["kitchen"])
+    #                 ns=int(doc["stairs"])
+    #                 nbrg=doc["garage"]
+    #                 if nbrg == "on":
+    #                     ng = 1
+    #                 else :
+    #                     ng = 0  
+    #                 H.simulate(nl,nb,nk,ns,ng)
+    #                 H.islogged=True
+    #                 return {"islogged":H.islogged}
+    #         # connex reussie
+    #         else:
+    #             H.msg="Your login/password is incorrect"
+    #             H.islogged=False
+    #         #error
+    #             return {"islogged":H.islogged}
+    # else:
+    #     return {"msg":H.msg}
     
 
 

@@ -16,6 +16,7 @@ class Room:
         states=['closed','opened']
         self.window=random.choice(states)
         return self.window
+        
     def airConditionerState(self):
         states=['on','off']
         self.airConditioner=random.choice(states)
