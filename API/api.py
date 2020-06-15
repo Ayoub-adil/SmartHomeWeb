@@ -406,7 +406,7 @@ def AddAdmin():
         doc=db.collection(u'users').document(login)
         doc=doc.get()
         if doc.exists:
-            H.msg="already existing login"
+            H.msg="this Login is taken"
             return redirect(f_end+'console')
             
         #ajout dans la base de donnee

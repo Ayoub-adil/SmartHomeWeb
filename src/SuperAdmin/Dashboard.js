@@ -67,13 +67,13 @@ class Dashboard extends Component{
             <tr>
               <th>ID</th>
               <th>login</th>
-              <th>Living room number</th>
-              <th>Beedroom number</th>
-              <th>Kitchen number</th>
-              <th>Stairs number</th>
-              <th>Garage </th>
+              <th>Livingrooms</th>
+              <th>Beedrooms</th>
+              <th>Kitchens</th>
+              <th>Stairs</th>
+              <th>Garage</th>
               <th>installation date</th>
-              <th>adress</th>
+              <th>address</th>
             </tr>
             {[...this.state.login].map((e,i)=>
             <tr>
@@ -82,8 +82,8 @@ class Dashboard extends Component{
             <td>{this.state.livingroom[i]}</td>
             <td>{this.state.bednum[i]}</td>
             <td>{this.state.kitchen[i]}</td>
-            <td>{this.state.stairs[i]}</td>
-            <td>{this.state.garage[i]}</td>
+            <td>{this.state.stairs[i]==='0'?<span>None</span>:this.state.stairs[i]}</td>
+            <td>{this.state.garage[i]==='on'?<span>Yes</span>:<span>No</span>}</td>
             <td>{this.state.date[i]}</td>
             <td>{this.state.adress[i]}</td>
            
