@@ -371,7 +371,7 @@ def login():
             H.msg="Inexistant account"
             return redirect(f_end+'SignIn')
     else:
-        return "<h1>You shouldn't be here.. </h1>"
+        return {"msg":H.msg}
             
 #****************************************************** Stockage des données dans la BD | form Add Admin **************************************************************
 

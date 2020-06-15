@@ -12,7 +12,6 @@ if(props.show) {
     return (
 <nav className={drawerClasses}>
     <ul>
-        <li><NavLink to="/Home">Home</NavLink></li>
         <li><NavLink to="/Rooms">Rooms</NavLink></li>
         <li><NavLink to="/Setting">Setting</NavLink></li>
         <li><NavLink to="/Profil">Profil</NavLink></li>

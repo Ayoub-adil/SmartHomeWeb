@@ -14,6 +14,7 @@ class Setting extends Component{
         this.state={
             server:false,
             user:'User',
+            plan:'homeSweetHome',
             outsideT:'Conexion au termometre',
             rain:'Conexion au capteur de pluie',
             door:'Conexion au capteur',
@@ -27,6 +28,8 @@ class Setting extends Component{
         this.WorkingServer=this.WorkingServer.bind(this);
         this.session();
         this.session=this.session.bind(this);
+        this.getplan();
+        this.getplan=this.getplan.bind(this);
 
         this.getOutsideTemperature();
         this.getDoorState();
@@ -60,6 +63,11 @@ class Setting extends Component{
           });
         })
       }
+    getplan(){
+        fetch('/home/plan').then(res=>res.json()).then(data=>{
+            this.setState({ plan: data.plan })
+            })
+        }
 
     getOutsideTemperature(){
         fetch('/home/outsideTemperature').then(res=>res.json()).then(data=>{
@@ -135,6 +143,7 @@ class Setting extends Component{
                     </div>
                 </Card>
 
+            {this.state.plan.stairs>0?
                 <Card style={{ marginTop: 30 }} type="inner">
                     <Avatar size={40} src={lampe} />
                     Hall ligth
@@ -147,6 +156,8 @@ class Setting extends Component{
                         />
                     </div>
                 </Card>
+              :null
+            }
 
                 <Card style={{ marginTop: 30 }} type="inner">
                     <Avatar size={40} style={{ color: '#007bff' , background:'none' }}icon={<KeyOutlined />}/>
@@ -159,18 +170,21 @@ class Setting extends Component{
                     />
                     </div>
                 </Card>
-                
+              {this.state.plan.garage===1?   
                 <Card style={{ marginTop: 30 }} type="inner">
                     <Avatar size={40} style={{ color: '#007bff' , background:'none' }}icon={<KeyOutlined />}/>
                     Door: Garage
-                    <div className="onOff">{this.state.garageDoor}<> </> 
+                    <div className="onOff">{this.state.garageDoor}<span> </span> 
                     <Switch 
                         size="small" 
                         checked ={this.state.garageDoor==="opened"?true:false}  
                         onChange={this.changeGarageDoorState} 
                     />
                     </div>
+                    
                 </Card>
+                :null
+              }
                 </Fragment>
             }
             </Fragment>
