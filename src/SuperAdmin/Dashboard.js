@@ -64,7 +64,7 @@ class Dashboard extends Component{
             showIcon
             closeText="Close"/>:null}
           <table>
-            <tr>
+            <thead>
               <th>ID</th>
               <th>login</th>
               <th>Livingrooms</th>
@@ -74,9 +74,10 @@ class Dashboard extends Component{
               <th>Garage</th>
               <th>installation date</th>
               <th>address</th>
-            </tr>
+            </thead>
+            <tbody>
             {[...this.state.login].map((e,i)=>
-            <tr>
+              <tr>
             <td>{i+1}</td>
             <td>{this.state.login[i]}</td>
             <td>{this.state.livingroom[i]}</td>
@@ -86,9 +87,9 @@ class Dashboard extends Component{
             <td>{this.state.garage[i]==='on'?<span>Yes</span>:<span>No</span>}</td>
             <td>{this.state.date[i]}</td>
             <td>{this.state.adress[i]}</td>
-           
+              </tr>)}
             
-          </tr>)}
+          </tbody>
           
            
            
