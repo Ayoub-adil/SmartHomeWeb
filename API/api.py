@@ -465,20 +465,15 @@ def loginMobile():
     if request.method == 'POST': 
 
         data = request.get_json()
-
-        a = print(data)
-
+        data=data['dt'] 
+        data=data['_parts'] 
+        # a = print(data)
         H.login = data['login']
         H.psw = data['psw']
 
-        return a
+        return {'login' : H.login, 'psw':H.psw}
     else:
-        return "<h1>You shouldn't be here.. </h1>"
-
-
-    #     return {'login' : H.login, 'psw':H.psw}
-    # else:
-    #     return {"msg":H.msg}
+        return {"msg":H.msg}
 
     #     doc_ref = db.collection(u'users').document(login)
     #     doc = doc_ref.get()

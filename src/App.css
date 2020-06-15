@@ -86,6 +86,16 @@ p{
   margin-left: 40%;
 }
 
+.imgke{
+  width: 27%;
+  height: auto;
+  margin-top: 7%; 
+  margin-bottom: 4%;
+  /* margin-left: 10%; */
+}
+.rightPrf{
+  margin-left: 10%;
+}
 .right{
   float: right;
 }
