@@ -67,6 +67,23 @@ p{
   box-shadow: 0px 10px 50px -10px rgba(0, 0, 0, 0.2);
 }
 
+.btnProfil{
+  margin-top: 1%;
+  font-weight: bold;
+  padding: 0.75%;
+  background-color: #007bff;
+  border-radius: 20px;
+  border: 1px solid #007bff;
+  color: #F9F9F9;
+  box-shadow: 0px 10px 50px -10px rgba(0, 0, 0, 0.2);
+}
+
+.gridprofil{
+  margin-left:20%;
+  margin-right: 20%;
+  margin-top: 40px;
+}
+
 .img {
   width: 50%;
   height: auto;
@@ -87,17 +104,19 @@ p{
 }
 
 .imgke{
-  width: 27%;
+  width: 13%;
   height: auto;
-  margin-top: 7%; 
-  margin-bottom: 4%;
+  margin-top: 4%; 
+  margin-bottom: 2%;
   /* margin-left: 10%; */
 }
-.rightPrf{
-  margin-left: 10%;
-}
+
 .right{
   float: right;
+}
+
+.tbl{
+  margin-top: 1%;
 }
 
 .left{
@@ -376,6 +395,22 @@ p{
     margin: 7%;
     font-size: 20px;
     padding: 1%;
+  }
+
+  .imgke{
+    width: 50%;
+    margin-top: 15%; 
+    margin-bottom: 15%;
+  }
+
+  .gridprofil{
+    margin-left:5%;
+    margin-right: 5%;
+    margin-top: 40px;
+  }
+
+  .btnProfil{
+    padding: 3%;
   }
 
   }
