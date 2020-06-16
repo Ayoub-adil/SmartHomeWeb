@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './console.css';
 import { Alert} from 'antd';
 
+import logo from '../images/logo.png';
+
 class Formulaire extends Component{
     constructor(props){
 		super(props);
@@ -30,10 +32,6 @@ class Formulaire extends Component{
     }
     
 
-
-
-
-
     render(){
       return(
         <div className="App">
@@ -42,11 +40,13 @@ class Formulaire extends Component{
 
                 <div className="formStyle">
                 {(this.state.msg === "pas de message")?null:<Alert message={this.state.msg} type="error" closeText="Close" showIcon  />}
-                <label style={{marginRight:10}}>Login : 
-                    <input type="text" name="log" required style={{marginLeft:10}}/>
+                <label >Login : <br/>
+                    <input type="text" name="log" required />
 			    </label>
-                <label className="pasw">Password : 
-                    <input type="password" name="psw" required style={{marginLeft:10}}/>	
+          </div>
+          <div className="formStyle">
+                <label className="pasw">Password : <br/>
+                    <input type="password" name="psw" required />	
 				</label>
                 </div>
 
@@ -54,13 +54,14 @@ class Formulaire extends Component{
 				
                 </div> */}
                 <div className="formStyle">
-				<label style={{marginRight:10}}>Adress :
-                  <input style={{margin:10}} type="text"name="adress" required style={{marginRight:10}}/>	
+				<label>Adress : <br/>
+                  <input type="text"name="adress" required />	
 				</label>
         
-        
-        <label>Installation date : 
-                   <input  type="date" name="date" required style={{marginRight:10}} />	
+        </div>
+        <div className="formStyle">
+        <label>Installation date : <br/>
+                   <input  type="date" name="date" required />	
 				</label>
                 </div>
                 <div className="formStyle">
@@ -88,7 +89,7 @@ class Formulaire extends Component{
                 </div>
 
                 <div className="formStyle">
-				<label>Garage : 
+				<label>Check if you have a garage : 
                     <input style={{margin:10}} type="checkbox"name="ng" />	
 				</label>
                 </div>
@@ -98,6 +99,10 @@ class Formulaire extends Component{
 
 				
             </form>
+
+            <div>
+            <img className='imglogo2' src={logo}></img>
+            </div>
             
         </div>
       );

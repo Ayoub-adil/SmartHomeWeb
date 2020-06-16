@@ -6,6 +6,7 @@
 table{
     height: auto;
     width: 100%;
+    border-collapse: collapse;
 }
 
 th{
@@ -16,8 +17,11 @@ th{
 td, th{
     border: 1px solid rgb(189, 189, 189);
     padding: 0.5%;
+    text-align: center;
 }
-
+tr:nth-child(even) {
+	background-color: #F9F9F9;
+}
 .formStyle{
     margin: 0.5% 1%;
 }
@@ -31,7 +35,7 @@ input[type=text]{
 
 input[type=number]{
     border: 2px solid #ccc;
-    width: 50%;
+    width: 6%;
     border-radius: 4px;
     margin: 4px 0;
 }
@@ -52,21 +56,46 @@ input[type=submit]{
     cursor: pointer;
 }
 
+.imglogo2{
+    float: right;
+    width: 40%;
+    height: auto;
+    margin-top: -40%;
+    margin-right: 15%;
+}
+/* 
 .pasw{
     margin-left: 30px;
-}
+} */
 @media screen and (max-width: 700px){
     input[type=submit]{
         width: 100%;
         margin: 0;
     }
     input[type=text]{
-        width: 50%;
+        width: 100%;
+        margin-bottom: 20px;
     }
     input[type=password]{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    input[type=number]{
         width: 50%;
+        margin-bottom: 20px;
     }
     .pasw{
         margin-left: 0;
+    }
+
+    table th{
+        display: none;
+    }
+    table, table tbody, table tr, table td{
+        display: block;
+        width: 100%;
+    }
+    .imglogo2{
+        display: none;
     }
 }
