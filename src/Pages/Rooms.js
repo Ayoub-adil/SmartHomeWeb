@@ -79,7 +79,7 @@ class Rooms extends Component{
                     <form method='post' action='/change/room'>
                         <input name='typeofroom' type='text' value='bedroom' hidden></input>
                         <button className="btnRoom" name='rooom' type='submit' value={i}>
-                            {i}
+                            bedroom {i+1}
                             <img className="imgRoom" src={bedroom} alt="bedroom"></img>
                         </button>
                     </form> 
@@ -99,7 +99,7 @@ class Rooms extends Component{
                     <form method='post' action='/change/room'>
                         <input name='typeofroom' type='text' value='livingroom' hidden></input>
                         <button className="btnRoom" name='rooom' type='submit' value={i}>
-                            {i}
+                            livingroom {i+1}
                             <img className="imgRoom" src={livingroom} alt="livingroom"></img>
                         </button>
                     </form> 
@@ -118,7 +118,7 @@ class Rooms extends Component{
                     <form method='post' action='/change/room'>
                         <input name='typeofroom' type='text' value='kitchen' hidden></input>
                         <button className="btnRoom" name='rooom' type='submit' value={i}>
-                            {i}
+                            kitchen {i+1}
                             <img className="imgRoom" src={kitchen} alt="kitchen"></img>
                         </button>
                     </form>  

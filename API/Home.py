@@ -47,14 +47,16 @@ class Home:
 # Home Plan
     def __init__(self):
         self.msg = 'pas de message'
-        self.login = "walo"
-        self.psw = "ma psw ma walo"
+        self.login = "login"
+        self.psw = "psw"
         self.islogged =False
+
         self.r=-1
         self.type_r='outdoor'
         self.alert='on'
         self.watering='on'
         self.hallLight=True
+        
         self.user='User'
         self.simulate(0,0,0,0,0)
         self.setStates()

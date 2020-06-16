@@ -122,7 +122,7 @@ class Setting extends Component{
                     <Avatar size={40} src={temperature} />
                     Weather
                     <div className="onOff">{this.state.outsideT}°C</div>
-                    <div className="onOff">{this.state.rain?null:<span>Pas de </span>}Pluie</div>
+                    <div className="onOff">{this.state.rain?null:<span>Not </span>}Rainy</div>
                 </Card>
                 <Card style={{ marginTop: 30 }} type="inner">
                     <Avatar size={40} style={{ color: '#007bff' , background:'none' }}icon={<AlertOutlined />}/>

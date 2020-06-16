@@ -184,6 +184,15 @@ def set_room():
         H.setRoom(typeOfRoom, int(rooom))
         return redirect(f_end+H.type_r)
     return "<h1>You shouldn't be here.. </h1>" 
+@app.route('/change/rooom',methods=["POST","GET"])
+def set_rooom():
+    if request.method=='POST':
+        data = request.get_json()
+        rooom = data['rooom']
+        typeOfRoom = data['typeofroom']
+        H.setRoom(typeOfRoom, rooom)
+        return "<h1>You shouldn't be here.. </h1>"
+    return "<h1>You shouldn't be here.. </h1>" 
 
 @app.route('/change/lamp')
 def set_lamp_state():
@@ -452,59 +461,48 @@ def recup():
 
 
 #********************************************* Authentification FOR MOBILE DEVICE | Firebase *******************************************************
-@app.route('/user/FakeloginMobile')
-def FakeloginMobile():
-    H.login = "walo"
-    H.psw = "ma psw ma walo"
-    return {'login' : H.login, 'psw':H.psw}
-
 
 @app.route('/user/loginMobile', methods=['GET', 'POST'])
 def loginMobile():
     #recuperer l'email et le mot de passe saisi par l'utilisateur
     if request.method == 'POST': 
+        H.islogged=False
 
         data = request.get_json()
-        data=data['dt'] 
-        data=data['_parts'] 
-        # a = print(data)
-        H.login = data['login']
-        H.psw = data['psw']
+        login = data['login']
+        psw = data['psw']
 
-        return {'login' : H.login, 'psw':H.psw}
-    else:
-        return {"msg":H.msg}
+        H.login=login
+        H.psw=psw
 
-    #     doc_ref = db.collection(u'users').document(login)
-    #     doc = doc_ref.get()
-    #     #verif de si le nom d'utilisateur existe 
-    #     if doc.exists:
-    #         doc =doc.to_dict()
-    #         passw=doc["psw"]
+        doc_ref = db.collection(u'users').document(login)
+        doc = doc_ref.get()
+        #verif de si le nom d'utilisateur existe 
+        if doc.exists:
+            doc =doc.to_dict()
+            passw=doc["psw"]
                 
-    #         # verif du mdp
-    #         if passw == psw :
-    #             if passw == psw :
-    #                 nl=int(doc["livingroom"])
-    #                 nb=int(doc["bednum"])
-    #                 nk=int(doc["kitchen"])
-    #                 ns=int(doc["stairs"])
-    #                 nbrg=doc["garage"]
-    #                 if nbrg == "on":
-    #                     ng = 1
-    #                 else :
-    #                     ng = 0  
-    #                 H.simulate(nl,nb,nk,ns,ng)
-    #                 H.islogged=True
-    #                 return {"islogged":H.islogged}
-    #         # connex reussie
-    #         else:
-    #             H.msg="Your login/password is incorrect"
-    #             H.islogged=False
-    #         #error
-    #             return {"islogged":H.islogged}
-    # else:
-    #     return {"msg":H.msg}
+            # verif du mdp
+            if passw == psw :
+                H.islogged=True
+                H.msg="pas de message"
+                nl=int(doc["livingroom"])
+                nb=int(doc["bednum"])
+                nk=int(doc["kitchen"])
+                ns=int(doc["stairs"])
+                nbrg=doc["garage"]
+                if nbrg == "on":
+                    ng = 1
+                else :
+                    ng = 0  
+                H.simulate(nl,nb,nk,ns,ng)
+            else:
+                H.msg="Your Password is incorrect"
+        else :
+            H.msg="Inexistant Account"
+        return {"msg":H.msg,"islogged":H.islogged}
+    else:
+        return {"msg":H.msg,"islogged":H.islogged}
     
 
 
