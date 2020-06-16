@@ -89,7 +89,7 @@ class Formulaire extends Component{
                 </div>
 
                 <div className="formStyle">
-				<label>Check if you have a garage : 
+				<label>Check if the Client has a garage : 
                     <input style={{margin:10}} type="checkbox"name="ng" />	
 				</label>
                 </div>
