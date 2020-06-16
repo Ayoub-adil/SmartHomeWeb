@@ -25,7 +25,6 @@ H=Home.Home()
 def landing():
     return "<h1>Home Simulator Server</h1>"+"<h2>You shouldn't be here.. </h2>"+"<h3>This server is not for users.. SORRY</h3>"
 
-
 @app.route('/frontend')
 def frontend(link=''):
     return redirect(f_end+link)
@@ -423,6 +422,35 @@ def AddAdmin():
             H.msg="succes"
             db.collection(u'users').document(login).set(data)
             return redirect(f_end+'console')
+           
+    else:
+        return {"msg":H.msg}
+
+@app.route('/UserForm', methods=['GET', 'POST'])
+def AddUser():
+    
+    #recuperation du formulaire
+    if request.method == 'POST':
+        login=request.form.get("login")
+        psw=request.form.get("psw")
+        #remplisage des donnees saisies
+        data={
+            u'Login': login,
+            u'psw': psw,
+            u'propriete': u'user'
+        }
+        #verif de l'existant
+        doc=db.collection(u'users').document(login)
+        doc=doc.get()
+        if doc.exists:
+            H.msg="this Login is taken"
+            return redirect(f_end+'Profil')
+            
+        #ajout dans la base de donnee
+        else:
+            H.msg="You just Added a new user to your application"
+            db.collection(u'users').document(login).set(data)
+            return redirect(f_end+'Profil')
            
     else:
         return {"msg":H.msg}
