@@ -127,11 +127,30 @@ p{
 
 .btnRoom{
   border: 1px solid #ccc;
-  background-color: #F9F9F9;
-  margin-left: 2%;
-  border-radius: 10px;
-  box-shadow: 0px 10px 50px -20px rgba(0, 0, 0, 0.2);
+  color: #F9F9F9;
+  background-color: #007bff;
+  margin-right: 10%;
+  border-radius: 30px;
+  box-shadow: 10px 20px 50px -20px rgba(0, 0, 0, 0.2);
 }
+
+.btnRoom2{
+  border: 1px solid #ccc;
+  color: #F9F9F9;
+  background-color: #FF8D8D;
+  margin-right: 10%;
+  border-radius: 30px;
+  box-shadow: 10px 20px 50px -20px rgba(0, 0, 0, 0.2);
+}
+.btnRoom3{
+  border: 1px solid #ccc;
+  color: #F9F9F9;
+  background-color: #7AAFFD;
+  margin-right: 10%;
+  border-radius: 30px;
+  box-shadow: 10px 20px 50px -20px rgba(0, 0, 0, 0.2);
+}
+
 
 .crd{
   margin: 20% 7% 0 15%;

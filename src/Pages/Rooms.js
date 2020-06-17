@@ -53,7 +53,7 @@ class Rooms extends Component{
     
     render(){
         return(
-            <div className="App">
+            <div className="App" style={{margin:30}}>
             {this.state.server
             ?
             <Fragment>
@@ -98,7 +98,7 @@ class Rooms extends Component{
                     >  
                     <form method='post' action='/change/room'>
                         <input name='typeofroom' type='text' value='livingroom' hidden></input>
-                        <button className="btnRoom" name='rooom' type='submit' value={i}>
+                        <button className="btnRoom2" name='rooom' type='submit' value={i}>
                             livingroom {i+1}
                             <img className="imgRoom" src={livingroom} alt="livingroom"></img>
                         </button>
@@ -117,7 +117,7 @@ class Rooms extends Component{
                     > 
                     <form method='post' action='/change/room'>
                         <input name='typeofroom' type='text' value='kitchen' hidden></input>
-                        <button className="btnRoom" name='rooom' type='submit' value={i}>
+                        <button className="btnRoom3" name='rooom' type='submit' value={i}>
                             kitchen {i+1}
                             <img className="imgRoom" src={kitchen} alt="kitchen"></img>
                         </button>
