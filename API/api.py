@@ -36,7 +36,7 @@ def server():
 @app.route('/session')
 def session():
     return {"user":H.user} 
-    
+
 @app.route('/connect')
 def connect():
     return redirect(f_end+'SignIn')
