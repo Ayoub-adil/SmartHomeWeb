@@ -68,7 +68,7 @@ class Profil extends Component{
               <p>You can Add or delete users in this application.</p>
               <div>
               <button className="btnProfil" type="submit" onClick={this.showModal}>Add admin</button>
-              {(this.state.msg === "pas de message")?null:<Alert message={this.state.msg} type="error" closeText="Close" showIcon  />}
+              {(this.state.msg === "pas de message")?null:<Alert message={this.state.msg} type="success" closeText="Close" showIcon  />}
               </div>
               </div>
               <div className="gridprofil">

@@ -433,11 +433,13 @@ def AddUser():
     if request.method == 'POST':
         login=request.form.get("login")
         psw=request.form.get("psw")
+        admin=H.user
         #remplisage des donnees saisies
         data={
             u'Login': login,
             u'psw': psw,
-            u'propriete': u'user'
+            u'propriete': u'user',
+            u'owner':admin
         }
         #verif de l'existant
         doc=db.collection(u'users').document(login)
@@ -455,7 +457,21 @@ def AddUser():
     else:
         return {"msg":H.msg}
 
+#********************************************* Recuperation des users et l'affichage | Firebase *******************************************************
+@app.route('/users/tab')
+def getUsers():
+    login=[]
+    psw=[]
+    ad=H.user
     
+    docs= db.collection(u'users').where(u'propriete',u'==',u'user').where(u'owner',u'==',ad).stream()
+    for doc in docs:
+        if doc.exists:
+            doc=doc.to_dict()
+            login.append(doc["Login"])
+            psw.append(doc["psw"])
+    return{'login':login, 'psw':psw}
+
 
 
 #********************************************* Recuperation de tous les admin et l'affichage | Firebase *******************************************************
