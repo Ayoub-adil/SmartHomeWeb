@@ -5,6 +5,28 @@ import prof from '../images/profil.png'
 import '../App.css';
 
 class UsersTab extends Component{
+    constructor(props){
+      super(props);
+      this.state={
+                  login:"",
+                  psw:""
+      }
+      this.getUsers();
+      this.getUsers=this.forceUpdate.bind(this)
+
+      
+
+    }
+
+    getUsers(){
+      fetch('users/tab')
+      .then(res=>res.json())
+      .then(data=>{this.setState({
+        login : data.login,
+        psw:data.psw
+      })})
+    }
+    
     
     render(){
       
@@ -16,11 +38,13 @@ class UsersTab extends Component{
                 <Col span={8}>Password</Col>
                 <Col span={8}>Operation</Col>
               </Row>
+              
+              {[...this.state.login].map((e,i)=>
               <Row>
-              <Col span={8}>Oumayma</Col>
-                <Col span={8}>12345</Col>
+                <Col span={8}>{this.state.login[i]}</Col>
+                <Col span={8}>{this.state.psw[i]}</Col>
                 <Col span={8}>Delete</Col>
-              </Row>
+              </Row>)}
                 {/* <table className="tbl">
                   <tr>
                     <th>Login</th>
