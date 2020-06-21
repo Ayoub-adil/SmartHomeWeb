@@ -67,7 +67,7 @@ class Profil extends Component{
               <p>Hello, You are the administrator of your own Home!</p>
               <p>You can Add or delete users in this application.</p>
               <div>
-              <button className="btnProfil" type="submit" onClick={this.showModal}>Add admin</button>
+              <button className="btnProfil" type="submit" onClick={this.showModal}>Add User</button>
               {(this.state.msg === "pas de message")?null:<Alert message={this.state.msg} type="success" closeText="Close" showIcon  />}
               </div>
               </div>
@@ -90,7 +90,7 @@ class Profil extends Component{
               <input type="password" name="psw" required style={{marginLeft:10}}/>	
               </label>
               <center>
-              <button className="btnProfil" type="submit">Add admin</button>
+              <button className="btnProfil" type="submit">Add</button>
               </center>
             </div>
           </form>

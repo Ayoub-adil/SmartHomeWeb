@@ -334,53 +334,70 @@ def loginDirecteur():
 # SignIn users : 
 @app.route('/user/login', methods=['GET', 'POST'])
 def login():
-
-    # doc_ref = db.collection(u'users').document(u'admin')
-    # doc = doc_ref.get().to_dict()
-    # email=doc["login"]
-    # passw=doc["psw"]
-    # print(email+" "+passw)
-    
     #recuperer l'email et le mot de passe saisi par l'utilisateur
     if request.method == 'POST': 
         # session.pop('login',None)
         login = request.form.get("log")
         psw = request.form.get("psw")
-
+        
         doc_ref = db.collection(u'users').document(login)
         doc = doc_ref.get()
         #verif si le nom d'utilisateur existe 
         if doc.exists:
             doc =doc.to_dict()
             passw=doc["psw"]
-                
-            # verif du mdp
-            if passw == psw :
-                nl=int(doc["livingroom"])
-                nb=int(doc["bednum"])
-                nk=int(doc["kitchen"])
-                ns=int(doc["stairs"])
-                nbrg=doc["garage"]
-                if nbrg == "on":
-                    ng = 1
-                else :
-                    ng = 0
-                H.simulate(nl,nb,nk,ns,ng)
-                # session['login']=login
-                H.user=login
-                return redirect(f_end+'Home')
-            # connex reussie
+            profil = doc["propriete"]
+            
+            # verif si l'utilisateur est un ADMIN
+            if profil == "admin" :
+                # verif du mdp
+                if passw == psw :
+                    nl=int(doc["livingroom"])
+                    nb=int(doc["bednum"])
+                    nk=int(doc["kitchen"])
+                    ns=int(doc["stairs"])
+                    nbrg=doc["garage"]
+                    if nbrg == "on":
+                        ng = 1
+                    else :
+                        ng = 0
+                    H.simulate(nl,nb,nk,ns,ng)
+                    # session['login']=login
+                    H.user=login
+                    return redirect(f_end+'Home')
+                # connex reussie
+                else:
+                    H.msg="Incorrect password"
+                #error
+                    return redirect(f_end+'SignIn')
+            # sinon si l'utilisateur est un USER
             else:
-                H.msg="Incorrect password"
-            #error
-                return redirect(f_end+'SignIn')
+                owner = doc["owner"]
+                if passw == psw :
+                    H.user=login
+                    doc_refe = db.collection(u'users').document(owner)
+                    docu = doc_refe.get()
+                    nl=int(docu["livingroom"])
+                    nb=int(docu["bednum"])
+                    nk=int(docu["kitchen"])
+                    ns=int(docu["stairs"])
+                    nbrg=docu["garage"]
+                    if nbrg == "on":
+                        ng = 1
+                    else :
+                        ng = 0
+                    H.simulate(nl,nb,nk,ns,ng)
+                    return redirect(f_end+'Home')
+                else:
+                    H.msg="Incorrect password"
+                #error
+                    return redirect(f_end+'SignIn')
         else:
             #error
             H.msg="Inexistant account"
             return redirect(f_end+'SignIn')
     else:
-        return {"msg":H.msg}
-            
+        return {"msg":H.msg}    
 #****************************************************** Stockage des données dans la BD | form Add Admin **************************************************************
 
 @app.route('/spForm', methods=['GET', 'POST'])
@@ -471,8 +488,6 @@ def getUsers():
             login.append(doc["Login"])
             psw.append(doc["psw"])
     return{'login':login, 'psw':psw}
-
-
 
 #********************************************* Recuperation de tous les admin et l'affichage | Firebase *******************************************************
 
