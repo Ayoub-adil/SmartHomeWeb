@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import { NavLink } from 'react-router-dom';
 import { Avatar } from 'antd';
+import Header from './HomeHeader.js';
 import { HomeOutlined,SettingOutlined,UserOutlined,LogoutOutlined,InfoCircleOutlined} from '@ant-design/icons';
 import '../App.css';
 import ServerError from './ServerError';
@@ -38,6 +39,7 @@ class Home extends Component{
   render(){
     return(
       <div className="App">
+        {this.state.user==='User'?null:<Header />}
       {this.state.server
         ?
         <Fragment>
@@ -65,26 +67,6 @@ class Home extends Component{
             <NavLink to="/Setting">
             <button className='btn'><h2 className="titleroom">Setting</h2> 
             <Avatar size={50} style={{ color: '#007bff' , background:'none' }}icon={<SettingOutlined />}/>
-            </button>
-            </NavLink>
-                      
-            <NavLink to="/Profil">
-            <button className='btn'><h2 className="titleroom">Family</h2> 
-            <Avatar size={50} style={{ color: '#007bff' , background:'none' }}icon={<UserOutlined />}/>
-            </button>
-            </NavLink>
-
-            <br/>
-                                              
-            <NavLink exact to="/about">
-            <button className='btn'><h2 className="titleroom">About</h2> 
-            <Avatar size={50} style={{ color: '#007bff' , background:'none' }}icon={<InfoCircleOutlined />}/>
-            </button>
-            </NavLink>
-                                  
-            <NavLink onClick={this.disconnect} exact to="/">
-            <button className='btn'><h2 className="titleroom">Disconnect</h2> 
-            <Avatar size={50} style={{ color: '#007bff' , background:'none' }}icon={<LogoutOutlined />}/>
             </button>
             </NavLink>
         
