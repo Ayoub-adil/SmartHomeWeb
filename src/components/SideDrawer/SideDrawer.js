@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './SideDrawer.css';
+import { HomeOutlined,SettingOutlined,UserOutlined,LogoutOutlined,InfoCircleOutlined} from '@ant-design/icons';
 
 
 const sideDrawer = props => { 
@@ -12,10 +13,11 @@ if(props.show) {
     return (
 <nav className={drawerClasses}>
     <ul>
-        <li><NavLink to="/Rooms">Rooms</NavLink></li>
-        <li><NavLink to="/Setting">Setting</NavLink></li>
-        <li><NavLink to="/Profil">Profil</NavLink></li>
-        <li><NavLink onClick={()=>fetch('/disconnect')} exact to="/">Disconnect</NavLink></li> 
+        <li><NavLink to="/Rooms"><HomeOutlined/> Rooms</NavLink></li>
+        <li><NavLink to="/Setting"><SettingOutlined/> General</NavLink></li>
+        <li><NavLink to="/Profil"><UserOutlined/> Family</NavLink></li>
+        <li><NavLink to="/About"><InfoCircleOutlined/> About us</NavLink></li>
+        <li><NavLink onClick={()=>fetch('/disconnect')} exact to="/"><LogoutOutlined/> Disconnect</NavLink></li> 
     </ul>
 </nav>
     );

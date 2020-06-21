@@ -336,7 +336,6 @@ def loginDirecteur():
 def login():
     #recuperer l'email et le mot de passe saisi par l'utilisateur
     if request.method == 'POST': 
-        # session.pop('login',None)
         login = request.form.get("log")
         psw = request.form.get("psw")
         

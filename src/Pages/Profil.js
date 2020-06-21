@@ -1,10 +1,13 @@
-import React, {Component} from 'react';
+/* eslint-disable jsx-a11y/alt-text */
+import React, {Component, Fragment} from 'react';
 import { Alert} from 'antd';
-import { Row, Col, Modal } from 'antd';
+import { Modal } from 'antd';
 import prof from '../images/profil.png'
 import '../App.css';
 import UsersTab from './UsersTab.js';
 import Header from './Header.js';
+import ServerError from './ServerError';
+import SignIn from './SignIn';
 
 class Profil extends Component{
 
@@ -12,11 +15,15 @@ class Profil extends Component{
 		super(props);
 		this.state={
       server:false,
+      user:'User',
       msg : "pas de message",
       visible: false
         } 
-    this.WorkingServer();
-    this.WorkingServer=this.WorkingServer.bind(this);
+      this.WorkingServer();
+      this.WorkingServer=this.WorkingServer.bind(this);
+  
+      this.session();
+      this.session=this.session.bind(this);
 
 		this.AddUser();
 		this.AddUser=this.AddUser.bind(this)
@@ -26,6 +33,13 @@ class Profil extends Component{
       fetch('/server').then(res=>res.json()).then(data=>{
         this.setState({
           server: data.server,
+        });
+      })
+    }    
+    session(){
+      fetch('/session').then(res=>res.json()).then(data=>{
+        this.setState({
+          user: data.user,
         });
       })
     }
@@ -59,15 +73,23 @@ class Profil extends Component{
       return(
         
         <div className="App">
+{this.state.server
+?
+<Fragment>
+{this.state.user==='User'?
+<SignIn/>
+:
+<Fragment>
+
           <Header />
           <center>
             <div className="leftPrf">
             <div>
               <img className='imgke' src={prof}></img>
-              <p>Hello, You are the administrator of your own Home!</p>
-              <p>You can Add or delete users in this application.</p>
+              <p>Hello <span className="smarthome">{this.state.user}</span>, You are the Owner of this House !</p>
+              <p>Your <span className="smarthome">family members</span> can join us</p>
               <div>
-              <button className="btnProfil" type="submit" onClick={this.showModal}>Add User</button>
+              <button className="btnProfil" type="submit" onClick={this.showModal}>Add Member</button>
               {(this.state.msg === "pas de message")?null:<Alert message={this.state.msg} type="success" closeText="Close" showIcon  />}
               </div>
               </div>
@@ -97,6 +119,12 @@ class Profil extends Component{
         </Modal>
             </div>
             </center>  
+</Fragment>
+}
+</Fragment>
+:
+<ServerError/>
+}
         </div>
       );
     }
