@@ -15,6 +15,7 @@ import Console from './SuperAdmin/console.js';
 import Cons from './SuperAdmin/cons.js';
 import ServerError from './Pages/ServerError.js';
 import Profil from './Pages/Profil.js';
+import About from './Pages/About.js';
 
 
 class App extends Component{
@@ -28,6 +29,7 @@ class App extends Component{
         <Route path="/Home" component={Home} />
         <Route path="/Rooms" component={Rooms} />        
         <Route path="/Setting" component={Setting} />
+        <Route path="/About" component={About} />
         <Route path="/Bedroom" component={Bedroom} />
         <Route path="/kitchen" component={Kitchen} />
         <Route path="/LivingRoom" component={LivingRoom} />

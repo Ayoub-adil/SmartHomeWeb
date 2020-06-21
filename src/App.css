@@ -170,6 +170,11 @@ p{
   margin-left: 20%;
   margin-top: 2%;
 }
+.pdp{
+  width: 50px;
+  border-radius:30px ;
+  border: 1px solid #007bff;
+}
 
 .Rooms{
   margin-top: 5%;
@@ -430,8 +435,48 @@ p{
     margin-top: 40px;
   }
 
+
   .btnProfil{
     padding: 3%;
   }
+}
+
+
+  .desc{
+    padding: 30px;
+    width: 60%;
+    position: relative;
+    float: left;
+  }
+  .weare{
+    padding: 30px;
+    width: 60%;
+    position: relative;
+    float: left;
+  }
+  .log{
+    text-align: center;
+    width: 40%;
+    position: relative;
+    float: left;
+  }
+  .log img{
+    padding-top: 10%;
+    width: 10%;  
+  }
+  .map{
+    text-align: center;
+    width: 100%;
 
   }
+  .btnCrd{
+    padding: 0.5% 2%;
+    width: 30%;
+    margin: 1%;
+    background-color: #F9F9F9;
+    color: black;
+    border: 2px solid #F9F9F9;
+    border-radius: 20px;
+    box-shadow: 0px 10px 50px -10px rgba(0, 0, 0, 0.2);
+  }
+

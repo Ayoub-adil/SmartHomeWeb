@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import { Row, Col, Modal } from 'antd';
-import prof from '../images/profil.png'
+import { Row, Col,} from 'antd';
 import '../App.css';
 
 

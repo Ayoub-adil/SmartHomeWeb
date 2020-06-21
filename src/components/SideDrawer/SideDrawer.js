@@ -14,7 +14,7 @@ if(props.show) {
 <nav className={drawerClasses}>
     <ul>
         <li><NavLink to="/Rooms"><HomeOutlined/> Rooms</NavLink></li>
-        <li><NavLink to="/Setting"><SettingOutlined/> Setting</NavLink></li>
+        <li><NavLink to="/Setting"><SettingOutlined/> General</NavLink></li>
         <li><NavLink to="/Profil"><UserOutlined/> Family</NavLink></li>
         <li><NavLink to="/About"><InfoCircleOutlined/> About us</NavLink></li>
         <li><NavLink onClick={()=>fetch('/disconnect')} exact to="/"><LogoutOutlined/> Disconnect</NavLink></li> 

@@ -29,8 +29,9 @@ class toolbar extends Component{
             <div className="toolbar-navigation-items">
                 <ul>
                     <li><NavLink to="/Rooms"><HomeOutlined /> Rooms</NavLink></li>
-                    <li><NavLink to="/Setting"><SettingOutlined /> Settings</NavLink></li>
+                    <li><NavLink to="/Setting"><SettingOutlined /> General</NavLink></li>
                     <li><NavLink to="/Profil"><UserOutlined /> Family</NavLink></li>
+                    <li><NavLink to="/About"><InfoCircleOutlined/> About us</NavLink></li>
                     <li><NavLink onClick={this.disconnect} exact to="/"><LogoutOutlined /> Disconnect</NavLink></li>                   
                 </ul>
             </div>

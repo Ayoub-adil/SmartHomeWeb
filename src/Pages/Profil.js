@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, {Component, Fragment} from 'react';
 import { Alert} from 'antd';
-import { Row, Col, Modal } from 'antd';
+import { Modal } from 'antd';
 import prof from '../images/profil.png'
 import '../App.css';
 import UsersTab from './UsersTab.js';
@@ -85,10 +86,10 @@ class Profil extends Component{
             <div className="leftPrf">
             <div>
               <img className='imgke' src={prof}></img>
-              <p>Hello, You are the administrator of your own Home!</p>
-              <p>You can Add or delete users in this application.</p>
+              <p>Hello <span className="smarthome">{this.state.user}</span>, You are the Owner of this House !</p>
+              <p>Your <span className="smarthome">family members</span> can join us</p>
               <div>
-              <button className="btnProfil" type="submit" onClick={this.showModal}>Add admin</button>
+              <button className="btnProfil" type="submit" onClick={this.showModal}>Add Member</button>
               {(this.state.msg === "pas de message")?null:<Alert message={this.state.msg} type="success" closeText="Close" showIcon  />}
               </div>
               </div>
