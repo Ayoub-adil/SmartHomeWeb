@@ -376,17 +376,19 @@ def login():
                     H.user=login
                     doc_refe = db.collection(u'users').document(owner)
                     docu = doc_refe.get()
-                    nl=int(docu["livingroom"])
-                    nb=int(docu["bednum"])
-                    nk=int(docu["kitchen"])
-                    ns=int(docu["stairs"])
-                    nbrg=docu["garage"]
-                    if nbrg == "on":
-                        ng = 1
-                    else :
-                        ng = 0
-                    H.simulate(nl,nb,nk,ns,ng)
-                    return redirect(f_end+'Home')
+                    if docu.exists:
+                        docu =docu.to_dict()
+                        nl=int(docu["livingroom"])
+                        nb=int(docu["bednum"])
+                        nk=int(docu["kitchen"])
+                        ns=int(docu["stairs"])
+                        nbrg=docu["garage"]
+                        if nbrg == "on":
+                            ng = 1
+                        else :
+                            ng = 0
+                        H.simulate(nl,nb,nk,ns,ng)
+                        return redirect(f_end+'Home')
                 else:
                     H.msg="Incorrect password"
                 #error
