@@ -343,7 +343,6 @@ def login():
     
     #recuperer l'email et le mot de passe saisi par l'utilisateur
     if request.method == 'POST': 
-        # session.pop('login',None)
         login = request.form.get("log")
         psw = request.form.get("psw")
 
@@ -366,7 +365,6 @@ def login():
                 else :
                     ng = 0
                 H.simulate(nl,nb,nk,ns,ng)
-                # session['login']=login
                 H.user=login
                 return redirect(f_end+'Home')
             # connex reussie

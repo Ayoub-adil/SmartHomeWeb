@@ -245,7 +245,7 @@ p{
 
 .home{
   background-image: url("./images/homeBG.jpg");
-  height: 750px;
+  height: 730px;
 }
 
 .home h1{
@@ -258,7 +258,7 @@ p{
 }
 
 .hometext{
-  padding-top: 16%;
+  padding-top: 10%;
   padding-left: 4%;
 }
 
@@ -382,6 +382,8 @@ p{
     margin-top: 30%;
     margin-left: 20%;
   }  
+
+
 
   .btn{
     padding: 14% 32%;

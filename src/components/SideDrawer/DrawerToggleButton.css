@@ -1,10 +1,10 @@
 .toggle-button{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    height: 24px;
-    width: 30px;
     background: transparent;
+    position: fixed;
+    left: 91%;
+    top: 0px;
     
     border: none;
     cursor: pointer;
@@ -14,11 +14,4 @@
 
 .toggle-button :focus{
     outline: none;
-}
-
-
-.toggle-button_line {
-    width: 30px;
-    height: 2px;
-    background: black;
 }
