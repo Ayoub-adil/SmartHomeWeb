@@ -47,8 +47,8 @@ class About extends Component{
         
         <div className="App">
         {this.state.user==='User'?null:<Header />}
-      <Row className="AboutCard">
-      <Col span={12}>
+      <div className="AboutCard">
+      <div>
       <div className='desc' style={{ marginTop:"5%"}}>
           <h1 style={{ fontWeight:"bold"}}> WHO WE ARE ?</h1>
           <p>What if all the devices in your life could connect to the internet ?
@@ -61,63 +61,59 @@ consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
       </div>
-      </Col>
-      <Col span={12}>
+      </div>
+      <div>
       <div className='log'>
           <img src={logo}/>
       </div>
-      </Col>
-      </Row>
-
-      <Row className="AboutCard2">
-      <Col span={12}>
+      </div>
+      </div>
+{/* *************************************** DEVICES *************************************** */}
+      <div className="AboutCard2">
+      
       <div className='weare'>
           <h1 style={{ fontWeight:"bold" , paddingTop:100}}>You can use our app for either iOS or Android, and our website can be used with any browsers!</h1>
-      
-      </div></Col>  
-      <Col span={12}>
+      </div>
+      <div>
       <div className='log'>
         <img style={{ width:"90%"}} src={pc}/>
-      </div> </Col>  
-      
-      </Row>
-
+      </div> </div>  
+      </div>
+{/* *************************************** Services *************************************** */}
       <h1 style={{ margin:'20px', textAlign:'center', fontWeight:"bold"}}>Our services</h1>
-      <Row className=''>
-      
-        <Col className='btnCrd' style={{marginLeft:45}}>        
-        <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<LockTwoTone />}/>
+    <div class="flex-container">
+  <div className='btnCrd'>
+  <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<LockTwoTone />}/>
         <span className="titleroom">Security</span> 
         <ul>
           <li>Door System</li>
           <li>Windows System</li>
           <li>Smoke detector</li>
         </ul>
-        </Col>
-        
-        <Col className='btnCrd'>        
-        <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<SmileTwoTone />}/>
+  </div>
+  <div className='btnCrd'>
+  <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<SmileTwoTone />}/>
         <span className="titleroom">Comfort</span> 
         <ul>
           <li>Light movement detector</li>
           <li>Temperature adjustment</li>
           <li>Rooms Lights</li>
         </ul>
-        </Col>
-        <Col className='btnCrd'>        
-        <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<EyeTwoTone />}/>
+  </div>
+  <div className='btnCrd'>
+  <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<EyeTwoTone />}/>
         <span className="titleroom">Consultation of information</span> 
         <ul>
           <li>Rain detector</li>
           <li>Outside Temperature detector</li>
         </ul>
-        </Col>
-    </Row>
-
+    </div>  
+   </div>
+{/* *************************************** Contact *************************************** */}
       <h1 style={{ margin:'20px', textAlign:'center',  fontWeight:"bold" }}>Contacts</h1>
-      <Row className=''>
+      <div class="flex-container">
       
-        <Col className='btnCrd' style={{marginLeft:45}}>
+        <div className='btnCrd'>
         <img className='pdp' src={contact}/>
         <h2 className="titleroom">Ayoub ADIL</h2> 
         <p>Student at the university of sciences and techniques of Mohammedia.
@@ -125,26 +121,29 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
         </p>
         <Avatar size={50} style={{ color: '#007bff' , background:'none' }}icon={<ContactsTwoTone />}/>
         <a href = "mailto: ayoub.adil0406@gmail.com">ayoub.adil0406@gmail.com</a>
-        </Col>
+        </div>
         
-        <Col className='btnCrd'>
+        <div className='btnCrd'>
         <img className='pdp' src={contacta}/>
         <h2 className="titleroom">Imane CHBIRA</h2>
         <p>Student at the university of sciences and techniques of Mohammedia.
         <br/> Bachelor in Computer Science, Network and Multimedia.</p>
         <Avatar size={50} style={{ color: '#007bff' , background:'none' }}icon={<ContactsTwoTone />}/>
         <a href = "mailto: Imane.chbira@gmail.com">Imane.chbira@gmail.com</a>
-        </Col>
+        </div>
         
-        <Col className='btnCrd'>
+        <div className='btnCrd'>
         <img className='pdp' src={contacta}/>
         <h2 className="titleroom">Oumayma ESSEMRHOUNI</h2>
         <p>Student at the university of sciences and techniques of Mohammedia.
         <br/> Bachelor in Computer Science, Network and Multimedia.</p> 
         <Avatar size={50} style={{ color: '#007bff' , background:'none' }}icon={<ContactsTwoTone />}/>
         <a href = "oumaymaessemrhouni@gmail.com">oumaymaessemrhouni@gmail.com</a>
-        </Col>
-    </Row>
+        </div>
+    </div>
+
+    {/* *************************************** MAP *************************************** */}
+
 <Iframe iframe={iframe} />
         </div>
       );
