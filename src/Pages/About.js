@@ -2,13 +2,12 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, {Component} from 'react';
 import {Col, Row} from 'antd';
-import logo from '../images/about.png'
-import pc from '../images/pc.png'
+import logo from '../images/house.webp'
 import contact from '../images/profil.jpg'
 import contacta from '../images/profila.jpg'
 import '../App.css';
 import Header from './Header.js';
-import { ContactsTwoTone , LockTwoTone , EyeTwoTone , SmileTwoTone} from '@ant-design/icons';
+import { DollarCircleOutlined} from '@ant-design/icons';
 import { Avatar } from 'antd';
 
 
@@ -47,103 +46,71 @@ class About extends Component{
         
         <div className="App">
         {this.state.user==='User'?null:<Header />}
-      <div className="AboutCard">
-      <div>
-      <div className='desc' style={{ marginTop:"5%"}}>
-          <h1 style={{ fontWeight:"bold"}}> WHO WE ARE ?</h1>
-          <p>What if all the devices in your life could connect to the internet ?
-            <br/> Smart Home is a company that gives you a virtual key to control your own house using a mobile phone or a computer.
-            <br/> Our service provides you Confort, security and more....
-            <br/> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+      <Row>
+      <div className='desc'>
+          <h1>Description</h1>
+          <p>Eius populus ab incunabulis primis ad usque pueritiae tempus extremum, quod annis circumcluditur fere trecentis, circummurana pertulit bella, deinde aetatem ingressus adultam post multiplices bellorum aerumnas Alpes transcendit et fretum, in iuvenem erectus et virum ex omni plaga quam orbis ambit inmensus, reportavit laureas et triumphos, iamque vergens in senium et nomine solo aliquotiens vincens ad tranquilliora vitae discessit.</p>
       </div>
-      </div>
-      <div>
       <div className='log'>
           <img src={logo}/>
+          <h1><h2>Smart <span style={{ color: '#007bff',}}>Home</span></h2></h1>
       </div>
-      </div>
-      </div>
-{/* *************************************** DEVICES *************************************** */}
-      <div className="AboutCard2">
-      
-      <div className='weare'>
-          <h1 style={{ fontWeight:"bold" , paddingTop:100}}>You can use our app for either iOS or Android, and our website can be used with any browsers!</h1>
-      </div>
-      <div>
+      </Row>
+
+      <Row>
       <div className='log'>
-        <img style={{ width:"90%"}} src={pc}/>
-      </div> </div>  
+        <img src={logo}/>
+        <h1><h2>Smart <span style={{ color: '#007bff',}}>Home</span></h2></h1>
+      </div>      
+      <div className='weare'>
+          <h1>We Are :</h1>
+          <p>Eius populus ab incunabulis primis ad usque pueritiae tempus extremum, quod annis circumcluditur fere trecentis, circummurana pertulit bella, deinde aetatem ingressus adultam post multiplices bellorum aerumnas Alpes transcendit et fretum, in iuvenem erectus et virum ex omni plaga quam orbis ambit inmensus, reportavit laureas et triumphos, iamque vergens in senium et nomine solo aliquotiens vincens ad tranquilliora vitae discessit.</p>
       </div>
-{/* *************************************** Services *************************************** */}
-      <h1 style={{ margin:'20px', textAlign:'center', fontWeight:"bold"}}>Our services</h1>
-    <div class="flex-container">
-  <div className='btnCrd'>
-  <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<LockTwoTone />}/>
-        <span className="titleroom">Security</span> 
-        <ul>
-          <li>Door System</li>
-          <li>Windows System</li>
-          <li>Smoke detector</li>
-        </ul>
-  </div>
-  <div className='btnCrd'>
-  <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<SmileTwoTone />}/>
-        <span className="titleroom">Comfort</span> 
-        <ul>
-          <li>Light movement detector</li>
-          <li>Temperature adjustment</li>
-          <li>Rooms Lights</li>
-        </ul>
-  </div>
-  <div className='btnCrd'>
-  <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<EyeTwoTone />}/>
-        <span className="titleroom">Consultation of information</span> 
-        <ul>
-          <li>Rain detector</li>
-          <li>Outside Temperature detector</li>
-        </ul>
-    </div>  
-   </div>
-{/* *************************************** Contact *************************************** */}
-      <h1 style={{ margin:'20px', textAlign:'center',  fontWeight:"bold" }}>Contacts</h1>
-      <div class="flex-container">
+      </Row>
+
+      <h1 style={{ marginLeft:'20px' }}>Deals</h1>
+      <Row className=''>
       
-        <div className='btnCrd'>
+        <Col className='btnCrd'>        
+        <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<DollarCircleOutlined />}/>
+        <span className="titleroom">999$</span> 
+        <p>Eius populus ab incunabulis primis ad usque pueritiae tempus extremum, quod annis circumcluditur fere trecentis, circummurana pertulit bella.</p>
+        </Col>
+        
+        <Col className='btnCrd'>        
+        <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<DollarCircleOutlined />}/>
+        <span className="titleroom">1499$</span> 
+        <p>Eius populus ab incunabulis primis ad usque pueritiae tempus extremum, quod annis circumcluditur fere trecentis, circummurana pertulit bella.</p>
+        </Col>
+        
+        <Col className='btnCrd'>        
+        <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<DollarCircleOutlined />}/>
+        <span className="titleroom">1749$</span> 
+        <p>Eius populus ab incunabulis primis ad usque pueritiae tempus extremum, quod annis circumcluditur fere trecentis, circummurana pertulit bella.</p>
+        </Col>
+    </Row>
+
+      <h1 style={{ marginLeft:'20px' }}>Contacts</h1>
+      <Row className=''>
+      
+        <Col className='btnCrd'>
         <img className='pdp' src={contact}/>
         <h2 className="titleroom">Ayoub ADIL</h2> 
-        <p>Student at the university of sciences and techniques of Mohammedia.
-          <br/> Bachelor in Computer Science, Network and Multimedia.
-        </p>
-        <Avatar size={50} style={{ color: '#007bff' , background:'none' }}icon={<ContactsTwoTone />}/>
-        <a href = "mailto: ayoub.adil0406@gmail.com">ayoub.adil0406@gmail.com</a>
-        </div>
+        <p>Eius populus ab incunabulis primis ad usque pueritiae tempus extremum, quod annis circumcluditur fere trecentis, circummurana pertulit bella.</p>
+        </Col>
         
-        <div className='btnCrd'>
+        <Col className='btnCrd'>
         <img className='pdp' src={contacta}/>
         <h2 className="titleroom">Imane CHBIRA</h2>
-        <p>Student at the university of sciences and techniques of Mohammedia.
-        <br/> Bachelor in Computer Science, Network and Multimedia.</p>
-        <Avatar size={50} style={{ color: '#007bff' , background:'none' }}icon={<ContactsTwoTone />}/>
-        <a href = "mailto: Imane.chbira@gmail.com">Imane.chbira@gmail.com</a>
-        </div>
+        <p>Eius populus ab incunabulis primis ad usque pueritiae tempus extremum, quod annis circumcluditur fere trecentis, circummurana pertulit bella.</p> 
+        </Col>
         
-        <div className='btnCrd'>
+        <Col className='btnCrd'>
         <img className='pdp' src={contacta}/>
         <h2 className="titleroom">Oumayma ESSEMRHOUNI</h2>
-        <p>Student at the university of sciences and techniques of Mohammedia.
-        <br/> Bachelor in Computer Science, Network and Multimedia.</p> 
-        <Avatar size={50} style={{ color: '#007bff' , background:'none' }}icon={<ContactsTwoTone />}/>
-        <a href = "oumaymaessemrhouni@gmail.com">oumaymaessemrhouni@gmail.com</a>
-        </div>
-    </div>
-
-    {/* *************************************** MAP *************************************** */}
-
+        <p>Eius populus ab incunabulis primis ad usque pueritiae tempus extremum, quod annis circumcluditur fere trecentis, circummurana pertulit bella.</p> 
+        </Col>
+    </Row>
 <Iframe iframe={iframe} />
         </div>
       );
