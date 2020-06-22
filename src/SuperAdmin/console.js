@@ -8,6 +8,7 @@ import Password from 'antd/lib/input/Password';
 import { Link } from 'react-router-dom';
 import Dashboard  from './Dashboard.js';
 import Formulaire from './Formulaire.js';
+import logo from '../images/house.png';
 const { TabPane } = Tabs;
 
 const { Header, Footer, Content } = Layout;
@@ -56,7 +57,11 @@ class Console extends Component{
                 <Header style={{padding:14}}>
                     <Link to="/"><Button style={{float:'right' , fontWeight:800}} >Disconnect</Button></Link>
                     {/* <a href='#' style={{float:'right'}} icon={<UserOutlined />}  /> */}
-                    <Title style={{color:'#F9F9F9'}} level={4}>SMARTHOME GROUP console</Title>
+                    <Title style={{color:'#F9F9F9'}} level={4}>
+                    <span>Smart </span>
+                <img className="imgLogo" src={logo} alt="home"></img>
+                <span> Home</span>
+                    </Title>
                     </Header>
                 <Layout>
                     

@@ -52,7 +52,7 @@ class Home extends Component{
           <div className="hometext">
              
              <h1 orientation="left">
-                   <h2>Hello <span style={{ color: '#F9F9F9',}}>{this.state.user}</span></h2>
+                   <h2> <span style={{ color: '#F9F9F9', fontWeight:"bold"}}>Hello {this.state.user}</span></h2>
             </h1>
              <p>Control your home from SmartHome-App on your mobile phone.</p>
              <p>Discover more ways to control your home :</p>

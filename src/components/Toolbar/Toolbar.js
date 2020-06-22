@@ -4,7 +4,7 @@ import './Toolbar.css';
 import '../SideDrawer/DrawerToggleButton';
 import DrawerToggleButton from '../SideDrawer/DrawerToggleButton';
 import { HomeOutlined,SettingOutlined,UserOutlined,LogoutOutlined,InfoCircleOutlined} from '@ant-design/icons';
-import logo from '../../images/house.webp';
+import logoo from '../../images/house.png';
 
 class toolbar extends Component{
     constructor(props){
@@ -22,7 +22,7 @@ class toolbar extends Component{
             </div>
             <NavLink to="/Home" className="toolbar_logo">
                 <span>Smart </span>
-                <img className="imgLogo" src={logo} alt="home"></img>
+                <img className="imgLogo" src={logoo} alt="home"></img>
                 <span> Home</span>
             </NavLink>
             <div className="spacer"/>

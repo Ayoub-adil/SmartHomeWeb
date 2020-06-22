@@ -4,7 +4,7 @@ import './Toolbar.css';
 import '../SideDrawer/DrawerToggleButton';
 import DrawerToggleButton from '../SideDrawer/DrawerToggleButton';
 import { HomeOutlined,SettingOutlined,UserOutlined,LogoutOutlined,InfoCircleOutlined} from '@ant-design/icons';
-import logo from '../../images/house.webp';
+import logo from '../../images/house.png';
 
 class toolbarHome extends Component{
     constructor(props){
