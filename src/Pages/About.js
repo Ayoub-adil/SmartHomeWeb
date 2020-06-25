@@ -50,16 +50,14 @@ class About extends Component{
       <div className="AboutCard">
       <div>
       <div className='desc' style={{ marginTop:"5%"}}>
-          <h1 style={{ fontWeight:"bold"}}> WHO WE ARE ?</h1>
+          <h1 style={{ fontWeight:"bold"}}> WHO ARE WE ?</h1>
           <p>What if all the devices in your life could connect to the internet ?
-            <br/> Smart Home is a company that gives you a virtual key to control your own house using a mobile phone or a computer.
+            <br/> Smart Home is a company that gives you a virtual key to control your own house only using a smart phone or a computer.
             <br/> Our service provides you Confort, security and more....
-            <br/> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+            <br/> We offer you a whole new exciting experience with our application.The ultimate optimal solution for
+home automation, you no longer have to worry neither about the windows
+left open, the garage door, or even your lights.Adding convinience and
+ease to your daily life, and a priceless peace of mind. </p>
       </div>
       </div>
       <div>
@@ -72,7 +70,8 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
       <div className="AboutCard2">
       
       <div className='weare'>
-          <h1 style={{ fontWeight:"bold" , paddingTop:100}}>You can use our app for either iOS or Android, and our website can be used with any browsers!</h1>
+          <h1 style={{ fontWeight:"bold" , paddingTop:100}}>Total versatility !</h1>
+          <p>You can use our app for either iOS or Android, also our website can be used in all browsers!</p>
       </div>
       <div>
       <div className='log'>
