@@ -47,77 +47,72 @@ class About extends Component{
         
         <div className="App">
         {this.state.user==='User'?null:<Header />}
-      <Row className="AboutCard">
-      <Col span={12}>
+      <div className="AboutCard">
+      <div>
       <div className='desc' style={{ marginTop:"5%"}}>
-          <h1 style={{ fontWeight:"bold"}}> WHO WE ARE ?</h1>
+          <h1 style={{ fontWeight:"bold"}}> WHO ARE WE ?</h1>
           <p>What if all the devices in your life could connect to the internet ?
-            <br/> Smart Home is a company that gives you a virtual key to control your own house using a mobile phone or a computer.
+            <br/> Smart Home is a company that gives you a virtual key to control your own house only using a smart phone or a computer.
             <br/> Our service provides you Confort, security and more....
-            <br/> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+            <br/> We offer you a whole new exciting experience with our application.The ultimate optimal solution for
+home automation, you no longer have to worry neither about the windows
+left open, the garage door, or even your lights.Adding convinience and
+ease to your daily life, and a priceless peace of mind. </p>
       </div>
-      </Col>
-      <Col span={12}>
+      </div>
+      <div>
       <div className='log'>
           <img src={logo}/>
       </div>
-      </Col>
-      </Row>
-
-      <Row className="AboutCard2">
-      <Col span={12}>
-      <div className='weare'>
-          <h1 style={{ fontWeight:"bold" , paddingTop:100}}>You can use our app for either iOS or Android, and our website can be used with any browsers!</h1>
+      </div>
+      </div>
+{/* *************************************** DEVICES *************************************** */}
+      <div className="AboutCard2">
       
-      </div></Col>  
-      <Col span={12}>
+      <div className='weare'>
+          <h1 style={{ fontWeight:"bold" , paddingTop:100}}>Total versatility !</h1>
+          <p>You can use our app for either iOS or Android, also our website can be used in all browsers!</p>
+      </div>
+      <div>
       <div className='log'>
         <img style={{ width:"90%"}} src={pc}/>
-      </div> </Col>  
-      
-      </Row>
-
+      </div> </div>  
+      </div>
+{/* *************************************** Services *************************************** */}
       <h1 style={{ margin:'20px', textAlign:'center', fontWeight:"bold"}}>Our services</h1>
-      <Row className=''>
-      
-        <Col className='btnCrd' style={{marginLeft:45}}>        
-        <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<LockTwoTone />}/>
+    <div class="flex-container">
+  <div className='btnCrd'>
+  <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<LockTwoTone />}/>
         <span className="titleroom">Security</span> 
         <ul>
           <li>Door System</li>
           <li>Windows System</li>
           <li>Smoke detector</li>
         </ul>
-        </Col>
-        
-        <Col className='btnCrd'>        
-        <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<SmileTwoTone />}/>
+  </div>
+  <div className='btnCrd'>
+  <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<SmileTwoTone />}/>
         <span className="titleroom">Comfort</span> 
         <ul>
           <li>Light movement detector</li>
           <li>Temperature adjustment</li>
           <li>Rooms Lights</li>
         </ul>
-        </Col>
-        <Col className='btnCrd'>        
-        <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<EyeTwoTone />}/>
+  </div>
+  <div className='btnCrd'>
+  <Avatar size={60} style={{ color: '#007bff' , background:'none' }}icon={<EyeTwoTone />}/>
         <span className="titleroom">Consultation of information</span> 
         <ul>
           <li>Rain detector</li>
           <li>Outside Temperature detector</li>
         </ul>
-        </Col>
-    </Row>
-
+    </div>  
+   </div>
+{/* *************************************** Contact *************************************** */}
       <h1 style={{ margin:'20px', textAlign:'center',  fontWeight:"bold" }}>Contacts</h1>
-      <Row className=''>
+      <div class="flex-container">
       
-        <Col className='btnCrd' style={{marginLeft:45}}>
+        <div className='btnCrd'>
         <img className='pdp' src={contact}/>
         <h2 className="titleroom">Ayoub ADIL</h2> 
         <p>Student at the university of sciences and techniques of Mohammedia.
@@ -125,26 +120,29 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
         </p>
         <Avatar size={50} style={{ color: '#007bff' , background:'none' }}icon={<ContactsTwoTone />}/>
         <a href = "mailto: ayoub.adil0406@gmail.com">ayoub.adil0406@gmail.com</a>
-        </Col>
+        </div>
         
-        <Col className='btnCrd'>
+        <div className='btnCrd'>
         <img className='pdp' src={contacta}/>
         <h2 className="titleroom">Imane CHBIRA</h2>
         <p>Student at the university of sciences and techniques of Mohammedia.
         <br/> Bachelor in Computer Science, Network and Multimedia.</p>
         <Avatar size={50} style={{ color: '#007bff' , background:'none' }}icon={<ContactsTwoTone />}/>
         <a href = "mailto: Imane.chbira@gmail.com">Imane.chbira@gmail.com</a>
-        </Col>
+        </div>
         
-        <Col className='btnCrd'>
+        <div className='btnCrd'>
         <img className='pdp' src={contacta}/>
         <h2 className="titleroom">Oumayma ESSEMRHOUNI</h2>
         <p>Student at the university of sciences and techniques of Mohammedia.
         <br/> Bachelor in Computer Science, Network and Multimedia.</p> 
         <Avatar size={50} style={{ color: '#007bff' , background:'none' }}icon={<ContactsTwoTone />}/>
         <a href = "oumaymaessemrhouni@gmail.com">oumaymaessemrhouni@gmail.com</a>
-        </Col>
-    </Row>
+        </div>
+    </div>
+
+    {/* *************************************** MAP *************************************** */}
+
 <Iframe iframe={iframe} />
         </div>
       );
