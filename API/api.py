@@ -23,7 +23,7 @@ H=Home.Home()
 #**********************************************************************************************************************************
 @app.route('/')
 def landing():
-    return "<h1>Home Simulator Server</h1>"+"<h2>You shouldn't be here.. </h2>"+"<h3>This server is not for users.. SORRY</h3>"
+    return "<h1>Home Simulator Server</h1>"+"<h2>You shouldn't be here.. </h2>"+"<h3>This is not a user space.. SORRY</h3>"
 
 @app.route('/frontend')
 def frontend(link=''):
@@ -35,7 +35,7 @@ def server():
 
 @app.route('/session')
 def session():
-    return {"user":H.user} 
+    return {"user":H.user,'type':H.userType} 
 
 @app.route('/sessionMob')
 def sessionMob():
@@ -44,16 +44,18 @@ def sessionMob():
 @app.route('/connect')
 def connect():
     return redirect(f_end+'SignIn')
+
 @app.route('/disconnect')
 def disconnect():
     H.user='User'
+    H.userType='none'
     H.simulate(0,0,0,0,0)
     return "<h1>You are out of Home</h1>"
 
 @app.route('/disconnectMob')
 def disconnectMob():
     H.usermob='User'
-    # H.islogged =False
+    H.islogged =False
     H.simulate(0,0,0,0,0)
     return "<h1>You are out of Home</h1>"
 
@@ -356,6 +358,7 @@ def login():
             doc =doc.to_dict()
             passw=doc["psw"]
             profil = doc["propriete"]
+            H.userType = profil
             
             # verif si l'utilisateur est un ADMIN
             if profil == "admin" :
