@@ -489,6 +489,20 @@ def getUsers():
             login.append(doc["Login"])
             psw.append(doc["psw"])
     return{'login':login, 'psw':psw}
+#********************************************* Suppression d'un utilisateur | Firebase ****************************************************************
+@app.route('/users/supp',methods=['GET', 'POST'])
+def delUser():
+    if request.method == 'POST':
+        data = request.get_json()
+        login = data['login']
+        db.collection(u'users').document(login).delete()
+        H.msg="user deleted successfully"
+        
+    return{"msg":H.msg}
+    
+    
+
+
 
 #********************************************* Recuperation de tous les admin et l'affichage | Firebase *******************************************************
 
