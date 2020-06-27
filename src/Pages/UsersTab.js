@@ -12,7 +12,6 @@ class UsersTab extends Component{
     this.state={
         server:false,
         user:'User',
-
         login:"",
         psw:"",
         msg:"pas de message"

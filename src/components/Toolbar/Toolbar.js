@@ -8,10 +8,20 @@ import logoo from '../../images/house.png';
 
 class toolbar extends Component{
     constructor(props){
-		super(props);
-        this.disconnect=this.disconnect.bind(this)
+        super(props);
+        this.state={
+            type:null,
+              }
+        this.disconnect=this.disconnect.bind(this) 
+		this.session();
+        this.session=this.session.bind(this)
     }
     disconnect(){fetch('/disconnect')}
+    session(){
+        fetch('/session')
+        .then(res=>res.json())
+        .then(data=>{this.setState({ type: data.type })})
+        }
 
     render(){
         return(
@@ -30,7 +40,7 @@ class toolbar extends Component{
                 <ul>
                     <li><NavLink to="/Rooms"><HomeOutlined /> Rooms</NavLink></li>
                     <li><NavLink to="/Setting"><SettingOutlined /> Setting</NavLink></li>
-                    <li><NavLink to="/Profil"><UserOutlined /> Family</NavLink></li>
+                    {this.state.type==='admin'?<li><NavLink to="/Profil"><UserOutlined /> Family</NavLink></li>:null}
                     <li><NavLink to="/About"><InfoCircleOutlined/> About us</NavLink></li>
                     <li><NavLink onClick={this.disconnect} exact to="/"><LogoutOutlined /> Disconnect</NavLink></li>                   
                 </ul>

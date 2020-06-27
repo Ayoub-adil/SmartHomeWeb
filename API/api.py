@@ -23,7 +23,7 @@ H=Home.Home()
 #**********************************************************************************************************************************
 @app.route('/')
 def landing():
-    return "<h1>Home Simulator Server</h1>"+"<h2>You shouldn't be here.. </h2>"+"<h3>This server is not for users.. SORRY</h3>"
+    return "<h1>Home Simulator Server</h1>"+"<h2>You shouldn't be here.. </h2>"+"<h3>This is not a user space.. SORRY</h3>"
 
 @app.route('/frontend')
 def frontend(link=''):
@@ -35,18 +35,30 @@ def server():
 
 @app.route('/session')
 def session():
-    return {"user":H.user} 
+    return {"user":H.user,'type':H.userType} 
+
+@app.route('/sessionMob')
+def sessionMob():
+    return {"usermob":H.usermob} 
 
 @app.route('/connect')
 def connect():
     return redirect(f_end+'SignIn')
+
 @app.route('/disconnect')
 def disconnect():
     H.user='User'
+    H.userType='none'
     H.simulate(0,0,0,0,0)
     return "<h1>You are out of Home</h1>"
-    # return H.user
-    # return redirect(f_end)
+
+@app.route('/disconnectMob')
+def disconnectMob():
+    H.usermob='User'
+    H.islogged =False
+    H.simulate(0,0,0,0,0)
+    return "<h1>You are out of Home</h1>"
+
 #**********************************************************************************************************************************
 @app.route('/home/plan')
 def get_plan():
@@ -346,6 +358,7 @@ def login():
             doc =doc.to_dict()
             passw=doc["psw"]
             profil = doc["propriete"]
+            H.userType = profil
             
             # verif si l'utilisateur est un ADMIN
             if profil == "admin" :
@@ -399,6 +412,79 @@ def login():
             return redirect(f_end+'SignIn')
     else:
         return {"msg":H.msg}    
+
+
+#********************************************* Authentification FOR MOBILE DEVICE | Firebase *******************************************************
+
+@app.route('/user/loginMobile', methods=['GET', 'POST'])
+def loginMobile():
+    #recuperer l'email et le mot de passe saisi par l'utilisateur
+    if request.method == 'POST': 
+        H.islogged=False
+
+        data = request.get_json()
+        login = data['login']
+        psw = data['psw']
+
+        H.login=login
+        H.psw=psw
+
+        doc_ref = db.collection(u'users').document(login)
+        doc = doc_ref.get()
+        #verif de si le nom d'utilisateur existe 
+        if doc.exists:
+            doc =doc.to_dict()
+            passw=doc["psw"]
+            profil = doc["propriete"]
+            # verif si l'utilisateur est un ADMIN
+            if profil == "admin" :
+                # verif du mdp
+                if passw == psw :
+                    H.islogged=True
+                    H.msg="pas de message"
+                    H.usermob = login
+                    nl=int(doc["livingroom"])
+                    nb=int(doc["bednum"])
+                    nk=int(doc["kitchen"])
+                    ns=int(doc["stairs"])
+                    nbrg=doc["garage"]
+                    if nbrg == "on":
+                        ng = 1
+                    else :
+                        ng = 0
+                    H.simulate(nl,nb,nk,ns,ng)
+                else:
+                    H.msg="Incorrect password"
+            # sinon si l'utilisateur est un USER
+            else:
+                owner = doc["owner"]
+                if passw == psw :
+                    H.usermob=login
+                    doc_refe = db.collection(u'users').document(owner)
+                    docu = doc_refe.get()
+                    if docu.exists:
+                        docu =docu.to_dict()
+                        H.islogged=True
+                        H.msg="pas de message"
+                        nl=int(docu["livingroom"])
+                        nb=int(docu["bednum"])
+                        nk=int(docu["kitchen"])
+                        ns=int(docu["stairs"])
+                        nbrg=docu["garage"]
+                        if nbrg == "on":
+                            ng = 1
+                        else :
+                            ng = 0
+                        H.simulate(nl,nb,nk,ns,ng)
+                else:
+                    H.msg="Your Password is incorrect"
+        else:
+            #error
+            H.msg="Inexistant account"
+        return {"msg":H.msg,"islogged":H.islogged, "usermob":H.usermob}
+    else:
+        return {"msg":H.msg,"islogged":H.islogged, "usermob":H.usermob}  
+    
 #****************************************************** Stockage des données dans la BD | form Add Admin **************************************************************
 
 @app.route('/spForm', methods=['GET', 'POST'])
@@ -444,6 +530,8 @@ def AddAdmin():
     else:
         return {"msg":H.msg}
 
+#****************************************************** form Add user (stockage) **************************************************************
+
 @app.route('/UserForm', methods=['GET', 'POST'])
 def AddUser():
     
@@ -472,6 +560,38 @@ def AddUser():
             db.collection(u'users').document(login).set(data)
             return redirect(f_end+'Profil')
            
+    else:
+        return {"msg":H.msg}
+#****************************************************** form Add user (stockage) MOBILE **************************************************************
+
+@app.route('/UserFormMobile', methods=['GET', 'POST'])
+def AddUserMobile():
+    
+    #recuperation du formulaire
+    if request.method == 'POST':
+        dataform = request.get_json()
+        login = dataform['login']
+        psw = dataform['psw']
+
+        H.login=login
+        H.psw=psw
+        admin=H.usermob
+        #remplisage des donnees saisies
+        data={
+            u'Login': login,
+            u'psw': psw,
+            u'propriete': u'user',
+            u'owner':admin
+        }
+        #verif de l'existant
+        doc=db.collection(u'users').document(login)
+        doc=doc.get()
+        if doc.exists:
+            H.msg="this Login is taken"
+        #ajout dans la base de donnee
+        else:
+            H.msg="You just Added a new user to your application"
+            db.collection(u'users').document(login).set(data)
     else:
         return {"msg":H.msg}
 
@@ -530,56 +650,6 @@ def recup():
             stairs.append(doc["stairs"])
             garage.append(doc["garage"])
     return {'login' : login, 'adress':adr,'date':date,'garage':garage,'livingroom':livingroom,'bednum':bednum,'kitchen':kitchen,'stairs':stairs}
-
-
-
-
-#********************************************* Authentification FOR MOBILE DEVICE | Firebase *******************************************************
-
-@app.route('/user/loginMobile', methods=['GET', 'POST'])
-def loginMobile():
-    #recuperer l'email et le mot de passe saisi par l'utilisateur
-    if request.method == 'POST': 
-        H.islogged=False
-
-        data = request.get_json()
-        login = data['login']
-        psw = data['psw']
-
-        H.login=login
-        H.psw=psw
-
-        doc_ref = db.collection(u'users').document(login)
-        doc = doc_ref.get()
-        #verif de si le nom d'utilisateur existe 
-        if doc.exists:
-            doc =doc.to_dict()
-            passw=doc["psw"]
-                
-            # verif du mdp
-            if passw == psw :
-                H.islogged=True
-                H.msg="pas de message"
-                nl=int(doc["livingroom"])
-                nb=int(doc["bednum"])
-                nk=int(doc["kitchen"])
-                ns=int(doc["stairs"])
-                nbrg=doc["garage"]
-                if nbrg == "on":
-                    ng = 1
-                else :
-                    ng = 0  
-                H.simulate(nl,nb,nk,ns,ng)
-            else:
-                H.msg="Your Password is incorrect"
-        else :
-            H.msg="Inexistant Account"
-        return {"msg":H.msg,"islogged":H.islogged}
-    else:
-        return {"msg":H.msg,"islogged":H.islogged}
-    
-
-
 
 
 # # FIN DATABASE 

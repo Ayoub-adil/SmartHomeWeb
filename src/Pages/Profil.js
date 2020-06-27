@@ -16,6 +16,7 @@ class Profil extends Component{
 		this.state={
       server:false,
       user:'User',
+      type:null,
       msg : "pas de message",
       visible: false
         } 
@@ -40,6 +41,7 @@ class Profil extends Component{
       fetch('/session').then(res=>res.json()).then(data=>{
         this.setState({
           user: data.user,
+          type: data.type,
         });
       })
     }
@@ -76,9 +78,7 @@ class Profil extends Component{
 {this.state.server
 ?
 <Fragment>
-{this.state.user==='User'?
-<SignIn/>
-:
+{this.state.type==='admin'?
 <Fragment>
 
           <Header />
@@ -120,6 +120,8 @@ class Profil extends Component{
             </div>
             </center>  
 </Fragment>
+:<SignIn/>
+
 }
 </Fragment>
 :

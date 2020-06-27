@@ -58,6 +58,8 @@ class Home:
         self.hallLight=True
         
         self.user='User'
+        self.userType='none'
+        self.usermob = 'User'
         self.simulate(0,0,0,0,0)
         self.setStates()
 
