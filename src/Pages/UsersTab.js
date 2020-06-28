@@ -28,7 +28,7 @@ class UsersTab extends Component{
 
   getUsers(){
     fetch('users/tab')
-    .then(res=>res.json())
+    .then(res=>res.json()) 
     .then(data=>{this.setState({
       login : data.login,
       psw:data.psw
