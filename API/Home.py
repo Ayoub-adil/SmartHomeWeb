@@ -47,6 +47,7 @@ class Home:
 # Home Plan
     def __init__(self):
         self.msg = 'pas de message'
+        self.msgMobile = 'pas de message'
         self.msgSuper = 'pas de message'
         self.msgMember = 'pas de message'
         self.DelMember = 'pas de message'

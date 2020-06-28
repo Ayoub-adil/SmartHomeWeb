@@ -7,7 +7,7 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 
 # Firebase Config
-cred = credentials.Certificate("./API/db-fb-1609e-firebase-adminsdk-f948g-0bcbc6ee26.json")
+cred = credentials.Certificate("./API/smart-h-firebase-adminsdk-q32wn-6d5614d56e (1).json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
@@ -610,6 +610,20 @@ def getUsers():
             login.append(doc["Login"])
             psw.append(doc["psw"])
     return{'login':login, 'psw':psw}
+#********************************************* Suppression d'un utilisateur | Firebase ****************************************************************
+@app.route('/users/supp',methods=['GET', 'POST'])
+def delUser():
+    if request.method == 'POST':
+        data = request.get_json()
+        login = data['login']
+        db.collection(u'users').document(login).delete()
+        H.DelMember="user deleted successfully"
+        
+    return{"DelMember":H.DelMember}
+    
+    
+
+
 
 #********************************************* Recuperation de tous les admin et l'affichage | Firebase *******************************************************
 

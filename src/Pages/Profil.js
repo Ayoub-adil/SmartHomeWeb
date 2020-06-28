@@ -17,7 +17,7 @@ class Profil extends Component{
       server:false,
       user:'User',
       type:null,
-      msg : "pas de message",
+      DelMember : "pas de message",
       visible: false
         } 
       this.WorkingServer();
@@ -48,7 +48,7 @@ class Profil extends Component{
     AddUser(){
       fetch('/UserForm')
       .then(res=>res.json())
-      .then(data=>{this.setState({ msg : data.msg })})
+      .then(data=>{this.setState({msgMember: data.msgMember})})
       }
   showModal = () => {
     this.setState({
@@ -90,7 +90,7 @@ class Profil extends Component{
               <p>Your <span className="smarthome">family members</span> can join us</p>
               <div>
               <button className="btnProfil" type="submit" onClick={this.showModal}>Add Member</button>
-              {(this.state.msg === "pas de message")?null:<Alert message={this.state.msg} type="success" closeText="Close" showIcon  />}
+              {(this.state.msgMember === "pas de message")?null:<Alert message={this.state.msgMember} type="success" closeText="Close" showIcon  />}
               </div>
               </div>
               <div className="gridprofil">
