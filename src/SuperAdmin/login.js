@@ -8,7 +8,7 @@ class Login extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			msg : "pas de message",
+			msgSuper : "pas de message",
 		} 
 		this.login();
 		this.login=this.login.bind(this)
@@ -17,7 +17,7 @@ class Login extends Component{
 	login(){
 		fetch('/SuperAdmin/loginDirecteur')
 		.then(res=>res.json())
-		.then(data=>{this.setState({ msg : data.msg })})
+		.then(data=>{this.setState({ msgSuper : data.msgSuper })})
 	}
 	
 	
@@ -44,7 +44,7 @@ class Login extends Component{
 				<div class="msg"></div>
 				<input type="submit" value="Login" />
 			</form>
-			{(this.state.msg === "pas de message")? null:<> <Alert message={this.state.msg} type="error" closeText="Close" showIcon/> </>}
+			{(this.state.msgSuper === "pas de message")? null:<> <Alert message={this.state.msgSuper} type="error" closeText="Close" showIcon/> </>}
 		</div>
 		<div>
 			<img className='imglogo' src={logo}></img>

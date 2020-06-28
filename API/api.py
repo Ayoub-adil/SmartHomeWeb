@@ -314,8 +314,9 @@ def set_mvt_light():
 
 @app.route('/SuperAdmin/message')
 def message():
+    H.msgSuper="pas de message"
     H.msg="pas de message"
-    return {"msg":H.msg}
+    return {"msgSuper":H.msgSuper , "msg":H.msg}
 
 @app.route('/SuperAdmin/loginDirecteur', methods=['GET', 'POST'])
 def loginDirecteur():
@@ -331,11 +332,11 @@ def loginDirecteur():
         # return 'Logged in successfully!'
         else:
             # message d'erreur
-            H.msg="Your login/password are incorrect, try again!"
+            H.msgSuper="Your login/password are incorrect, try again!"
             # H.msg = "err"
             return redirect(f_end+'login')
     else:
-        return {"msg":H.msg}
+        return {"msgSuper":H.msgSuper}
 
 
 # # DATABASE 
@@ -551,17 +552,17 @@ def AddUser():
         doc=db.collection(u'users').document(login)
         doc=doc.get()
         if doc.exists:
-            H.msg="this Login is taken"
+            H.msgMember="this Login is taken"
             return redirect(f_end+'Profil')
             
         #ajout dans la base de donnee
         else:
-            H.msg="You just Added a new user to your application"
+            H.msgMember="You just Added a new user to your application"
             db.collection(u'users').document(login).set(data)
             return redirect(f_end+'Profil')
            
     else:
-        return {"msg":H.msg}
+        return {"msgMember":H.msgMember}
 #****************************************************** form Add user (stockage) MOBILE **************************************************************
 
 @app.route('/UserFormMobile', methods=['GET', 'POST'])
