@@ -24,7 +24,6 @@ class Login extends Component{
     render(){
 
       return(
-		<>		
         <div className="AppLogin">
             <div class="login">
 			<h1>Login</h1>
@@ -43,14 +42,14 @@ class Login extends Component{
 				<input type="password" name="password" placeholder="Password" id="password" required />
 				<div class="msg"></div>
 				<input type="submit" value="Login" />
+
 			</form>
-			{(this.state.msgSuper === "pas de message")? null:<> <Alert message={this.state.msgSuper} type="error" closeText="Close" showIcon/> </>}
+				{(this.state.msgSuper === "pas de message")? null:<Alert message={this.state.msgSuper} type="error" closeText="Close" showIcon/>}
 		</div>
 		<div>
-			<img className='imglogo' src={logo}></img>
+			<img className='imglogo' src={logo}/>
 		</div>
 		</div>
-		</>
       );
     }
   }

@@ -41,6 +41,10 @@ def session():
 def sessionMob():
     return {"usermob":H.usermob} 
 
+@app.route('/sessionSA')
+def sessionSA():
+    return {"sessionSA":H.SAsession} 
+
 @app.route('/connect')
 def connect():
     return redirect(f_end+'SignIn')
@@ -57,6 +61,11 @@ def disconnectMob():
     H.usermob='User'
     H.islogged =False
     H.simulate(0,0,0,0,0)
+    return "<h1>You are out of Home</h1>"
+
+@app.route('/disconnectSA')
+def disconnectSA():
+    H.SAsession=False
     return "<h1>You are out of Home</h1>"
 
 #**********************************************************************************************************************************
@@ -328,6 +337,7 @@ def loginDirecteur():
         psw = request.form.get("password")
 # verification
         if username == secretlogin and psw == secretpsw :
+            H.SAsession=True
             return redirect(f_end+'console')
         # return 'Logged in successfully!'
         else:

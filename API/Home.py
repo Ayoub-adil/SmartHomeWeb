@@ -54,6 +54,7 @@ class Home:
         self.login = "login"
         self.psw = "psw"
         self.islogged =False
+        self.SAsession =False
 
         self.r=-1
         self.type_r='outdoor'

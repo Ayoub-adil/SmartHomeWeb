@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import Dashboard  from './Dashboard.js';
 import Formulaire from './Formulaire.js';
 import logo from '../images/house.png';
+import Login from './login';
+
 const { TabPane } = Tabs;
 
 const { Header, Footer, Content } = Layout;
@@ -45,24 +47,38 @@ const onFinish = values => {
 
 class Console extends Component{
 
-    // on annule had fetch 7it faut qu'on enovie les donnees du formulaire machi ghir nmchiw la page
-    // Traitement() {
-    //     fetch('/traitementForm')
-    // }
+    constructor(props){
+        super(props);
+        this.state={
+            session:"session",              
+        }
+        this.disconnect=this.disconnect.bind(this) 
+        this.session()
+        this.session=this.session.bind(this) 
+    }
+    disconnect(){fetch('/disconnectSA')}
 
+    session(){
+        fetch('/sessionSA').then(res=>res.json()).then(data=>{
+        this.setState({
+            session: data.sessionSA,
+        });
+        })
+    }
     render(){
       return(
         <div className="App">
+        {this.state.session===true?
             <Layout>
                 <Header style={{padding:14}}>
-                    <Link to="/"><Button style={{float:'right' , fontWeight:800}} >Disconnect</Button></Link>
+                    <Link onClick={this.disconnect} exact to="/"><Button style={{float:'right' , fontWeight:800}} >Disconnect</Button></Link>
                     {/* <a href='#' style={{float:'right'}} icon={<UserOutlined />}  /> */}
                     <Title style={{color:'#F9F9F9'}} level={4}>
-                    <span>Smart </span>
-                <img className="imgLogo" src={logo} alt="home"></img>
-                <span> Home</span>
+                        <span>Smart </span>
+                        <img className="imgLogo" src={logo} alt="home"/>
+                        <span> Home</span>
                     </Title>
-                    </Header>
+                </Header>
                 <Layout>
                     
                     <Layout>
@@ -105,6 +121,7 @@ class Console extends Component{
                 </Layout>                
                 
             </Layout>
+        :<Login/>}
         </div>
       );
     }
