@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import { Layout, Tabs , Alert, Breadcrumb,Form, Input, InputNumber, Button  } from 'antd';
-import { UserOutlined, TableOutlined, UsergroupAddOutlined } from '@ant-design/icons';
+import { Layout, Tabs , Alert, Breadcrumb, Button  } from 'antd';
+import { TableOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 import './console.css';
 import '../App.css';
 import Title from 'antd/lib/typography/Title';
-import Password from 'antd/lib/input/Password';
 import { Link } from 'react-router-dom';
 import Dashboard  from './Dashboard.js';
 import Formulaire from './Formulaire.js';
@@ -15,33 +14,6 @@ const { TabPane } = Tabs;
 
 const { Header, Footer, Content } = Layout;
 
-function onChange(value) {
-    console.log('changed', value);
-}
-
-const layout = {
-    labelCol: {
-      span: 8,
-    },
-    wrapperCol: {
-      span: 16,
-    },
-};
-
-const validateMessages = {
-    required: '${label} is required!',
-    types: {
-      email: '${label} is not validate email!',
-      number: '${label} is not a validate number!',
-    },
-    number: {
-      range: '${label} must be between ${min} and ${max}',
-    },
-};
-
-const onFinish = values => {
-    console.log(values);
-};
 
   
 

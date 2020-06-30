@@ -69,7 +69,6 @@ class Rooms extends Component{
         fetch('/home/room').then(res=>res.json()).then(data=>{
           this.setState({ rooom: data.room })
         })
-        console.log(this.state.rooom)
       }
 
       getLampState(){
@@ -148,8 +147,6 @@ class Rooms extends Component{
                   </form>
                 </Col>
               </Row>
-              {/* <Row gutter={[8, 48]}> */}
-                {/* <Col> */}
                     {this.state.climatiseur==="on"
                     ?  
                     <Slider
@@ -163,10 +160,6 @@ class Rooms extends Component{
                     /> 
                     :null 
                     }
-                {/* </Col> */}
-              {/* </Row>      */}
-                  
-      
               <Row gutter={[8, 48]}>
                 <Col>
                   Light : 
