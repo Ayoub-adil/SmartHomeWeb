@@ -60,6 +60,7 @@ def disconnect():
 def disconnectMob():
     H.usermob='User'
     H.islogged =False
+    H.msgMemberMob = "pas de message"
     H.simulate(0,0,0,0,0)
     return "<h1>You are out of Home</h1>"
 
