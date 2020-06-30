@@ -241,6 +241,17 @@ def set_temperature():
         return redirect(f_end+H.type_r)
     return "<h1>You shouldn't be here.. </h1>"
 
+@app.route('/change/temperatureMob',methods=["POST","GET"])
+def set_temperatureMob():
+    if request.method=='POST':
+        data = request.get_json()
+        tmp = data['tmp']
+        if H.type_r=='bedroom':
+            H.bedrooms[H.r].temperature=int(tmp)
+        elif H.type_r=='livingroom':
+            H.livingrooms[H.r].temperature=int(tmp)
+    return "<h1>You shouldn't be here.. </h1>"
+
 @app.route('/change/airConditioner',methods=["POST","GET"])
 def set_air_conditioner_state():
     if(H.type_r=='bedroom'):
