@@ -598,13 +598,13 @@ def AddUserMobile():
         doc=db.collection(u'users').document(login)
         doc=doc.get()
         if doc.exists:
-            H.msg="this Login is taken"
+            H.msgMemberMob="this Login is taken"
         #ajout dans la base de donnee
         else:
-            H.msg="You just Added a new user to your application"
+            H.msgMemberMob="You just Added a new user to your application"
             db.collection(u'users').document(login).set(data)
     else:
-        return {"msg":H.msg}
+        return {"msgMemberMob":H.msgMemberMob}
 
 #********************************************* Recuperation des users et l'affichage | Firebase *******************************************************
 @app.route('/users/tab')

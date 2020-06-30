@@ -50,6 +50,7 @@ class Home:
         self.msgMobile = 'pas de message'
         self.msgSuper = 'pas de message'
         self.msgMember = 'pas de message'
+        self.msgMemberMob = 'pas de message'
         self.DelMember = 'pas de message'
         self.login = "login"
         self.psw = "psw"
