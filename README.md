@@ -26,6 +26,7 @@ You will need to change some lines : <br>
 +   <code>"start": "react-app-rewired start",</code><br> <br>
 +   <code>"build": "react-app-rewired build",</code><br> <br>
 +   <code>"test": "react-app-rewired test",</code><br> <br>
+
 <code>}</code><br>
 <br>
 <br>
@@ -44,6 +45,8 @@ Inside this code :<br> <br>
 In the project directory, you can run this too :
 
 <code> pip install flask</code><br> <br>
+
+<code>pip install firebase-admin</code><br> <br>
 
 yarn add babel-plugin-import<br>
 npm install react-sticky<br>
