@@ -45,8 +45,7 @@ In the project directory, you can run this too :
 
 <code> pip install flask</code><br> <br>
 
-<br>
-<br> yarn add babel-plugin-import<br>
+yarn add babel-plugin-import<br>
 npm install react-sticky<br>
 npm i rc-animate <br>
 <br>
