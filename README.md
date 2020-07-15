@@ -41,6 +41,10 @@ Inside this code :<br> <br>
    <br>    <code>}),</code><br>
 <br> <code>);</code><br>
 
+In the project directory, you can run this too :
+
+<code> pip install flask</code><br> <br>
+
 <br>
 <br> yarn add babel-plugin-import<br>
 npm install react-sticky<br>
