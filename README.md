@@ -4,11 +4,10 @@ Concevoir et développer une application Web/Mobile pour contrôler à
 distance un modèle de maison intelligente avec sept services.
 Cette application est basé sur ReactJS et Ant Design en front end
 
-## Available Scripts
+<h1>What to install after cloning the project :</h1>
 
 In the project directory, you can run:
 
-<h1>What to install after cloning the project :</h1>
 install node files<br>
 npm install -g yarn<br><br>
 npm i react-router-dom<br>
